@@ -8,6 +8,7 @@ public class sanPham {
     String hinhAnh;
     long giaNhap;
     long giaBan;
+    long giaSi;
     int soLuong;
     int soLuongToiThieu;
     String idNhaCungCap;
@@ -26,7 +27,8 @@ public class sanPham {
             String hinhAnh,
             long giaNhap,
             long giaBan,
-            int soLuong, 
+            long giaSi,
+            int soLuong,
             int soLuongToiThieu,
             String idNhaCungCap,
             String idDonViTinh,
@@ -37,6 +39,7 @@ public class sanPham {
         this.name = name;
         this.hinhAnh = hinhAnh;
         this.barcode = barcode;
+        this.giaSi = giaSi;
         this.giaNhap = giaNhap;
         this.giaBan = giaBan;
         this.soLuong = soLuong;
@@ -46,6 +49,14 @@ public class sanPham {
         this.idLoaiSanPham = idLoaiSanPham;
         this.ghiChu = ghiChu;
         this.trangThai = trangThai;
+    }
+
+    public long getGiaSi() {
+        return giaSi;
+    }
+
+    public void setGiaSi(long giaSi) {
+        this.giaSi = giaSi;
     }
 
     public String getIdSanPham() {

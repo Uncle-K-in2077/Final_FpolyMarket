@@ -6,23 +6,13 @@ package CLASS;
 
 public class hoaDon {
 
-    String idHoaDon;
     String idNhanVien;
     String idKhachHang;
-    String thoiGian;
     int hinhThucThanhToan;
     long giamGia;
     long tongTienThanhToan;
     String ghiChu;
     boolean trangThai;
-
-    public String getIdHoaDon() {
-        return idHoaDon;
-    }
-
-    public void setIdHoaDon(String idHoaDon) {
-        this.idHoaDon = idHoaDon;
-    }
 
     public String getIdNhanVien() {
         return idNhanVien;
@@ -38,14 +28,6 @@ public class hoaDon {
 
     public void setIdKhachHang(String idKhachHang) {
         this.idKhachHang = idKhachHang;
-    }
-
-    public String getThoiGian() {
-        return thoiGian;
-    }
-
-    public void setThoiGian(String thoiGian) {
-        this.thoiGian = thoiGian;
     }
 
     public int getHinhThucThanhToan() {
@@ -91,11 +73,9 @@ public class hoaDon {
     public hoaDon() {
     }
 
-    public hoaDon(String idHoaDon, String idNhanVien, String idKhachHang, String thoiGian, int hinhThucThanhToan, long giamGia, long tongTienThanhToan, String ghiChu, boolean trangThai) {
-        this.idHoaDon = idHoaDon;
+    public hoaDon(String idNhanVien, String idKhachHang, int hinhThucThanhToan, long giamGia, long tongTienThanhToan, String ghiChu, boolean trangThai) {
         this.idNhanVien = idNhanVien;
         this.idKhachHang = idKhachHang;
-        this.thoiGian = thoiGian;
         this.hinhThucThanhToan = hinhThucThanhToan;
         this.giamGia = giamGia;
         this.tongTienThanhToan = tongTienThanhToan;

@@ -7,13 +7,14 @@ import java.util.ArrayList;
 public class MDSanPham {
 
     public static void quickAdd(String ten, long giaBan, String barcode) {
-        String sql = "insert into sanpham(id,name,barcode,giaBan,hinhAnh,idnhacungcap,idloaisanpham,iddonvitinh,soluong,soluongtoithieu,trangthai,ghichu) "
+        String sql = "insert into sanpham(id,name,barcode,giaBan,giasi,hinhAnh,idnhacungcap,idloaisanpham,iddonvitinh,soluong,soluongtoithieu,trangthai,ghichu) "
                 + "values(?,?,?,?,?,?,?,?,?,?,?,?)";
         HELPER.SQLhelper.executeUpdate(sql,
                 createId(),
                 ten,
                 barcode,
                 giaBan,
+                0,
                 "empty.png",
                 "01",
                 "01",
@@ -41,6 +42,7 @@ public class MDSanPham {
                         rs.getString("hinhanh"),
                         rs.getLong("GiaNhap"),
                         rs.getLong("GiaBan"),
+                        rs.getLong("giaSi"),
                         rs.getInt("Soluong"),
                         rs.getInt("soLuongToiThieu"),
                         rs.getString("idNhaCungCap"),
@@ -68,6 +70,7 @@ public class MDSanPham {
                         rs.getString("hinhanh"),
                         rs.getLong("GiaNhap"),
                         rs.getLong("GiaBan"),
+                        rs.getLong("giaSi"),
                         rs.getInt("Soluong"),
                         rs.getInt("soLuongToiThieu"),
                         rs.getString("idNhaCungCap"),
@@ -95,6 +98,7 @@ public class MDSanPham {
                         rs.getString("hinhanh"),
                         rs.getLong("GiaNhap"),
                         rs.getLong("GiaBan"),
+                        rs.getLong("giaSi"),
                         rs.getInt("Soluong"),
                         rs.getInt("soLuongToiThieu"),
                         rs.getString("idNhaCungCap"),
@@ -134,10 +138,11 @@ public class MDSanPham {
     }
 
     public static void update(sanPham sp) {
-        String sql = "update SanPham set name=?, barcode=?, hinhanh = ?, Gianhap=?, GiaBan=?, SoLuong=?, SoLuongToiThieu=?, "
+        String sql = "update SanPham set name=?,giasi=?, barcode=?, hinhanh = ?, Gianhap=?, GiaBan=?, SoLuong=?, SoLuongToiThieu=?, "
                 + " IDNhaCungCap=?, IDDonViTinh=?, IDLoaiSanPham=?, GhiChu=?, Trangthai=? where id=?";
         HELPER.SQLhelper.executeUpdate(sql,
                 sp.getName(),
+                sp.getGiaSi(),
                 sp.getBarcode(),
                 sp.getHinhAnh() == null ? "empty.png" : sp.getHinhAnh(),
                 sp.getGiaNhap(),
@@ -186,6 +191,7 @@ public class MDSanPham {
                         rs.getString("hinhanh"),
                         rs.getLong("GiaNhap"),
                         rs.getLong("GiaBan"),
+                        rs.getLong("giaSi"),
                         rs.getInt("Soluong"),
                         rs.getInt("soLuongToiThieu"),
                         rs.getString("idNhaCungCap"),

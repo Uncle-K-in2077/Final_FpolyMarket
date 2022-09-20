@@ -238,6 +238,7 @@ public class frmMAIN extends javax.swing.JFrame {
                 item.getIdLoaiSanPham(),
                 helper.LongToString(item.getGiaNhap()),
                 helper.LongToString(item.getGiaBan()),
+                helper.LongToString(item.getGiaSi()),
                 item.getSoLuong(),
                 item.getSoLuongToiThieu(),
                 item.getGhiChu(),
@@ -274,6 +275,7 @@ public class frmMAIN extends javax.swing.JFrame {
 
     public void setTableTextCenter() {
         // set table text center
+        helper.setTableTextCenterFullColumn(tableTraNoNhaCungCap);
         HELPER.helper.setTableTextCenter(tableNhaCungCap);
         HELPER.helper.setTableTextCenter(tableNhanVien);
         HELPER.helper.setTableTextCenter(tableDonViTinh);
@@ -333,7 +335,7 @@ public class frmMAIN extends javax.swing.JFrame {
 
     public void setModelTableSanPham() {
 
-        String[] column = {"Hình ảnh", "Mã", "Sản phẩm", "Mã vạch", "Đơn vị tính", "Nhóm hàng", "Giá nhập", "Giá bán", "Tồn kho", "Số lượng tối thiểu", "Ghi chú", "Còn sử dụng?"};
+        String[] column = {"Hình ảnh", "Mã", "Sản phẩm", "Mã vạch", "Đơn vị tính", "Nhóm hàng", "Giá nhập", "Giá bán", "Giá sĩ", "Tồn kho", "Số lượng tối thiểu", "Ghi chú", "Còn sử dụng?"};
         Object[][] rows = {};
         DefaultTableModel model = new DefaultTableModel(rows, column) {
             @Override
@@ -342,7 +344,7 @@ public class frmMAIN extends javax.swing.JFrame {
                     case 0:
                         return ImageIcon.class;
 
-                    case 11:
+                    case 12:
                         return Boolean.class;
                     default:
                         return Object.class;
@@ -372,15 +374,16 @@ public class frmMAIN extends javax.swing.JFrame {
         tableSanPham.getColumnModel().getColumn(8).setCellRenderer(centerRenderer);
         tableSanPham.getColumnModel().getColumn(9).setCellRenderer(centerRenderer);
         tableSanPham.getColumnModel().getColumn(10).setCellRenderer(centerRenderer);
+        tableSanPham.getColumnModel().getColumn(11).setCellRenderer(centerRenderer);
 
         tableSanPham.getColumnModel().getColumn(0).setPreferredWidth(100);
         tableSanPham.getColumnModel().getColumn(1).setPreferredWidth(70);
         tableSanPham.getColumnModel().getColumn(2).setPreferredWidth(200);
         tableSanPham.getColumnModel().getColumn(3).setPreferredWidth(150);
         tableSanPham.getColumnModel().getColumn(4).setPreferredWidth(60);
-        tableSanPham.getColumnModel().getColumn(10).setPreferredWidth(110);
-        tableSanPham.getColumnModel().getColumn(11).setPreferredWidth(90);
-        tableSanPham.getColumnModel().getColumn(8).setPreferredWidth(60);
+        tableSanPham.getColumnModel().getColumn(11).setPreferredWidth(110);
+        tableSanPham.getColumnModel().getColumn(12).setPreferredWidth(90);
+        tableSanPham.getColumnModel().getColumn(9).setPreferredWidth(60);
     }
 
     public void setSearchTextField() {
@@ -1801,6 +1804,11 @@ public class frmMAIN extends javax.swing.JFrame {
         btnTaoPhieuChi.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnTaoPhieuChi.setPreferredSize(new java.awt.Dimension(120, 120));
         btnTaoPhieuChi.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnTaoPhieuChi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTaoPhieuChiActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btnTaoPhieuChi);
         jToolBar1.add(jSeparator4);
 
@@ -2527,6 +2535,10 @@ public class frmMAIN extends javax.swing.JFrame {
             loadTableLoaiSanPham();
         }
     }//GEN-LAST:event_tableLoaiSanPhamMousePressed
+
+    private void btnTaoPhieuChiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoPhieuChiActionPerformed
+
+    }//GEN-LAST:event_btnTaoPhieuChiActionPerformed
 
     public void openTab(JPanel TypeOfPanel, String name) {
         JPanel tab = TypeOfPanel;

@@ -19,6 +19,7 @@ public class MDChiTietHoaDon {
                         rs.getString("dvt"),
                         1,
                         rs.getLong("giaban"),
+                        rs.getLong("giaSi"),
                         true
                 );
 
