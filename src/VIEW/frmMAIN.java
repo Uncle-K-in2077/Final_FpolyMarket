@@ -2184,7 +2184,9 @@ public class frmMAIN extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void menuTaoPhieuChiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuTaoPhieuChiActionPerformed
-
+        frmPhieuChi panel = new frmPhieuChi(this, true, acc);
+        panel.setVisible(true);
+        
     }//GEN-LAST:event_menuTaoPhieuChiActionPerformed
 
     private void btnNhapHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNhapHangActionPerformed
