@@ -93,7 +93,6 @@ public class MDAccount {
     }
 
     public static void add(Account acc) {
-
         String sql = "INSERT INTO Account (Username, Password, IDNhanVien, TrangThai, BanHang, NhapHang, TaiKhoan, HangHoa, NhanVien, "
                 + " KhachHang, NhaCungCap, BaoCao, PhieuChi) "
                 + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";

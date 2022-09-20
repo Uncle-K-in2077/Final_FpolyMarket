@@ -541,6 +541,11 @@ public class panelTaoHoaDonBanHang extends javax.swing.JPanel {
 
         cbTuyChonGiamGia.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cbTuyChonGiamGia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Giảm số tiền", "Giảm phần trăm" }));
+        cbTuyChonGiamGia.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbTuyChonGiamGiaItemStateChanged(evt);
+            }
+        });
 
         txtGiaTriGiam.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         txtGiaTriGiam.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -805,11 +810,9 @@ public class panelTaoHoaDonBanHang extends javax.swing.JPanel {
             } else {   // Giảm số phần trăm
                 long giaTriPhanTram = helper.SoLong(txtGiaTriGiam.getText());
                 long soTienGiam = thanhTienBanDau * giaTriPhanTram / 100;
-                System.out.println(soTienGiam);
                 tongTienFinal = thanhTienBanDau - soTienGiam;
             }
         }
-        System.out.println(tongTienFinal);
         txtTongTien.setText(helper.LongToString(tongTienFinal));
     }
 
@@ -840,11 +843,9 @@ public class panelTaoHoaDonBanHang extends javax.swing.JPanel {
             } else {   // Giảm số phần trăm
                 long giaTriPhanTram = helper.SoLong(txtGiaTriGiam.getText());
                 long soTienGiam = thanhTienBanDau * giaTriPhanTram / 100;
-                System.out.println(soTienGiam);
                 tongTienFinal = thanhTienBanDau - soTienGiam;
             }
         }
-        System.out.println(tongTienFinal);
         txtTongTien.setText(helper.LongToString(tongTienFinal));
     }
 
@@ -1007,6 +1008,15 @@ public class panelTaoHoaDonBanHang extends javax.swing.JPanel {
             loadTableGioHangGiaSi();
         }
     }//GEN-LAST:event_txtGiaTriGiamKeyReleased
+
+    private void cbTuyChonGiamGiaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbTuyChonGiamGiaItemStateChanged
+        txtGiaTriGiam.setText("0");
+        if (cbChonGia.getSelectedIndex() == 0) {
+            loadTableGioHangGiaBan();
+        } else {
+            loadTableGioHangGiaSi();
+        }
+    }//GEN-LAST:event_cbTuyChonGiamGiaItemStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
