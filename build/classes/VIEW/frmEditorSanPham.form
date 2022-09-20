@@ -191,9 +191,9 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
+              <Group type="102" alignment="1" attributes="0">
                   <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" groupAlignment="1" attributes="0">
                       <Component id="jLabel2" alignment="1" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel3" alignment="1" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel4" alignment="1" min="-2" max="-2" attributes="0"/>
@@ -204,9 +204,11 @@
                       <Component id="jLabel9" alignment="1" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel11" alignment="1" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel10" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="txtGiaSi" max="32767" attributes="0"/>
                       <Component id="pnlNhaCungCap" alignment="0" pref="258" max="32767" attributes="0"/>
                       <Component id="pnlDonViTinh" alignment="0" max="32767" attributes="0"/>
                       <Component id="pnlNhomHang" alignment="0" max="32767" attributes="0"/>
@@ -260,15 +262,18 @@
                       <Component id="txtGiaBan" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                       <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="txtGiaSi" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                      <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
                           <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                          <Component id="txtSoLuong" min="-2" pref="37" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="txtSoLuong" alignment="0" min="-2" pref="37" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="2" attributes="0">
@@ -280,7 +285,7 @@
                       <Component id="jLabel10" alignment="2" min="-2" max="-2" attributes="0"/>
                       <Component id="txtGhiChu" alignment="2" min="-2" pref="35" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="68" max="32767" attributes="0"/>
+                  <EmptySpace pref="23" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -455,6 +460,24 @@
               <Font name="Segoe UI" size="16" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Ghi chu&#x301; :"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtGiaSi">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="14" style="0"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtGiaSiKeyReleased"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel12">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="16" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Gia&#x301; si&#x303; :"/>
           </Properties>
         </Component>
       </SubComponents>

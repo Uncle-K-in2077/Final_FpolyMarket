@@ -35,7 +35,7 @@ import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class frmEditorSanPham extends javax.swing.JDialog {
-
+    
     public static String option;
     private DetailedComboBox comboBoxNhaCungCap;
     private DetailedComboBox comboBoxDonViTinh;
@@ -48,7 +48,7 @@ public class frmEditorSanPham extends javax.swing.JDialog {
     private String idDonViTinh;
     private String hinhAnh;
     private Component thisPanel = this;
-
+    
     public frmEditorSanPham(java.awt.Frame parent, boolean modal, String option) {
         super(parent, modal);
         this.option = option;
@@ -58,16 +58,17 @@ public class frmEditorSanPham extends javax.swing.JDialog {
         lbHinhAnh.setIcon(imageIcon);
         if (this.option != "add") {
             loadThongTinSanPham(this.option);
-
+            
         }
         setUX(this.option);
     }
-
+    
     public void loadThongTinSanPham(String idSanPham) {
         sanPham item = MDSanPham.getSanPham(idSanPham);
         txtTenSanPham.setText(item.getName());
         txtBarcode.setText(item.getBarcode());
         txtGhiChu.setText(item.getGhiChu());
+        txtGiaSi.setText(HELPER.helper.LongToString(item.getGiaSi()));
         txtGiaBan.setText(HELPER.helper.LongToString(item.getGiaBan()));
         txtGiaNhap.setText(HELPER.helper.LongToString(item.getGiaNhap()));
         txtSoLuong.setValue(Integer.parseInt(item.getSoLuong() + ""));
@@ -75,9 +76,9 @@ public class frmEditorSanPham extends javax.swing.JDialog {
         ImageIcon imageIcon = new ImageIcon(new ImageIcon("src/IMAGE/" + item.getHinhAnh()).getImage().getScaledInstance(lbHinhAnh.getWidth(), lbHinhAnh.getHeight(), Image.SCALE_DEFAULT));
         lbHinhAnh.setIcon(imageIcon);
         this.hinhAnh = item.getHinhAnh();
-        if(item.isTrangThai()==true){
+        if (item.isTrangThai() == true) {
             cbTrangThai.setSelectedIndex(0);
-        }else{
+        } else {
             cbTrangThai.setSelectedIndex(1);
         }
         for (int i = 0; i < dataDonViTinh.size(); i++) {
@@ -98,12 +99,12 @@ public class frmEditorSanPham extends javax.swing.JDialog {
                 break;
             }
         }
-
+        
     }
 
     // edit UX
     public void setUX(String option) {
-
+        
         if (option != "add") {
             btnChonAnh.setEnabled(false);
             btnLuu.setEnabled(false);
@@ -149,6 +150,7 @@ public class frmEditorSanPham extends javax.swing.JDialog {
                     String barcode = txtBarcode.getText();
                     long giaNhap = HELPER.helper.SoLong(txtGiaNhap.getText());
                     long giaBan = HELPER.helper.SoLong(txtGiaBan.getText());
+                    long giaSi = HELPER.helper.SoLong(txtGiaSi.getText());
                     int soLuong = Integer.parseInt(txtSoLuong.getValue() + "");
                     int soLuongToiThieu = Integer.parseInt(txtSoLuongToiThieu.getValue() + "");
                     String ghiChu = txtGhiChu.getText();
@@ -160,6 +162,7 @@ public class frmEditorSanPham extends javax.swing.JDialog {
                             img,
                             giaNhap,
                             giaBan,
+                            giaSi,
                             soLuong,
                             soLuongToiThieu,
                             idNhaCungCap,
@@ -172,7 +175,7 @@ public class frmEditorSanPham extends javax.swing.JDialog {
                     thisPanel.setVisible(false);
                 }
             });
-
+            
         } else if (option == "add") {
             lbTrangThai.setVisible(false);
             cbTrangThai.setVisible(false);
@@ -185,10 +188,11 @@ public class frmEditorSanPham extends javax.swing.JDialog {
                     String barcode = txtBarcode.getText();
                     long giaNhap = HELPER.helper.SoLong(txtGiaNhap.getText());
                     long giaBan = HELPER.helper.SoLong(txtGiaBan.getText());
+                    long giaSi = HELPER.helper.SoLong(txtGiaSi.getText());
                     int soLuong = Integer.parseInt(txtSoLuong.getValue() + "");
                     int soLuongToiThieu = Integer.parseInt(txtSoLuongToiThieu.getValue() + "");
                     String ghiChu = txtGhiChu.getText();
-
+                    
                     sanPham sp = new sanPham(
                             id,
                             name,
@@ -196,6 +200,7 @@ public class frmEditorSanPham extends javax.swing.JDialog {
                             hinhAnh,
                             giaNhap,
                             giaBan,
+                            giaSi,
                             soLuong,
                             soLuongToiThieu,
                             idNhaCungCap,
@@ -209,21 +214,21 @@ public class frmEditorSanPham extends javax.swing.JDialog {
                 }
             });
         }
-
+        
     }
-
+    
     public void loadComboBox() {
         // comboBox nhà cung cấp
         String[] columns1 = new String[]{"Mã", "Tên", "Điện thoại", "Công nợ"};
         int[] widths1 = new int[]{80, 300, 120, 130};
         this.comboBoxNhaCungCap = new DetailedComboBox(columns1, widths1, 1);
-
+        
         List<List<?>> tableDataNhaCungCap = new ArrayList<List<?>>();
         for (nhaCungCap ncc : dataNhaCungCap) {
             tableDataNhaCungCap.add(new ArrayList<>(
                     Arrays.asList(ncc.getIdNhaCungCap(), ncc.getName(), ncc.getSoDienThoai(), HELPER.helper.LongToString(ncc.getCongNo()))));
         }
-
+        
         comboBoxNhaCungCap.setTableData(tableDataNhaCungCap);
         comboBoxNhaCungCap.setFont(new Font("Arial", Font.ITALIC, 14));
         comboBoxNhaCungCap.setSelectedIndex(-1);
@@ -242,13 +247,13 @@ public class frmEditorSanPham extends javax.swing.JDialog {
         String[] columns2 = new String[]{"Mã", "Loại"};
         int[] widths2 = new int[]{80, 200};
         this.comboBoxNhomHang = new DetailedComboBox(columns2, widths2, 1);
-
+        
         List<List<?>> tableDataLoaiSanPham = new ArrayList<List<?>>();
         for (loaiSanPham lsp : dataLoaiSanPham) {
             tableDataLoaiSanPham.add(new ArrayList<>(
                     Arrays.asList(lsp.getIdLoaiSanPham(), lsp.getName())));
         }
-
+        
         comboBoxNhomHang.setTableData(tableDataLoaiSanPham);
         comboBoxNhomHang.setFont(new Font("Arial", Font.ITALIC, 14));
         comboBoxNhomHang.setSelectedIndex(-1);
@@ -267,13 +272,13 @@ public class frmEditorSanPham extends javax.swing.JDialog {
         String[] columns3 = new String[]{"Mã", "ĐVT"};
         int[] widths3 = new int[]{80, 200};
         this.comboBoxDonViTinh = new DetailedComboBox(columns3, widths3, 1);
-
+        
         List<List<?>> tableDataDonViTinh = new ArrayList<List<?>>();
         for (donViTinh dvt : dataDonViTinh) {
             tableDataDonViTinh.add(new ArrayList<>(
                     Arrays.asList(dvt.getIdDonViTinh(), dvt.getName())));
         }
-
+        
         comboBoxDonViTinh.setTableData(tableDataDonViTinh);
         comboBoxDonViTinh.setFont(new Font("Arial", Font.ITALIC, 14));
         comboBoxDonViTinh.setSelectedIndex(-1);
@@ -288,7 +293,7 @@ public class frmEditorSanPham extends javax.swing.JDialog {
         comboBoxDonViTinh.setVisible(true);
         pnlDonViTinh.add(comboBoxDonViTinh);
     }
-
+    
     public void copyFile(File sourceFile, File destFile) {
         if (!destFile.exists()) {
             try {
@@ -297,10 +302,10 @@ public class frmEditorSanPham extends javax.swing.JDialog {
                 Logger.getLogger(frmEditorSanPham.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-
+        
         FileChannel source = null;
         FileChannel destination = null;
-
+        
         try {
             source = new FileInputStream(sourceFile).getChannel();
             destination = new FileOutputStream(destFile).getChannel();
@@ -323,7 +328,7 @@ public class frmEditorSanPham extends javax.swing.JDialog {
             }
         }
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -356,6 +361,8 @@ public class frmEditorSanPham extends javax.swing.JDialog {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
+        txtGiaSi = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
         cbTrangThai = new javax.swing.JComboBox<>();
         lbTrangThai = new javax.swing.JLabel();
 
@@ -485,35 +492,47 @@ public class frmEditorSanPham extends javax.swing.JDialog {
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jLabel10.setText("Ghi chú :");
 
+        txtGiaSi.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtGiaSi.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtGiaSiKeyReleased(evt);
+            }
+        });
+
+        jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        jLabel12.setText("Giá sĩ :");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(50, 50, 50)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel11)
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel12))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pnlNhaCungCap, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
-                    .addComponent(pnlDonViTinh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnlNhomHang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtGiaNhap)
-                    .addComponent(txtGiaBan)
-                    .addComponent(txtSoLuong)
-                    .addComponent(txtSoLuongToiThieu)
-                    .addComponent(txtGhiChu)
-                    .addComponent(txtTenSanPham)
-                    .addComponent(txtBarcode))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtGiaSi)
+                    .addComponent(pnlNhaCungCap, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
+                    .addComponent(pnlDonViTinh, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnlNhomHang, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtGiaNhap, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtGiaBan, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtSoLuong, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtSoLuongToiThieu, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtGhiChu, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtTenSanPham, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtBarcode, javax.swing.GroupLayout.Alignment.LEADING))
                 .addGap(90, 90, 90))
         );
         jPanel2Layout.setVerticalGroup(
@@ -547,13 +566,16 @@ public class frmEditorSanPham extends javax.swing.JDialog {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtGiaBan, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtGiaSi, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
+                        .addGap(1, 1, 1)
                         .addComponent(jLabel9))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addComponent(txtSoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(txtSoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(txtSoLuongToiThieu, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -562,7 +584,7 @@ public class frmEditorSanPham extends javax.swing.JDialog {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jLabel10)
                     .addComponent(txtGhiChu, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(68, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         cbTrangThai.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -664,6 +686,10 @@ public class frmEditorSanPham extends javax.swing.JDialog {
 
     }//GEN-LAST:event_btnLuuActionPerformed
 
+    private void txtGiaSiKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtGiaSiKeyReleased
+        HELPER.helper.setTextFieldMoney(txtGiaSi);
+    }//GEN-LAST:event_txtGiaSiKeyReleased
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -711,6 +737,7 @@ public class frmEditorSanPham extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -731,6 +758,7 @@ public class frmEditorSanPham extends javax.swing.JDialog {
     private javax.swing.JTextField txtGhiChu;
     private javax.swing.JTextField txtGiaBan;
     private javax.swing.JTextField txtGiaNhap;
+    private javax.swing.JTextField txtGiaSi;
     private javax.swing.JSpinner txtSoLuong;
     private javax.swing.JSpinner txtSoLuongToiThieu;
     private javax.swing.JTextField txtTenSanPham;
