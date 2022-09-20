@@ -5,23 +5,21 @@
 package VIEW;
 
 import CLASS.donViTinh;
-import CLASS.loaiSanPham;
 import MODEL.MDDonViTinh;
-import MODEL.MDLoaiSanPham;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author DELL
- */
 public class frmEditorDonViTinh extends javax.swing.JDialog {
 
-    /**
-     * Creates new form frmEditorDonViTinh
-     */
-    public frmEditorDonViTinh(java.awt.Frame parent, boolean modal) {
+    private static String option;
+
+    public frmEditorDonViTinh(java.awt.Frame parent, boolean modal, String option) {
         super(parent, modal);
+        this.option = option;
         initComponents();
+        if (option == "add") {
+            lb.setVisible(false);
+            cbboc.setVisible(false);
+        }
     }
 
     /**
@@ -40,7 +38,8 @@ public class frmEditorDonViTinh extends javax.swing.JDialog {
         jLabel3 = new javax.swing.JLabel();
         txtMoTa = new javax.swing.JTextField();
         btnLuu = new javax.swing.JButton();
-        btnHuy = new javax.swing.JButton();
+        lb = new javax.swing.JLabel();
+        cbboc = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -65,14 +64,11 @@ public class frmEditorDonViTinh extends javax.swing.JDialog {
             }
         });
 
-        btnHuy.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnHuy.setForeground(new java.awt.Color(0, 153, 204));
-        btnHuy.setText("Hủy");
-        btnHuy.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnHuyActionPerformed(evt);
-            }
-        });
+        lb.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        lb.setText("Trạng thái :");
+
+        cbboc.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        cbboc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Đang sử dụng", "Ngưng sử dụng" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -88,18 +84,17 @@ public class frmEditorDonViTinh extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(25, 25, 25)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(lb))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtMoTa, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
+                            .addComponent(txtName)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnLuu, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnHuy, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel3))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtMoTa, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
-                                    .addComponent(txtName))))
+                                .addComponent(cbboc, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnLuu, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 40, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -118,11 +113,12 @@ public class frmEditorDonViTinh extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtMoTa, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(41, 41, 41)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(btnLuu, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnHuy, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(41, Short.MAX_VALUE))
+                    .addComponent(cbboc, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lb))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
 
         pack();
@@ -132,19 +128,27 @@ public class frmEditorDonViTinh extends javax.swing.JDialog {
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
         String name = txtName.getText();
         String moTa = txtMoTa.getText();
-        if (name != null) {
-            donViTinh item = new donViTinh(MDDonViTinh.createId(), name, moTa, true);
-            MDDonViTinh.add(item);
-            JOptionPane.showMessageDialog(this, "Thêm thành công !!!");
-            this.setVisible(false);
+        if (option == "add") {
+            if (!name.equals("")) {
+                donViTinh item = new donViTinh(MDDonViTinh.createId(), name, moTa, true);
+                MDDonViTinh.add(item);
+                JOptionPane.showMessageDialog(this, "Thêm thành công !!!");
+                this.setVisible(false);
+            } else {
+                JOptionPane.showMessageDialog(this, "Chưa nhập tên đơn vị tính !!!");
+            }
         } else {
-            JOptionPane.showMessageDialog(this, "Chưa nhập tên đơn vị tính !!!");
+
+            if (!name.equals("")) {
+                donViTinh item = new donViTinh(MDDonViTinh.createId(), name, moTa, cbboc.getSelectedIndex() == 1 ? true : false);
+                MDDonViTinh.update(item);
+                JOptionPane.showMessageDialog(this, "Sữa thành công !!!");
+                this.setVisible(false);
+            } else {
+                JOptionPane.showMessageDialog(this, "Chưa nhập tên đơn vị tính !!!");
+            }
         }
     }//GEN-LAST:event_btnLuuActionPerformed
-
-    private void btnHuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyActionPerformed
-        this.setVisible(false);
-    }//GEN-LAST:event_btnHuyActionPerformed
 
     /**
      * @param args the command line arguments
@@ -176,7 +180,7 @@ public class frmEditorDonViTinh extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                frmEditorDonViTinh dialog = new frmEditorDonViTinh(new javax.swing.JFrame(), true);
+                frmEditorDonViTinh dialog = new frmEditorDonViTinh(new javax.swing.JFrame(), true, option);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -189,12 +193,13 @@ public class frmEditorDonViTinh extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnHuy;
     private javax.swing.JButton btnLuu;
+    private javax.swing.JComboBox<String> cbboc;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel lb;
     private javax.swing.JTextField txtMoTa;
     private javax.swing.JTextField txtName;
     // End of variables declaration//GEN-END:variables

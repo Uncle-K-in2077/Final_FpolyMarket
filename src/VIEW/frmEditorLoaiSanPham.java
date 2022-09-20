@@ -5,7 +5,6 @@
 package VIEW;
 
 import CLASS.loaiSanPham;
-import MODEL.MDDonViTinh;
 import MODEL.MDLoaiSanPham;
 import javax.swing.JOptionPane;
 
@@ -18,9 +17,16 @@ public class frmEditorLoaiSanPham extends javax.swing.JDialog {
     /**
      * Creates new form frmThemLoaiSanPham
      */
-    public frmEditorLoaiSanPham(java.awt.Frame parent, boolean modal) {
+    private static String option;
+
+    public frmEditorLoaiSanPham(java.awt.Frame parent, boolean modal, String option) {
         super(parent, modal);
+        this.option = option;
         initComponents();
+        if (option == "add") {
+            lb.setVisible(false);
+            cbboc.setVisible(false);
+        }
     }
 
     /**
@@ -39,7 +45,8 @@ public class frmEditorLoaiSanPham extends javax.swing.JDialog {
         jLabel3 = new javax.swing.JLabel();
         txtMoTa = new javax.swing.JTextField();
         btnLuu = new javax.swing.JButton();
-        btnHuy = new javax.swing.JButton();
+        cbboc = new javax.swing.JComboBox<>();
+        lb = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -64,42 +71,36 @@ public class frmEditorLoaiSanPham extends javax.swing.JDialog {
             }
         });
 
-        btnHuy.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnHuy.setForeground(new java.awt.Color(0, 153, 204));
-        btnHuy.setText("Hủy");
-        btnHuy.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnHuyActionPerformed(evt);
-            }
-        });
+        cbboc.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        cbboc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Đang sử dụng", "Ngưng sử dụng" }));
+
+        lb.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        lb.setText("Trạng thái :");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(lb)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(cbboc, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnLuu, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtMoTa, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
+                    .addComponent(txtName))
+                .addContainerGap(40, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnLuu, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnHuy, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel3))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtMoTa, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
-                                    .addComponent(txtName))))
-                        .addGap(0, 32, Short.MAX_VALUE)))
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -117,11 +118,12 @@ public class frmEditorLoaiSanPham extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtMoTa, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(41, 41, 41)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(btnLuu, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnHuy, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(26, Short.MAX_VALUE))
+                    .addComponent(cbboc, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lb))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
 
         pack();
@@ -131,19 +133,26 @@ public class frmEditorLoaiSanPham extends javax.swing.JDialog {
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
         String name = txtName.getText();
         String moTa = txtMoTa.getText();
-        if (name != null) {
-            loaiSanPham item = new loaiSanPham(MDLoaiSanPham.createId(), name, moTa, true);
-            MDLoaiSanPham.add(item);
-            JOptionPane.showMessageDialog(this, "Thêm thành công !!!");
-            this.setVisible(false);
+        if (option == "add") {
+            if (!name.equals("")) {
+                loaiSanPham item = new loaiSanPham(MDLoaiSanPham.createId(), name, moTa, true);
+                MDLoaiSanPham.add(item);
+                JOptionPane.showMessageDialog(this, "Thêm thành công !!!");
+                this.setVisible(false);
+            } else if (name.equals("")) {
+                JOptionPane.showMessageDialog(this, "Chưa nhập tên loại sản phẩm !!!");
+            }
         } else {
-            JOptionPane.showMessageDialog(this, "Chưa nhập tên loại sản phẩm !!!");
+            if (!name.equals("")) {
+                loaiSanPham item = new loaiSanPham(MDLoaiSanPham.createId(), name, moTa, cbboc.getSelectedIndex() == 1 ? true : false);
+                MDLoaiSanPham.update(item);
+                JOptionPane.showMessageDialog(this, "Sữa thành công !!!");
+                this.setVisible(false);
+            } else if (name.equals("")) {
+                JOptionPane.showMessageDialog(this, "Chưa nhập tên loại sản phẩm !!!");
+            }
         }
     }//GEN-LAST:event_btnLuuActionPerformed
-
-    private void btnHuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyActionPerformed
-        this.setVisible(false);
-    }//GEN-LAST:event_btnHuyActionPerformed
 
     /**
      * @param args the command line arguments
@@ -176,7 +185,7 @@ public class frmEditorLoaiSanPham extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                frmEditorLoaiSanPham dialog = new frmEditorLoaiSanPham(new javax.swing.JFrame(), true);
+                frmEditorLoaiSanPham dialog = new frmEditorLoaiSanPham(new javax.swing.JFrame(), true, option);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -189,12 +198,13 @@ public class frmEditorLoaiSanPham extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnHuy;
     private javax.swing.JButton btnLuu;
+    private javax.swing.JComboBox<String> cbboc;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel lb;
     private javax.swing.JTextField txtMoTa;
     private javax.swing.JTextField txtName;
     // End of variables declaration//GEN-END:variables

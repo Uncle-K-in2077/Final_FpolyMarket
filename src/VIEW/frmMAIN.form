@@ -1517,6 +1517,9 @@
                           <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                         </Property>
                       </Properties>
+                      <Events>
+                        <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tableDonViTinhMousePressed"/>
+                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -1599,6 +1602,9 @@
                           <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                         </Property>
                       </Properties>
+                      <Events>
+                        <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tableLoaiSanPhamMousePressed"/>
+                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>
