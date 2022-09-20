@@ -1227,6 +1227,11 @@ public class frmMAIN extends javax.swing.JFrame {
         btnXoaSanPham1.setText("Thêm nhóm hàng");
         btnXoaSanPham1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnXoaSanPham1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnXoaSanPham1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaSanPham1ActionPerformed(evt);
+            }
+        });
 
         btnXoaSanPham2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnXoaSanPham2.setForeground(new java.awt.Color(0, 153, 255));
@@ -1234,6 +1239,11 @@ public class frmMAIN extends javax.swing.JFrame {
         btnXoaSanPham2.setText("Thêm ĐVT");
         btnXoaSanPham2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnXoaSanPham2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnXoaSanPham2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaSanPham2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -1386,6 +1396,11 @@ public class frmMAIN extends javax.swing.JFrame {
         });
         tableDonViTinh.setRowHeight(30);
         tableDonViTinh.setRowMargin(4);
+        tableDonViTinh.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tableDonViTinhMousePressed(evt);
+            }
+        });
         jScrollPane7.setViewportView(tableDonViTinh);
         if (tableDonViTinh.getColumnModel().getColumnCount() > 0) {
             tableDonViTinh.getColumnModel().getColumn(0).setMinWidth(100);
@@ -1441,6 +1456,11 @@ public class frmMAIN extends javax.swing.JFrame {
         });
         tableLoaiSanPham.setRowHeight(30);
         tableLoaiSanPham.setRowMargin(4);
+        tableLoaiSanPham.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tableLoaiSanPhamMousePressed(evt);
+            }
+        });
         jScrollPane9.setViewportView(tableLoaiSanPham);
         if (tableLoaiSanPham.getColumnModel().getColumnCount() > 0) {
             tableLoaiSanPham.getColumnModel().getColumn(0).setMinWidth(100);
@@ -2439,12 +2459,13 @@ public class frmMAIN extends javax.swing.JFrame {
         loadTableThuNoKhachHang();
     }//GEN-LAST:event_btnTaoPhieuThuActionPerformed
 
+
     private void jMenuItem28ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem28ActionPerformed
         // TODO add your handling code here:
         frmTraNoNhaCungCap panel = new frmTraNoNhaCungCap(this, true, acc);
         panel.setVisible(true);
         loadTableNhaCungCap();
-
+        loadTableDanhSachPhieuTraNoNCC();
 
     }//GEN-LAST:event_jMenuItem28ActionPerformed
     public void loadTableDanhSachPhieuTraNoNCC() {
@@ -2470,6 +2491,41 @@ public class frmMAIN extends javax.swing.JFrame {
         // TODO add your handling code here:
         openTab(panelDanhSachPhieuTraNoNCC, "Danh sách phiếu trả nợ NCC");
     }//GEN-LAST:event_jMenuItem29ActionPerformed
+
+    private void btnXoaSanPham2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaSanPham2ActionPerformed
+        frmEditorDonViTinh frm = new frmEditorDonViTinh(this, true, "add");
+        frm.setVisible(true);
+        loadTableDonViTinh();
+    }//GEN-LAST:event_btnXoaSanPham2ActionPerformed
+
+    private void btnXoaSanPham1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaSanPham1ActionPerformed
+        frmEditorLoaiSanPham frm = new frmEditorLoaiSanPham(this, true, "add");
+        frm.setVisible(true);
+        loadTableLoaiSanPham();
+    }//GEN-LAST:event_btnXoaSanPham1ActionPerformed
+
+    private void tableDonViTinhMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableDonViTinhMousePressed
+        int index = tableDonViTinh.getSelectedRow();
+
+        if (tableDonViTinh.getSelectedRows().length == 1 && evt.getClickCount() == 2) {
+            String id = tableDonViTinh.getValueAt(index, 0) + "";
+            frmEditorDonViTinh frm = new frmEditorDonViTinh(this, true, id);
+            frm.setVisible(true);
+            loadTableDonViTinh();
+        }
+    }//GEN-LAST:event_tableDonViTinhMousePressed
+
+    private void tableLoaiSanPhamMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableLoaiSanPhamMousePressed
+        int index = tableLoaiSanPham.getSelectedRow();
+
+        if (tableLoaiSanPham.getSelectedRows().length == 1 && evt.getClickCount() == 2) {
+            String id = tableLoaiSanPham.getValueAt(index, 0) + "";
+            frmEditorLoaiSanPham frm = new frmEditorLoaiSanPham(this, true, id);
+            frm.setVisible(true);
+            loadTableLoaiSanPham();
+        }
+    }//GEN-LAST:event_tableLoaiSanPhamMousePressed
+
     public void openTab(JPanel TypeOfPanel, String name) {
         JPanel tab = TypeOfPanel;
         tab.setName(name);

@@ -16,6 +16,21 @@ import javax.swing.table.DefaultTableModel;
  */
 public class MDLoaiSanPham {
 
+    public static String createId() {
+        String id = "";
+        String sql = "select count(id) as 'count' from loaisanpham";
+        int count = 0;
+        try {
+            ResultSet rs = HELPER.SQLhelper.executeQuery(sql);
+            while (rs.next()) {
+                count = rs.getInt("count");
+            }
+        } catch (Exception e) {
+        }
+        id = "LSP0" + (++count);
+        return id;
+    }
+
     public static ArrayList<String> getNames() {
         ArrayList<String> data = new ArrayList<>();
         String sql = "select name from loaisanpham";
