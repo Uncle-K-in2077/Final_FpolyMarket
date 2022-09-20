@@ -1653,6 +1653,11 @@ public class frmMAIN extends javax.swing.JFrame {
         btnTaoPhieuThu.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnTaoPhieuThu.setPreferredSize(new java.awt.Dimension(120, 120));
         btnTaoPhieuThu.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnTaoPhieuThu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTaoPhieuThuActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btnTaoPhieuThu);
         jToolBar1.add(jSeparator3);
 
@@ -2305,6 +2310,13 @@ public class frmMAIN extends javax.swing.JFrame {
     private void btnTimKiemNhanVien1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemNhanVien1ActionPerformed
         loadTableThuNoKhachHang();
     }//GEN-LAST:event_btnTimKiemNhanVien1ActionPerformed
+
+    private void btnTaoPhieuThuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoPhieuThuActionPerformed
+        frmThuNoKhachHang panel = new frmThuNoKhachHang(this, true, acc);
+        panel.setVisible(true);
+        loadTableKhachHang();
+        loadTableThuNoKhachHang();
+    }//GEN-LAST:event_btnTaoPhieuThuActionPerformed
     public void openTab(JPanel TypeOfPanel, String name) {
         JPanel tab = TypeOfPanel;
         tab.setName(name);
