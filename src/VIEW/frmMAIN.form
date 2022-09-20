@@ -2264,7 +2264,7 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem29">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Nh&#xe2;&#x323;t ky&#x301; tra&#x309; n&#x1a1;&#x323; NCC"/>
+                <Property name="text" type="java.lang.String" value="Danh sa&#x301;ch phi&#xea;&#x301;u tra&#x309; n&#x1a1;&#x323; NCC"/>
                 <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
                   <Insets value="[6, 6, 6, 6]"/>
                 </Property>

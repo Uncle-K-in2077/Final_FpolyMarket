@@ -2057,7 +2057,7 @@ public class frmMAIN extends javax.swing.JFrame {
         });
         jMenu3.add(jMenuItem28);
 
-        jMenuItem29.setText("Nhật ký trả nợ NCC");
+        jMenuItem29.setText("Danh sách phiếu trả nợ NCC");
         jMenuItem29.setMargin(new java.awt.Insets(6, 6, 6, 6));
         jMenuItem29.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

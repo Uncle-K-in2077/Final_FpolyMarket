@@ -1,7 +1,9 @@
 package MODEL;
 
+import CLASS.hoaDon;
 import java.sql.ResultSet;
 import java.util.Date;
+import javax.swing.JTable;
 
 public class MDHoaDon {
 
@@ -21,7 +23,8 @@ public class MDHoaDon {
         return id + date + (++count);
     }
 
-//    public static void taoHoaDon(String idnhanvien,String idkhachhang,hinhThu) {
-//        // tạo hóa đơn : 
-//    }
+    public static void taoHoaDon(hoaDon hoadon, JTable tableGioHang) {
+        // tạo hóa đơn : 
+        
+    }
 }
