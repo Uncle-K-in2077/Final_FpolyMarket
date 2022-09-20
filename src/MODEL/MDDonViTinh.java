@@ -16,6 +16,21 @@ import javax.swing.table.DefaultTableModel;
  */
 public class MDDonViTinh {
 
+    public static String createId() {
+        String id = "";
+        String sql = "select count(id) as 'count' from donvitinh";
+        int count = 0;
+        try {
+            ResultSet rs = HELPER.SQLhelper.executeQuery(sql);
+            while (rs.next()) {
+                count = rs.getInt("count");
+            }
+        } catch (Exception e) {
+        }
+        id = "DVT0" + (++count);
+        return id;
+    }
+
     public static void add(donViTinh item) {
         String sql = "insert into donvitinh values(?,?,?,?)";
         HELPER.SQLhelper.executeUpdate(sql, item.getIdDonViTinh(), item.getName(), item.getGhiChu(), item.isTrangThai() == true ? 1 : 0);

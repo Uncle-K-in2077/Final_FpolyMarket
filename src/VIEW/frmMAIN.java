@@ -1218,6 +1218,11 @@ public class frmMAIN extends javax.swing.JFrame {
         btnXoaSanPham1.setText("Thêm nhóm hàng");
         btnXoaSanPham1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnXoaSanPham1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnXoaSanPham1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaSanPham1ActionPerformed(evt);
+            }
+        });
 
         btnXoaSanPham2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnXoaSanPham2.setForeground(new java.awt.Color(0, 153, 255));
@@ -1225,6 +1230,11 @@ public class frmMAIN extends javax.swing.JFrame {
         btnXoaSanPham2.setText("Thêm ĐVT");
         btnXoaSanPham2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnXoaSanPham2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnXoaSanPham2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaSanPham2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -2317,6 +2327,18 @@ public class frmMAIN extends javax.swing.JFrame {
         loadTableKhachHang();
         loadTableThuNoKhachHang();
     }//GEN-LAST:event_btnTaoPhieuThuActionPerformed
+
+    private void btnXoaSanPham2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaSanPham2ActionPerformed
+        frmEditorDonViTinh frm = new frmEditorDonViTinh(this, true);
+        frm.setVisible(true);
+        loadTableDonViTinh();
+    }//GEN-LAST:event_btnXoaSanPham2ActionPerformed
+
+    private void btnXoaSanPham1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaSanPham1ActionPerformed
+        frmEditorLoaiSanPham frm = new frmEditorLoaiSanPham(this, true);
+        frm.setVisible(true);
+        loadTableLoaiSanPham();
+    }//GEN-LAST:event_btnXoaSanPham1ActionPerformed
     public void openTab(JPanel TypeOfPanel, String name) {
         JPanel tab = TypeOfPanel;
         tab.setName(name);
