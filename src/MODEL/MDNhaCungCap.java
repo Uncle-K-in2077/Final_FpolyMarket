@@ -16,6 +16,12 @@ import javax.swing.table.DefaultTableModel;
  */
 public class MDNhaCungCap {
     
+    public static void truNoNCC(String idNCC, long tien) {
+        String sql = "update NhaCungCap set congno = congno-? where id= ?";
+
+        HELPER.SQLhelper.executeUpdate(sql, tien, idNCC);
+    }
+    
     public static void arrayToTable(JTable table) {
         String sql = "select * from nhacungcap";
         ResultSet rs = HELPER.SQLhelper.executeQuery(sql);
