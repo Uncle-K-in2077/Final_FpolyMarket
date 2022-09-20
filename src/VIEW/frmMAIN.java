@@ -16,6 +16,7 @@ import MODEL.MDLoaiSanPham;
 import MODEL.MDNhaCungCap;
 import MODEL.MDNhanVien;
 import MODEL.MDSanPham;
+import MODEL.MDThuChi;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -76,6 +77,7 @@ public class frmMAIN extends javax.swing.JFrame {
         loadTableSanPham();
         loadTableThuNoKhachHang();
         loadTableDanhSachPhieuTraNoNCC();
+        loadTableNhatKyChiTien();
         // thiết lập phân quyền theo account
         setModuleForAccount();
 
@@ -489,6 +491,14 @@ public class frmMAIN extends javax.swing.JFrame {
         cbFilterThuNo1 = new javax.swing.JComboBox<>();
         jScrollPane11 = new javax.swing.JScrollPane();
         tableTraNoNhaCungCap = new javax.swing.JTable();
+        panelDanhSachPhieuChi = new javax.swing.JPanel();
+        jPanel13 = new javax.swing.JPanel();
+        txtTimKiemThuNoKhachHang2 = new javax.swing.JTextField();
+        btnTimKiemNhanVien3 = new javax.swing.JButton();
+        jLabel15 = new javax.swing.JLabel();
+        cbFilterThuNo2 = new javax.swing.JComboBox<>();
+        jScrollPane12 = new javax.swing.JScrollPane();
+        tableDanhSachPhieuChi = new javax.swing.JTable();
         jToolBar1 = new javax.swing.JToolBar();
         btnTaoHoaDonBanHang = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JToolBar.Separator();
@@ -1715,6 +1725,9 @@ public class frmMAIN extends javax.swing.JFrame {
             }
         });
         jScrollPane11.setViewportView(tableTraNoNhaCungCap);
+        if (tableTraNoNhaCungCap.getColumnModel().getColumnCount() > 0) {
+            tableTraNoNhaCungCap.getColumnModel().getColumn(4).setHeaderValue("Ghi chú");
+        }
 
         javax.swing.GroupLayout panelDanhSachPhieuTraNoNCCLayout = new javax.swing.GroupLayout(panelDanhSachPhieuTraNoNCC);
         panelDanhSachPhieuTraNoNCC.setLayout(panelDanhSachPhieuTraNoNCCLayout);
@@ -1733,6 +1746,108 @@ public class frmMAIN extends javax.swing.JFrame {
                 .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane11, javax.swing.GroupLayout.DEFAULT_SIZE, 492, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jPanel13.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        txtTimKiemThuNoKhachHang2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtTimKiemThuNoKhachHang2KeyReleased(evt);
+            }
+        });
+
+        btnTimKiemNhanVien3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/reload.png"))); // NOI18N
+        btnTimKiemNhanVien3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTimKiemNhanVien3ActionPerformed(evt);
+            }
+        });
+
+        jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        jLabel15.setText("Tìm theo :");
+
+        cbFilterThuNo2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả", "Nhân viên", "Khách hàng" }));
+
+        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
+        jPanel13.setLayout(jPanel13Layout);
+        jPanel13Layout.setHorizontalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel13Layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(jLabel15)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cbFilterThuNo2, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtTimKiemThuNoKhachHang2, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 305, Short.MAX_VALUE)
+                .addComponent(btnTimKiemNhanVien3, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel13Layout.setVerticalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel13Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jLabel15)
+                    .addComponent(btnTimKiemNhanVien3)
+                    .addComponent(txtTimKiemThuNoKhachHang2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbFilterThuNo2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(20, Short.MAX_VALUE))
+        );
+
+        tableDanhSachPhieuChi.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tableDanhSachPhieuChi.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Thời gian", "Nhân viên chi tiền", "Số tiền chi", "Lý Do"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tableDanhSachPhieuChi.setComponentPopupMenu(popupTableNhanVien);
+        tableDanhSachPhieuChi.setRowHeight(35);
+        tableDanhSachPhieuChi.setRowMargin(3);
+        tableDanhSachPhieuChi.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                tableDanhSachPhieuChiFocusLost(evt);
+            }
+        });
+        tableDanhSachPhieuChi.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tableDanhSachPhieuChiMousePressed(evt);
+            }
+        });
+        jScrollPane12.setViewportView(tableDanhSachPhieuChi);
+
+        javax.swing.GroupLayout panelDanhSachPhieuChiLayout = new javax.swing.GroupLayout(panelDanhSachPhieuChi);
+        panelDanhSachPhieuChi.setLayout(panelDanhSachPhieuChiLayout);
+        panelDanhSachPhieuChiLayout.setHorizontalGroup(
+            panelDanhSachPhieuChiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(panelDanhSachPhieuChiLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane12)
+                .addContainerGap())
+        );
+        panelDanhSachPhieuChiLayout.setVerticalGroup(
+            panelDanhSachPhieuChiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelDanhSachPhieuChiLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane12, javax.swing.GroupLayout.DEFAULT_SIZE, 451, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -2078,6 +2193,11 @@ public class frmMAIN extends javax.swing.JFrame {
 
         menuDanhSachPhieuChi.setText("Danh sách phiếu chi");
         menuDanhSachPhieuChi.setMargin(new java.awt.Insets(6, 6, 6, 6));
+        menuDanhSachPhieuChi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuDanhSachPhieuChiActionPerformed(evt);
+            }
+        });
         jMenu3.add(menuDanhSachPhieuChi);
 
         jMenuBar1.add(jMenu3);
@@ -2481,6 +2601,9 @@ public class frmMAIN extends javax.swing.JFrame {
     public void loadTableDanhSachPhieuTraNoNCC() {
         MDCongNo.dataTableTraNoNhaCungCap(tableTraNoNhaCungCap);
     }
+    public void loadTableNhatKyChiTien(){
+        MDThuChi.dataTableDanhSachPhieuChi(tableDanhSachPhieuChi);
+    }
     private void txtTimKiemThuNoKhachHang1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemThuNoKhachHang1KeyReleased
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTimKiemThuNoKhachHang1KeyReleased
@@ -2537,8 +2660,33 @@ public class frmMAIN extends javax.swing.JFrame {
     }//GEN-LAST:event_tableLoaiSanPhamMousePressed
 
     private void btnTaoPhieuChiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoPhieuChiActionPerformed
-
+        frmPhieuChi panel = new frmPhieuChi(this, true, acc);
+        panel.setVisible(true);
+        loadTableNhatKyChiTien();
     }//GEN-LAST:event_btnTaoPhieuChiActionPerformed
+
+    private void txtTimKiemThuNoKhachHang2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemThuNoKhachHang2KeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTimKiemThuNoKhachHang2KeyReleased
+
+    private void btnTimKiemNhanVien3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemNhanVien3ActionPerformed
+        // TODO add your handling code here:
+        loadTableNhatKyChiTien();
+    }//GEN-LAST:event_btnTimKiemNhanVien3ActionPerformed
+
+    private void tableDanhSachPhieuChiFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tableDanhSachPhieuChiFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tableDanhSachPhieuChiFocusLost
+
+    private void tableDanhSachPhieuChiMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableDanhSachPhieuChiMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tableDanhSachPhieuChiMousePressed
+
+    private void menuDanhSachPhieuChiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuDanhSachPhieuChiActionPerformed
+        // TODO add your handling code here:
+        openTab(panelDanhSachPhieuChi, "Nhật Ký Chi Tiền");
+        
+    }//GEN-LAST:event_menuDanhSachPhieuChiActionPerformed
 
     public void openTab(JPanel TypeOfPanel, String name) {
         JPanel tab = TypeOfPanel;
@@ -2582,11 +2730,13 @@ public class frmMAIN extends javax.swing.JFrame {
     private javax.swing.JButton btnTimKiemNhanVien;
     private javax.swing.JButton btnTimKiemNhanVien1;
     private javax.swing.JButton btnTimKiemNhanVien2;
+    private javax.swing.JButton btnTimKiemNhanVien3;
     private javax.swing.JButton btnTimKiemTaiKhoan;
     private javax.swing.JButton btnXoaSanPham1;
     private javax.swing.JButton btnXoaSanPham2;
     private javax.swing.JComboBox<String> cbFilterThuNo;
     private javax.swing.JComboBox<String> cbFilterThuNo1;
+    private javax.swing.JComboBox<String> cbFilterThuNo2;
     private javax.swing.JComboBox<String> comboBoxNhomHang;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
@@ -2598,6 +2748,7 @@ public class frmMAIN extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -2646,6 +2797,7 @@ public class frmMAIN extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -2657,6 +2809,7 @@ public class frmMAIN extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane11;
+    private javax.swing.JScrollPane jScrollPane12;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -2694,6 +2847,7 @@ public class frmMAIN extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuXoaNhanVien;
     private javax.swing.JMenu menubarBaoCao;
     private javax.swing.JPanel panelDanhSachHoaDonBanHang;
+    private javax.swing.JPanel panelDanhSachPhieuChi;
     private javax.swing.JPanel panelDanhSachPhieuThuNoKhachHang;
     private javax.swing.JPanel panelDanhSachPhieuTraNoNCC;
     private javax.swing.JPanel panelMain;
@@ -2706,6 +2860,7 @@ public class frmMAIN extends javax.swing.JFrame {
     private javax.swing.JTabbedPane tabbed;
     private javax.swing.JTable tableChiTietHoaDonBanHang;
     private javax.swing.JTable tableDanhSachHoaDonBanHang;
+    private javax.swing.JTable tableDanhSachPhieuChi;
     private javax.swing.JTable tableDonViTinh;
     private javax.swing.JTable tableKhachHang;
     private javax.swing.JTable tableLoaiSanPham;
@@ -2723,5 +2878,6 @@ public class frmMAIN extends javax.swing.JFrame {
     private javax.swing.JTextField txtTimKiemTaiKhoan;
     private javax.swing.JTextField txtTimKiemThuNoKhachHang;
     private javax.swing.JTextField txtTimKiemThuNoKhachHang1;
+    private javax.swing.JTextField txtTimKiemThuNoKhachHang2;
     // End of variables declaration//GEN-END:variables
 }
