@@ -803,12 +803,13 @@ public class panelTaoHoaDonBanHang extends javax.swing.JPanel {
                 tongTienFinal = thanhTienBanDau - giaTriGiam;
 
             } else {   // Giảm số phần trăm
-                int giaTriPhanTram = Integer.parseInt(txtGiaTriGiam.getText());
-
-                //tongTienFinal = tổng hóa đơn - ( tổng hóa đơn  * (value / 100))
-                tongTienFinal = thanhTienBanDau - (thanhTienBanDau * (giaTriPhanTram / 100));
+                long giaTriPhanTram = helper.SoLong(txtGiaTriGiam.getText());
+                long soTienGiam = thanhTienBanDau * giaTriPhanTram / 100;
+                System.out.println(soTienGiam);
+                tongTienFinal = thanhTienBanDau - soTienGiam;
             }
         }
+        System.out.println(tongTienFinal);
         txtTongTien.setText(helper.LongToString(tongTienFinal));
     }
 
@@ -830,19 +831,20 @@ public class panelTaoHoaDonBanHang extends javax.swing.JPanel {
 
         tableGioHang.setModel(model);
         long tongTienFinal = thanhTienBanDau;
-        if (!txtGiaTriGiam.getText().equals("")) {
+        if (!txtGiaTriGiam.getText().equals("") || !(helper.SoLong(txtGiaTriGiam.getText()) == 0)) {
             if (cbTuyChonGiamGia.getSelectedIndex() == 0) { // Giảm số tiền
 
                 long giaTriGiam = helper.SoLong(txtGiaTriGiam.getText());
                 tongTienFinal = thanhTienBanDau - giaTriGiam;
 
             } else {   // Giảm số phần trăm
-                int giaTriPhanTram = Integer.parseInt(txtGiaTriGiam.getText());
-
-                //tongTienFinal = tổng hóa đơn - ( tổng hóa đơn  * (value / 100))
-                tongTienFinal = thanhTienBanDau - (thanhTienBanDau * (giaTriPhanTram / 100));
+                long giaTriPhanTram = helper.SoLong(txtGiaTriGiam.getText());
+                long soTienGiam = thanhTienBanDau * giaTriPhanTram / 100;
+                System.out.println(soTienGiam);
+                tongTienFinal = thanhTienBanDau - soTienGiam;
             }
         }
+        System.out.println(tongTienFinal);
         txtTongTien.setText(helper.LongToString(tongTienFinal));
     }
 
@@ -998,7 +1000,6 @@ public class panelTaoHoaDonBanHang extends javax.swing.JPanel {
     private void txtGiaTriGiamKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtGiaTriGiamKeyReleased
         if (cbTuyChonGiamGia.getSelectedIndex() == 0) {
             helper.setTextFieldMoney(txtGiaTriGiam);
-
         }
         if (cbChonGia.getSelectedIndex() == 0) {
             loadTableGioHangGiaBan();
