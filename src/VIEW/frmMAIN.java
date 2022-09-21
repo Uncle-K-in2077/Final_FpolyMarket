@@ -36,9 +36,9 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 public class frmMAIN extends javax.swing.JFrame {
-
+    
     public static Account acc;
-
+    
     public frmMAIN(Account acount) {
         this.acc = acount;
         initComponents();
@@ -85,11 +85,11 @@ public class frmMAIN extends javax.swing.JFrame {
         setTableTextCenter();
         addKeyEsc();
     }
-
+    
     public void loadTableThuNoKhachHang() {
         MDCongNo.dataTableThuNoKhachHang(tableThuNoKhachHang);
     }
-
+    
     public void addKeyEsc() {
         InputMap inputMap = tabbed.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
         inputMap.put(KeyStroke.getKeyStroke("ESCAPE"), "VK_ESCAPE");
@@ -105,7 +105,7 @@ public class frmMAIN extends javax.swing.JFrame {
             }
         });
     }
-
+    
     public void showIconCloseTab() {
         tabbed.putClientProperty("JTabbedPane.tabCloseCallback",
                 (IntConsumer) tabIndex -> {
@@ -116,7 +116,7 @@ public class frmMAIN extends javax.swing.JFrame {
                     }
                 });
     }
-
+    
     public void loadTableLoaiSanPham() {
         ArrayList<loaiSanPham> data = MDLoaiSanPham.getAll();
         DefaultTableModel model = (DefaultTableModel) tableLoaiSanPham.getModel();
@@ -131,7 +131,7 @@ public class frmMAIN extends javax.swing.JFrame {
         }
         tableLoaiSanPham.setModel(model);
     }
-
+    
     public void loadTableDonViTinh() {
         ArrayList<donViTinh> data = MDDonViTinh.getAll();
         DefaultTableModel model = (DefaultTableModel) tableDonViTinh.getModel();
@@ -146,7 +146,7 @@ public class frmMAIN extends javax.swing.JFrame {
         }
         tableDonViTinh.setModel(model);
     }
-
+    
     public void loadTableNhanVien() {
         ArrayList<nhanVien> data = MDNhanVien.getDataToTable();
         DefaultTableModel model = (DefaultTableModel) tableNhanVien.getModel();
@@ -167,7 +167,7 @@ public class frmMAIN extends javax.swing.JFrame {
         }
         tableNhanVien.setModel(model);
     }
-
+    
     public void loadTableNhanVien(ArrayList<nhanVien> data) {
         DefaultTableModel model = (DefaultTableModel) tableNhanVien.getModel();
         model.setRowCount(0);
@@ -187,7 +187,7 @@ public class frmMAIN extends javax.swing.JFrame {
         }
         tableNhanVien.setModel(model);
     }
-
+    
     public void loadTableNhaCungCap() {
         ArrayList<nhaCungCap> data = MDNhaCungCap.getAll();
         DefaultTableModel model = (DefaultTableModel) tableNhaCungCap.getModel();
@@ -205,7 +205,7 @@ public class frmMAIN extends javax.swing.JFrame {
         }
         tableNhaCungCap.setModel(model);
     }
-
+    
     public void loadTableKhachHang() {
         ArrayList<khachHang> data = MDKhachHang.getDataToTable();
         DefaultTableModel model = (DefaultTableModel) tableKhachHang.getModel();
@@ -223,7 +223,7 @@ public class frmMAIN extends javax.swing.JFrame {
         }
         tableKhachHang.setModel(model);
     }
-
+    
     public void loadTableSanPham() {
         ArrayList<sanPham> data = MDSanPham.getDataToTable();
         DefaultTableModel model = (DefaultTableModel) tableSanPham.getModel();
@@ -245,12 +245,12 @@ public class frmMAIN extends javax.swing.JFrame {
                 item.getSoLuongToiThieu(),
                 item.getGhiChu(),
                 item.isTrangThai()
-
+            
             });
         }
         tableSanPham.setModel(model);
     }
-
+    
     public void loadTableAccount() {
         ArrayList<Account> data = MDAccount.getDataToTable();
         DefaultTableModel model = (DefaultTableModel) tableTaiKhoan.getModel();
@@ -274,7 +274,7 @@ public class frmMAIN extends javax.swing.JFrame {
         }
         tableTaiKhoan.setModel(model);
     }
-
+    
     public void setTableTextCenter() {
         // set table text center
         helper.setTableTextCenterFullColumn(tableTraNoNhaCungCap);
@@ -293,7 +293,7 @@ public class frmMAIN extends javax.swing.JFrame {
             tableTaiKhoan.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
         }
     }
-
+    
     public void setModuleForAccount() {
         //bán hàng
         btnDanhSachHoaDonBanHang.setVisible(acc.isBanHang());
@@ -332,11 +332,11 @@ public class frmMAIN extends javax.swing.JFrame {
         menuTaoPhieuChi.setVisible(acc.isPhieuChi());
         menuDanhSachPhieuChi.setVisible(acc.isPhieuChi());
         btnTaoPhieuChi.setVisible(acc.isPhieuChi());
-
+        
     }
-
+    
     public void setModelTableSanPham() {
-
+        
         String[] column = {"Hình ảnh", "Mã", "Sản phẩm", "Mã vạch", "Đơn vị tính", "Nhóm hàng", "Giá nhập", "Giá bán", "Giá sĩ", "Tồn kho", "Số lượng tối thiểu", "Ghi chú", "Còn sử dụng?"};
         Object[][] rows = {};
         DefaultTableModel model = new DefaultTableModel(rows, column) {
@@ -345,14 +345,14 @@ public class frmMAIN extends javax.swing.JFrame {
                 switch (column) {
                     case 0:
                         return ImageIcon.class;
-
+                    
                     case 12:
                         return Boolean.class;
                     default:
                         return Object.class;
                 }
             }
-
+            
             public boolean isCellEditable(int rowIndex,
                     int columnIndex) {
                 return false;
@@ -361,11 +361,11 @@ public class frmMAIN extends javax.swing.JFrame {
         tableSanPham.setModel(model);
         tableSanPham.setRowHeight(120);
         tableSanPham.setRowMargin(7);
-
+        
         tableSanPham.setFont(new Font("Arial", Font.CENTER_BASELINE, 17));
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(JLabel.CENTER);
-
+        
         tableSanPham.getColumnModel().getColumn(1).setCellRenderer(centerRenderer);
         tableSanPham.getColumnModel().getColumn(2).setCellRenderer(centerRenderer);
         tableSanPham.getColumnModel().getColumn(3).setCellRenderer(centerRenderer);
@@ -377,7 +377,7 @@ public class frmMAIN extends javax.swing.JFrame {
         tableSanPham.getColumnModel().getColumn(9).setCellRenderer(centerRenderer);
         tableSanPham.getColumnModel().getColumn(10).setCellRenderer(centerRenderer);
         tableSanPham.getColumnModel().getColumn(11).setCellRenderer(centerRenderer);
-
+        
         tableSanPham.getColumnModel().getColumn(0).setPreferredWidth(100);
         tableSanPham.getColumnModel().getColumn(1).setPreferredWidth(70);
         tableSanPham.getColumnModel().getColumn(2).setPreferredWidth(200);
@@ -387,7 +387,7 @@ public class frmMAIN extends javax.swing.JFrame {
         tableSanPham.getColumnModel().getColumn(12).setPreferredWidth(90);
         tableSanPham.getColumnModel().getColumn(9).setPreferredWidth(60);
     }
-
+    
     public void setSearchTextField() {
         helper.addIconSearch(txtTimKiemHoaDonBanHang);
         helper.addIconSearch(txtTimKiemKhachHang);
@@ -397,7 +397,7 @@ public class frmMAIN extends javax.swing.JFrame {
         helper.addIconSearch(txtTimKiemTaiKhoan);
         helper.addIconSearch(txtTimKiemThuNoKhachHang);
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -516,18 +516,7 @@ public class frmMAIN extends javax.swing.JFrame {
         panelMain = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenu7 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
-        jMenuItem7 = new javax.swing.JMenuItem();
-        jMenuItem8 = new javax.swing.JMenuItem();
-        jMenuItem11 = new javax.swing.JMenuItem();
-        jMenuItem12 = new javax.swing.JMenuItem();
-        jMenuItem13 = new javax.swing.JMenuItem();
-        jMenuItem14 = new javax.swing.JMenuItem();
-        jMenuItem17 = new javax.swing.JMenuItem();
-        jMenuItem18 = new javax.swing.JMenuItem();
+        jMenuItem30 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
@@ -1971,98 +1960,14 @@ public class frmMAIN extends javax.swing.JFrame {
 
         jMenu1.setText("Hệ thống");
 
-        jMenu7.setText("Giao diện");
-        jMenu7.setMargin(new java.awt.Insets(6, 6, 6, 6));
-
-        jMenuItem1.setMargin(new java.awt.Insets(6, 6, 6, 6));
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItem30.setText("Đổi giao diện");
+        jMenuItem30.setMargin(new java.awt.Insets(6, 6, 6, 6));
+        jMenuItem30.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                jMenuItem30ActionPerformed(evt);
             }
         });
-        jMenu7.add(jMenuItem1);
-
-        jMenuItem5.setMargin(new java.awt.Insets(6, 6, 6, 6));
-        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem5ActionPerformed(evt);
-            }
-        });
-        jMenu7.add(jMenuItem5);
-
-        jMenuItem6.setMargin(new java.awt.Insets(6, 6, 6, 6));
-        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem6ActionPerformed(evt);
-            }
-        });
-        jMenu7.add(jMenuItem6);
-
-        jMenuItem7.setMargin(new java.awt.Insets(6, 6, 6, 6));
-        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem7ActionPerformed(evt);
-            }
-        });
-        jMenu7.add(jMenuItem7);
-
-        jMenuItem8.setMargin(new java.awt.Insets(6, 6, 6, 6));
-        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem8ActionPerformed(evt);
-            }
-        });
-        jMenu7.add(jMenuItem8);
-
-        jMenuItem11.setMargin(new java.awt.Insets(6, 6, 6, 6));
-        jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem11ActionPerformed(evt);
-            }
-        });
-        jMenu7.add(jMenuItem11);
-
-        jMenuItem12.setMargin(new java.awt.Insets(6, 6, 6, 6));
-        jMenuItem12.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem12ActionPerformed(evt);
-            }
-        });
-        jMenu7.add(jMenuItem12);
-
-        jMenuItem13.setMargin(new java.awt.Insets(6, 6, 6, 6));
-        jMenuItem13.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem13ActionPerformed(evt);
-            }
-        });
-        jMenu7.add(jMenuItem13);
-
-        jMenuItem14.setMargin(new java.awt.Insets(6, 6, 6, 6));
-        jMenuItem14.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem14ActionPerformed(evt);
-            }
-        });
-        jMenu7.add(jMenuItem14);
-
-        jMenuItem17.setMargin(new java.awt.Insets(6, 6, 6, 6));
-        jMenuItem17.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem17ActionPerformed(evt);
-            }
-        });
-        jMenu7.add(jMenuItem17);
-
-        jMenuItem18.setMargin(new java.awt.Insets(6, 6, 6, 6));
-        jMenuItem18.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem18ActionPerformed(evt);
-            }
-        });
-        jMenu7.add(jMenuItem18);
-
-        jMenu1.add(jMenu7);
+        jMenu1.add(jMenuItem30);
 
         jMenuItem2.setText("Đổi mật khẩu");
         jMenuItem2.setMargin(new java.awt.Insets(6, 6, 6, 6));
@@ -2172,7 +2077,7 @@ public class frmMAIN extends javax.swing.JFrame {
         });
         jMenu3.add(jMenuItem28);
 
-        jMenuItem29.setText("Nhật ký trả nợ NCC");
+        jMenuItem29.setText("Danh sách phiếu trả nợ NCC");
         jMenuItem29.setMargin(new java.awt.Insets(6, 6, 6, 6));
         jMenuItem29.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2314,7 +2219,7 @@ public class frmMAIN extends javax.swing.JFrame {
     private void menuTaoPhieuChiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuTaoPhieuChiActionPerformed
         frmPhieuChi panel = new frmPhieuChi(this, true, acc);
         panel.setVisible(true);
-        
+
     }//GEN-LAST:event_menuTaoPhieuChiActionPerformed
 
     private void btnNhapHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNhapHangActionPerformed
@@ -2378,6 +2283,7 @@ public class frmMAIN extends javax.swing.JFrame {
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         new frmDoiMatKhau(this, true, acc).setVisible(true);
+        loadTableAccount();
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void menuQuanLyNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuQuanLyNhanVienActionPerformed
@@ -2420,52 +2326,8 @@ public class frmMAIN extends javax.swing.JFrame {
         taoPhieuBanHang();
     }//GEN-LAST:event_menuTaoHoaDonBanHangActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        helper.updateTheme(1);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
-
-    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        helper.updateTheme(2);
-    }//GEN-LAST:event_jMenuItem5ActionPerformed
-
-    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-        helper.updateTheme(3);
-    }//GEN-LAST:event_jMenuItem6ActionPerformed
-
-    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
-        helper.updateTheme(4);
-    }//GEN-LAST:event_jMenuItem7ActionPerformed
-
-    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
-        helper.updateTheme(5);
-    }//GEN-LAST:event_jMenuItem8ActionPerformed
-
-    private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
-        helper.updateTheme(6);
-    }//GEN-LAST:event_jMenuItem11ActionPerformed
-
-    private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
-        helper.updateTheme(11);
-    }//GEN-LAST:event_jMenuItem12ActionPerformed
-
-    private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
-        helper.updateTheme(9);
-    }//GEN-LAST:event_jMenuItem13ActionPerformed
-
-    private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
-        helper.updateTheme(10);
-    }//GEN-LAST:event_jMenuItem14ActionPerformed
-
-    private void jMenuItem17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem17ActionPerformed
-        helper.updateTheme(8);
-    }//GEN-LAST:event_jMenuItem17ActionPerformed
-
-    private void jMenuItem18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem18ActionPerformed
-        helper.updateTheme(7);
-    }//GEN-LAST:event_jMenuItem18ActionPerformed
-
     private void tableNhanVienMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableNhanVienMousePressed
-
+        
         if (evt.getClickCount() == 2 && tableNhanVien.getSelectedRows().length == 1) {
             int indexRow = tableNhanVien.getSelectedRow();
             String idNhanVien = tableNhanVien.getValueAt(indexRow, 0) + "";
@@ -2588,7 +2450,7 @@ public class frmMAIN extends javax.swing.JFrame {
         loadTableKhachHang();
         loadTableThuNoKhachHang();
     }//GEN-LAST:event_btnTaoPhieuThuActionPerformed
-
+    
 
     private void jMenuItem28ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem28ActionPerformed
         // TODO add your handling code here:
@@ -2601,7 +2463,8 @@ public class frmMAIN extends javax.swing.JFrame {
     public void loadTableDanhSachPhieuTraNoNCC() {
         MDCongNo.dataTableTraNoNhaCungCap(tableTraNoNhaCungCap);
     }
-    public void loadTableNhatKyChiTien(){
+    
+    public void loadTableNhatKyChiTien() {
         MDThuChi.dataTableDanhSachPhieuChi(tableDanhSachPhieuChi);
     }
     private void txtTimKiemThuNoKhachHang1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemThuNoKhachHang1KeyReleased
@@ -2639,7 +2502,7 @@ public class frmMAIN extends javax.swing.JFrame {
 
     private void tableDonViTinhMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableDonViTinhMousePressed
         int index = tableDonViTinh.getSelectedRow();
-
+        
         if (tableDonViTinh.getSelectedRows().length == 1 && evt.getClickCount() == 2) {
             String id = tableDonViTinh.getValueAt(index, 0) + "";
             frmEditorDonViTinh frm = new frmEditorDonViTinh(this, true, id);
@@ -2650,7 +2513,7 @@ public class frmMAIN extends javax.swing.JFrame {
 
     private void tableLoaiSanPhamMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableLoaiSanPhamMousePressed
         int index = tableLoaiSanPham.getSelectedRow();
-
+        
         if (tableLoaiSanPham.getSelectedRows().length == 1 && evt.getClickCount() == 2) {
             String id = tableLoaiSanPham.getValueAt(index, 0) + "";
             frmEditorLoaiSanPham frm = new frmEditorLoaiSanPham(this, true, id);
@@ -2685,9 +2548,13 @@ public class frmMAIN extends javax.swing.JFrame {
     private void menuDanhSachPhieuChiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuDanhSachPhieuChiActionPerformed
         // TODO add your handling code here:
         openTab(panelDanhSachPhieuChi, "Nhật Ký Chi Tiền");
-        
+
     }//GEN-LAST:event_menuDanhSachPhieuChiActionPerformed
 
+    private void jMenuItem30ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem30ActionPerformed
+        new frmEditorGiaoDien(this, true).setVisible(true);
+    }//GEN-LAST:event_jMenuItem30ActionPerformed
+    
     public void openTab(JPanel TypeOfPanel, String name) {
         JPanel tab = TypeOfPanel;
         tab.setName(name);
@@ -2701,7 +2568,7 @@ public class frmMAIN extends javax.swing.JFrame {
             tabbed.setSelectedIndex(tabbed.getTabCount() - 1);
         }
     }
-
+    
     public static void main(String args[]) {
 //        5,8,
 //sáng :10
@@ -2762,18 +2629,10 @@ public class frmMAIN extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
-    private javax.swing.JMenu jMenu7;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
-    private javax.swing.JMenuItem jMenuItem11;
-    private javax.swing.JMenuItem jMenuItem12;
-    private javax.swing.JMenuItem jMenuItem13;
-    private javax.swing.JMenuItem jMenuItem14;
     private javax.swing.JMenuItem jMenuItem15;
     private javax.swing.JMenuItem jMenuItem16;
-    private javax.swing.JMenuItem jMenuItem17;
-    private javax.swing.JMenuItem jMenuItem18;
     private javax.swing.JMenuItem jMenuItem19;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem20;
@@ -2787,11 +2646,8 @@ public class frmMAIN extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem28;
     private javax.swing.JMenuItem jMenuItem29;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem30;
     private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
-    private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;

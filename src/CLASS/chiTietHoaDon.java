@@ -10,14 +10,18 @@ public class chiTietHoaDon {
     long giaSi;
     boolean trangThai;
 
-    public chiTietHoaDon(String idSanPham, String tenSanPham, String donViTinh, int soLuong, long donGia,long giaSi, boolean trangThai) {
+    public chiTietHoaDon(String idSanPham, String tenSanPham, String donViTinh, int soLuong, long donGia, long giaSi, boolean trangThai) {
         this.idSanPham = idSanPham;
         this.tenSanPham = tenSanPham;
         this.donViTinh = donViTinh;
         this.soLuong = soLuong;
         this.donGia = donGia;
         this.trangThai = trangThai;
-        this.giaSi=giaSi;
+        this.giaSi = giaSi;
+    }
+
+    public long getThanhTienGiaSi() {
+        return soLuong * giaSi;
     }
 
     public long getGiaSi() {
@@ -62,7 +66,7 @@ public class chiTietHoaDon {
 
     public void setSoLuong(int soLuong) {
         this.soLuong = soLuong;
-        
+
     }
 
     public long getDonGia() {
