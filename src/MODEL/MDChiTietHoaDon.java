@@ -13,6 +13,9 @@ public class MDChiTietHoaDon {
         ResultSet rs = HELPER.SQLhelper.executeQuery(sql, barcode);
         try {
             while (rs.next()) {
+                if (rs.getInt("trangthai") == 0) {
+                    return null;
+                }
                 chiTiet = new chiTietHoaDon(
                         rs.getString("id"),
                         rs.getString("name"),

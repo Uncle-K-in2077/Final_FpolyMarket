@@ -115,7 +115,7 @@ public class panelTaoHoaDonBanHang extends javax.swing.JPanel {
     }
 
     public void loadTableSanPhamKeyReleased(String keyword) {
-        ArrayList<sanPham> dataSanPhamTable = MDSanPham.getDataToTable();
+        ArrayList<sanPham> dataSanPhamTable = MDSanPham.getDataToTableBanHang();
         cbLoaiSanPham.setSelectedIndex(0);
         DefaultTableModel model = (DefaultTableModel) tableSanPham.getModel();
         model.setRowCount(0);
@@ -142,7 +142,7 @@ public class panelTaoHoaDonBanHang extends javax.swing.JPanel {
     }
 
     public void loadTableSanPham() {
-        ArrayList<sanPham> dataSanPhamTable = MDSanPham.getDataToTable();
+        ArrayList<sanPham> dataSanPhamTable = MDSanPham.getDataToTableBanHang();
         DefaultTableModel model = (DefaultTableModel) tableSanPham.getModel();
         model.setRowCount(0);
         for (sanPham item : dataSanPhamTable) {
@@ -769,6 +769,9 @@ public class panelTaoHoaDonBanHang extends javax.swing.JPanel {
             return;
         }
         String barcode = txtBarcode.getText();
+        if (barcode.length() < 7) {
+            return;
+        }
         chiTietHoaDon sp = MDChiTietHoaDon.getSanPhamChiTietHoaDon(barcode);
         if (sp == null) {
             if (JOptionPane.showConfirmDialog(null, "Sản phẩm chưa có. Thêm mới sản phẩm ?") == 0) {
@@ -957,7 +960,7 @@ public class panelTaoHoaDonBanHang extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_tableSanPhamMousePressed
     public void loadTableSanPham(String loaiSanPham) {
-        ArrayList<sanPham> dataSanPhamTable = MDSanPham.getDataToTable();
+        ArrayList<sanPham> dataSanPhamTable = MDSanPham.getDataToTableBanHang();
         DefaultTableModel model = (DefaultTableModel) tableSanPham.getModel();
         model.setRowCount(0);
         for (sanPham item : dataSanPhamTable) {

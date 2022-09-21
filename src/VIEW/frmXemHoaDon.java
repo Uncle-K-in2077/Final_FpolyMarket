@@ -149,6 +149,9 @@ public class frmXemHoaDon extends javax.swing.JDialog {
             return;
         }
         String barcode = txtBarcode.getText();
+        if (barcode.length() < 7) {
+            return;
+        }
         chiTietHoaDon sp = MDChiTietHoaDon.getSanPhamChiTietHoaDon(barcode);
         if (sp == null) {
             if (JOptionPane.showConfirmDialog(null, "Sản phẩm chưa có. Thêm mới sản phẩm ?") == 0) {

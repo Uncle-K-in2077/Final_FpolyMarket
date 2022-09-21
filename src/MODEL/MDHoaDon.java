@@ -25,6 +25,14 @@ public class MDHoaDon {
 
     public static void taoHoaDon(hoaDon hoadon, JTable tableGioHang) {
         // tạo hóa đơn : 
+//         String idNhanVien;
+//    String idKhachHang;
+//    int hinhThucThanhToan;
+//    long giamGia;
+//    long tongTienThanhToan;
+//    String ghiChu;
+//    boolean trangThai;
         
+        String sql = "insert into hoadon values()";
     }
 }

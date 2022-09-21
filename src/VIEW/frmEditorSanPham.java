@@ -54,7 +54,7 @@ public class frmEditorSanPham extends javax.swing.JDialog {
         this.option = option;
         initComponents();
         loadComboBox();
-        ImageIcon imageIcon = new ImageIcon(new ImageIcon("src/IMAGE/empty.png").getImage().getScaledInstance(lbHinhAnh.getWidth(), lbHinhAnh.getHeight(), Image.SCALE_DEFAULT));
+        ImageIcon imageIcon = new ImageIcon(new ImageIcon("src/IMAGE/empty.png").getImage().getScaledInstance(lbHinhAnh.getWidth(), lbHinhAnh.getHeight(), Image.SCALE_SMOOTH));
         lbHinhAnh.setIcon(imageIcon);
         if (this.option != "add") {
             loadThongTinSanPham(this.option);
@@ -73,7 +73,7 @@ public class frmEditorSanPham extends javax.swing.JDialog {
         txtGiaNhap.setText(HELPER.helper.LongToString(item.getGiaNhap()));
         txtSoLuong.setValue(Integer.parseInt(item.getSoLuong() + ""));
         txtSoLuongToiThieu.setValue(Integer.parseInt(item.getSoLuongToiThieu() + ""));
-        ImageIcon imageIcon = new ImageIcon(new ImageIcon("src/IMAGE/" + item.getHinhAnh()).getImage().getScaledInstance(lbHinhAnh.getWidth(), lbHinhAnh.getHeight(), Image.SCALE_DEFAULT));
+        ImageIcon imageIcon = new ImageIcon(new ImageIcon("src/IMAGE/" + item.getHinhAnh()).getImage().getScaledInstance(lbHinhAnh.getWidth(), lbHinhAnh.getHeight(), Image.SCALE_SMOOTH));
         lbHinhAnh.setIcon(imageIcon);
         this.hinhAnh = item.getHinhAnh();
         if (item.isTrangThai() == true) {

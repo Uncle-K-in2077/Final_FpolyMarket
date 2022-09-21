@@ -25,12 +25,42 @@ public class MDSanPham {
                 "Chưa đầy đủ thông tin !!!"
         );
     }
-
-    public static ArrayList<sanPham> getDataToTable() {
+public static ArrayList<sanPham> getDataToTable() {
         ArrayList<sanPham> data = new ArrayList<>();
         String sql = "SELECT sanpham.* ,donvitinh.name as 'dvt', loaisanpham.name as 'lsp' from sanpham "
                 + "join donvitinh on donvitinh.id = sanpham.IDDonViTinh "
                 + "join loaisanpham on loaisanpham.id=sanpham.idLoaiSanPham"
+                + " order by trangthai desc";
+        ResultSet rs = HELPER.SQLhelper.executeQuery(sql);
+        try {
+            while (rs.next()) {
+                data.add(new sanPham(
+                        rs.getString("id"),
+                        rs.getString("name"),
+                        rs.getString("barcode"),
+                        rs.getString("hinhanh"),
+                        rs.getLong("GiaNhap"),
+                        rs.getLong("GiaBan"),
+                        rs.getLong("giaSi"),
+                        rs.getInt("Soluong"),
+                        rs.getInt("soLuongToiThieu"),
+                        rs.getString("idNhaCungCap"),
+                        rs.getString("dvt"),
+                        rs.getString("lsp"),
+                        rs.getString("GhiChu"),
+                        rs.getInt("trangthai") == 1 ? true : false
+                ));
+            }
+        } catch (Exception e) {
+        }
+        return data;
+    }
+    public static ArrayList<sanPham> getDataToTableBanHang() {
+        ArrayList<sanPham> data = new ArrayList<>();
+        String sql = "SELECT sanpham.* ,donvitinh.name as 'dvt', loaisanpham.name as 'lsp' from sanpham "
+                + "join donvitinh on donvitinh.id = sanpham.IDDonViTinh "
+                + "join loaisanpham on loaisanpham.id=sanpham.idLoaiSanPham"
+                + " where sanpham.trangthai = 1 "
                 + " order by trangthai desc";
         ResultSet rs = HELPER.SQLhelper.executeQuery(sql);
         try {
@@ -114,7 +144,7 @@ public class MDSanPham {
     }
 
     public static void add(sanPham item) {
-        String sql = "insert into SanPham values(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "insert into SanPham values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         HELPER.SQLhelper.executeUpdate(sql,
                 item.getIdSanPham(),
                 item.getName(),
@@ -122,6 +152,7 @@ public class MDSanPham {
                 item.getHinhAnh() == null ? "empty.png" : item.getHinhAnh(),
                 item.getGiaNhap(),
                 item.getGiaBan(),
+                item.getGiaSi(),
                 item.getSoLuong(),
                 item.getSoLuongToiThieu(),
                 item.getIdNhaCungCap(),
