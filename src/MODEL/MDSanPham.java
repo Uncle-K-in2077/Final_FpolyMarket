@@ -60,7 +60,7 @@ public static ArrayList<sanPham> getDataToTable() {
         String sql = "SELECT sanpham.* ,donvitinh.name as 'dvt', loaisanpham.name as 'lsp' from sanpham "
                 + "join donvitinh on donvitinh.id = sanpham.IDDonViTinh "
                 + "join loaisanpham on loaisanpham.id=sanpham.idLoaiSanPham"
-                + " where sanpham.trangthai = 1 "
+                + " where sanpham.trangthai = 1 and sanpham.soluong>0"
                 + " order by trangthai desc";
         ResultSet rs = HELPER.SQLhelper.executeQuery(sql);
         try {

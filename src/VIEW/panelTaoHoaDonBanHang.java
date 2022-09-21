@@ -35,7 +35,6 @@ public class panelTaoHoaDonBanHang extends javax.swing.JPanel {
     private DetailedComboBox comboboxKhachHang;
     public static Account acc;
     private ArrayList<chiTietHoaDon> dataChiTietHoaDon = new ArrayList<>();
-//    private ArrayList<sanPham> dataSanPham = MDSanPham.getAll();
     private ArrayList<String> listLoaiSanPham = MDLoaiSanPham.getNames();
 
     private String path = "src/IMAGE/";
@@ -706,6 +705,13 @@ public class panelTaoHoaDonBanHang extends javax.swing.JPanel {
         themNhanhSanPham();
         loadTableSanPham();
     }//GEN-LAST:event_jButton1ActionPerformed
+    public void loadGioHang() {
+        if (cbChonGia.getSelectedIndex() == 0) {
+            loadTableGioHangGiaBan();
+        } else {
+            loadTableGioHangGiaSi();
+        }
+    }
 
     public void addGioHang(chiTietHoaDon sp) {
         boolean isTonTai = true;
@@ -715,18 +721,12 @@ public class panelTaoHoaDonBanHang extends javax.swing.JPanel {
                 themNhanhSanPham();
                 loadTableSanPham();
             }
-            System.out.println("null");
             txtBarcode.setText("");
             txtBarcode.requestFocus();
         }
         if (dataChiTietHoaDon.size() == 0) {
             dataChiTietHoaDon.add(sp);
-            if (cbChonGia.getSelectedIndex() == 0) {
-                loadTableGioHangGiaBan();
-            } else {
-                loadTableGioHangGiaSi();
-            }
-
+            loadGioHang();
             return;
         } else {
             for (chiTietHoaDon item : dataChiTietHoaDon) {
@@ -752,16 +752,7 @@ public class panelTaoHoaDonBanHang extends javax.swing.JPanel {
         } else {
             dataChiTietHoaDon.add(sp);
         }
-        if (cbChonGia.getSelectedIndex() == 0) {
-            loadTableGioHangGiaBan();
-        } else {
-            loadTableGioHangGiaSi();
-        }
-        if (cbChonGia.getSelectedIndex() == 0) {
-            loadTableGioHangGiaBan();
-        } else {
-            loadTableGioHangGiaSi();
-        }
+        loadGioHang();
     }
 
     public void enterBarcode() {
@@ -910,11 +901,7 @@ public class panelTaoHoaDonBanHang extends javax.swing.JPanel {
                 dataChiTietHoaDon.remove(i);
             }
         }
-        if (cbChonGia.getSelectedIndex() == 0) {
-            loadTableGioHangGiaBan();
-        } else {
-            loadTableGioHangGiaSi();
-        }
+        loadGioHang();
     }
     private void tableGioHangMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableGioHangMousePressed
 //        deleteGioHang();
@@ -944,19 +931,19 @@ public class panelTaoHoaDonBanHang extends javax.swing.JPanel {
 
         }
 
-        if (cbChonGia.getSelectedIndex() == 0) {
-            loadTableGioHangGiaBan();
-        } else {
-            loadTableGioHangGiaSi();
-        }
+       loadGioHang();
     }//GEN-LAST:event_tableGioHangKeyReleased
 
     private void tableSanPhamMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableSanPhamMousePressed
         if (tableSanPham.getSelectedRows().length == 1 && evt.getClickCount() == 2) {
             int indexRow = tableSanPham.getSelectedRow();
-            String barcode = tableSanPham.getValueAt(indexRow, 3) + "";
-            chiTietHoaDon sp = MDChiTietHoaDon.getSanPhamChiTietHoaDon(barcode);
-            addGioHang(sp);
+            String id = tableSanPham.getValueAt(indexRow, 1) + "";
+            chiTietHoaDon sp = MDChiTietHoaDon.getSanPhamChiTietHoaDonbyID(id);
+            if (sp.getTonKho() - sp.getSoLuong() == 0) {
+                JOptionPane.showMessageDialog(this, "Sản phẩm đã hết hàng !");
+            } else {
+                addGioHang(sp);
+            }
         }
     }//GEN-LAST:event_tableSanPhamMousePressed
     public void loadTableSanPham(String loaiSanPham) {
@@ -990,11 +977,7 @@ public class panelTaoHoaDonBanHang extends javax.swing.JPanel {
     }//GEN-LAST:event_txtTimKiemSanPhamKeyReleased
 
     private void cbChonGiaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbChonGiaItemStateChanged
-        if (cbChonGia.getSelectedIndex() == 0) {
-            loadTableGioHangGiaBan();
-        } else {
-            loadTableGioHangGiaSi();
-        }
+       loadGioHang();
     }//GEN-LAST:event_cbChonGiaItemStateChanged
 
     private void cbChonGiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbChonGiaActionPerformed
@@ -1005,20 +988,12 @@ public class panelTaoHoaDonBanHang extends javax.swing.JPanel {
         if (cbTuyChonGiamGia.getSelectedIndex() == 0) {
             helper.setTextFieldMoney(txtGiaTriGiam);
         }
-        if (cbChonGia.getSelectedIndex() == 0) {
-            loadTableGioHangGiaBan();
-        } else {
-            loadTableGioHangGiaSi();
-        }
+       loadGioHang();
     }//GEN-LAST:event_txtGiaTriGiamKeyReleased
 
     private void cbTuyChonGiamGiaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbTuyChonGiamGiaItemStateChanged
         txtGiaTriGiam.setText("0");
-        if (cbChonGia.getSelectedIndex() == 0) {
-            loadTableGioHangGiaBan();
-        } else {
-            loadTableGioHangGiaSi();
-        }
+       loadGioHang();
     }//GEN-LAST:event_cbTuyChonGiamGiaItemStateChanged
 
 

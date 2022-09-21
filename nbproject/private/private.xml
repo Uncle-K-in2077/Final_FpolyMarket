@@ -2,16 +2,13 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-<<<<<<< HEAD
-        <group/>
-=======
         <group>
-            <file>file:/C:/Users/Admin/Desktop/Fpoly_Final/src/MODEL/MDThuChi.java</file>
-            <file>file:/C:/Users/Admin/Desktop/Fpoly_Final/src/VIEW/frmMAIN.java</file>
-            <file>file:/C:/Users/Admin/Desktop/Fpoly_Final/src/VIEW/frmPhieuChi.java</file>
-            <file>file:/C:/Users/Admin/Desktop/Fpoly_Final/src/VIEW/frmDangNhap.java</file>
-            <file>file:/C:/Users/Admin/Desktop/Fpoly_Final/src/MODEL/MDCongNo.java</file>
+            <file>file:/D:/gocHocTap/app/Final_FpolyMarket/src/VIEW/panelTaoHoaDonBanHang.java</file>
+            <file>file:/D:/gocHocTap/app/Final_FpolyMarket/src/CONTROLLER/CTRLSanPham.java</file>
+            <file>file:/D:/gocHocTap/app/Final_FpolyMarket/src/MODEL/MDSanPham.java</file>
+            <file>file:/D:/gocHocTap/app/Final_FpolyMarket/src/MODEL/MDChiTietHoaDon.java</file>
+            <file>file:/D:/gocHocTap/app/Final_FpolyMarket/src/CLASS/chiTietHoaDon.java</file>
+            <file>file:/D:/gocHocTap/app/Final_FpolyMarket/src/VIEW/frmXemHoaDon.java</file>
         </group>
->>>>>>> bb6b74ad706e93b15d1460936fafbe048db69a73
     </open-files>
 </project-private>

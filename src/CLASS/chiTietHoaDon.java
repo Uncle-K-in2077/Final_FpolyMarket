@@ -1,23 +1,35 @@
 package CLASS;
 
+import javax.swing.JOptionPane;
+
 public class chiTietHoaDon {
 
     String idSanPham;
     String tenSanPham;
     String donViTinh;
     int soLuong;
+    int tonKho;
     long donGia;
     long giaSi;
     boolean trangThai;
 
-    public chiTietHoaDon(String idSanPham, String tenSanPham, String donViTinh, int soLuong, long donGia, long giaSi, boolean trangThai) {
+    public chiTietHoaDon(String idSanPham, String tenSanPham, String donViTinh, int soLuong, int tonKho, long donGia, long giaSi, boolean trangThai) {
         this.idSanPham = idSanPham;
+        this.tonKho = tonKho;
         this.tenSanPham = tenSanPham;
         this.donViTinh = donViTinh;
         this.soLuong = soLuong;
         this.donGia = donGia;
         this.trangThai = trangThai;
         this.giaSi = giaSi;
+    }
+
+    public int getTonKho() {
+        return tonKho;
+    }
+
+    public void setTonKho(int tonKho) {
+        this.tonKho = tonKho;
     }
 
     public long getThanhTienGiaSi() {
@@ -61,6 +73,12 @@ public class chiTietHoaDon {
     }
 
     public int getSoLuong() {
+
+        if (soLuong > tonKho) {
+
+            return tonKho;
+        }
+
         return soLuong;
     }
 

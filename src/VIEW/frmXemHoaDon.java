@@ -104,10 +104,17 @@ public class frmXemHoaDon extends javax.swing.JDialog {
     public void addGioHang(chiTietHoaDon sp) {
         boolean isTonTai = true;
 
+        if (sp == null) {
+            if (JOptionPane.showConfirmDialog(null, "Sản phẩm chưa có. Thêm mới sản phẩm ?") == 0) {
+                themNhanhSanPham();
+                loadTableSanPham();
+            }
+            txtBarcode.setText("");
+            txtBarcode.requestFocus();
+        }
         if (dataChiTietHoaDon.size() == 0) {
             dataChiTietHoaDon.add(sp);
-            loadTableGioHang();
-
+            loadGioHang();
             return;
         } else {
             for (chiTietHoaDon item : dataChiTietHoaDon) {
@@ -133,10 +140,10 @@ public class frmXemHoaDon extends javax.swing.JDialog {
         } else {
             dataChiTietHoaDon.add(sp);
         }
-        loadTableGioHang();
+        loadGioHang();
     }
 
-    public void loadTableGioHang() {
+    public void loadGioHang() {
         if (cbChonGia.getSelectedIndex() == 0) {
             loadTableGioHangGiaBan();
         } else {
@@ -145,7 +152,7 @@ public class frmXemHoaDon extends javax.swing.JDialog {
     }
 
     public void enterBarcode() {
-        if (txtBarcode.isFocusable() == false) {
+      if (txtBarcode.isFocusable() == false) {
             return;
         }
         String barcode = txtBarcode.getText();
@@ -156,13 +163,13 @@ public class frmXemHoaDon extends javax.swing.JDialog {
         if (sp == null) {
             if (JOptionPane.showConfirmDialog(null, "Sản phẩm chưa có. Thêm mới sản phẩm ?") == 0) {
                 themNhanhSanPham();
-                loadTableSanPham();
             }
             txtBarcode.setText("");
             txtBarcode.requestFocus();
             return;
         }
         addGioHang(sp);
+        txtBarcode.requestFocus();
     }
 
     public void loadTableGioHangGiaBan() {
@@ -288,10 +295,11 @@ public class frmXemHoaDon extends javax.swing.JDialog {
         for (int i = 0; i < tableGioHang.getRowCount(); i++) {
             boolean check = (boolean) tableGioHang.getValueAt(i, 5);
             if (check == false) {
+//                model.removeRow(i);
                 dataChiTietHoaDon.remove(i);
             }
         }
-        loadTableGioHang();
+        loadGioHang();
     }
 
     public void setModelTableSanPham() {
@@ -478,10 +486,10 @@ public class frmXemHoaDon extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSeparator1)
                     .addComponent(jScrollPane3)
+                    .addComponent(jSeparator1)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 191, Short.MAX_VALUE)
+                        .addGap(0, 264, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(cbLoaiSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -801,8 +809,8 @@ public class frmXemHoaDon extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 630, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -814,6 +822,8 @@ public class frmXemHoaDon extends javax.swing.JDialog {
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
+
+        getAccessibleContext().setAccessibleParent(null);
 
         pack();
         setLocationRelativeTo(null);
@@ -897,7 +907,7 @@ public class frmXemHoaDon extends javax.swing.JDialog {
 
         }
 
-        loadTableGioHang();
+        loadGioHang();
     }//GEN-LAST:event_tableGioHangKeyReleased
 
     private void tableSanPhamMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableSanPhamMousePressed
