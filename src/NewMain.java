@@ -51,27 +51,8 @@ public class NewMain {
     }
 
     public static void main(String[] args) {
-////        icon.
-//        File file = new File("src/IMAGE/mirinda.png");
-//        ImageIcon icon = new ImageIcon(file.getPath());
-//        copyFile(file, new File("src/TEXT/file.png"));
 
-//        JFileChooser c = new JFileChooser();
-////Setting Up The Filter
-//        FileFilter imageFilter = new FileNameExtensionFilter(
-//                "Image files", ImageIO.getReaderFileSuffixes());
-//
-////Attaching Filter to JFileChooser object
-//        c.setFileFilter(imageFilter);
-//
-////Displaying Filechooser
-//        int rVal = c.showOpenDialog(new JPanel());
-//        System.out.println(c.getSelectedFile().getAbsolutePath());
-//        if (rVal == JFileChooser.APPROVE_OPTION) {
-//            File file = new File(c.getSelectedFile().getAbsolutePath());
-//            copyFile(file, new File("src/TEXT/" + file.getName()));
-//        }
-        System.out.println(MDHoaDon.craeteID());
+        System.out.println(HELPER.helper.isNumberString("1289a4728912894"));
     }
 
 }
