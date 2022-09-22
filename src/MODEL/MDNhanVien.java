@@ -109,6 +109,30 @@ public class MDNhanVien {
         return data;
     }
 
+    public static ArrayList<nhanVien> getData() {
+        String sql = "Select * from nhanvien where nhanvien.trangthai = 1";
+        ArrayList<nhanVien> data = new ArrayList<>();
+        ResultSet rs = HELPER.SQLhelper.executeQuery(sql);
+        try {
+            while (rs.next()) {
+                data.add(new nhanVien(
+                        rs.getString("id"),
+                        rs.getString("name"),
+                        rs.getString("sodienthoai"),
+                        rs.getString("diachi"),
+                        rs.getString("ngaySinh"),
+                        rs.getLong("luong"),
+                        rs.getInt("gioiTinh") == 1 ? true : false,
+                        rs.getString("ngayvaolam"),
+                        rs.getString("ghichu"),
+                        rs.getInt("trangthai") == 1 ? true : false
+                ));
+            }
+        } catch (Exception e) {
+        }
+        return data;
+    }
+
     public static nhanVien getNhanVien(String id) {
         String sql = "SELECT *,date(NgaySinh) as 'sinhnhat',date(NgayVaoLam) as 'ngaylam' FROM nhanvien where id = ? ";
         nhanVien nhanvien = new nhanVien();

@@ -152,7 +152,7 @@ public class frmXemHoaDon extends javax.swing.JDialog {
     }
 
     public void enterBarcode() {
-      if (txtBarcode.isFocusable() == false) {
+        if (txtBarcode.isFocusable() == false) {
             return;
         }
         String barcode = txtBarcode.getText();
@@ -203,7 +203,6 @@ public class frmXemHoaDon extends javax.swing.JDialog {
                 tongTienFinal = thanhTienBanDau - soTienGiam;
             }
         }
-        System.out.println(tongTienFinal);
         txtTongTien.setText(helper.LongToString(tongTienFinal));
     }
 
@@ -239,7 +238,6 @@ public class frmXemHoaDon extends javax.swing.JDialog {
                 tongTienFinal = thanhTienBanDau - soTienGiam;
             }
         }
-        System.out.println(tongTienFinal);
         txtTongTien.setText(helper.LongToString(tongTienFinal));
     }
 
@@ -272,7 +270,7 @@ public class frmXemHoaDon extends javax.swing.JDialog {
 //
 
     public void loadTableSanPham() {
-        ArrayList<sanPham> data = MDSanPham.getDataToTable();
+        ArrayList<sanPham> data = MDSanPham.getDataToTableBanHang();
         DefaultTableModel model = (DefaultTableModel) tableSanPham.getModel();
         model.setRowCount(0);
         for (sanPham item : data) {
@@ -913,9 +911,13 @@ public class frmXemHoaDon extends javax.swing.JDialog {
     private void tableSanPhamMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableSanPhamMousePressed
         if (tableSanPham.getSelectedRows().length == 1 && evt.getClickCount() == 2) {
             int indexRow = tableSanPham.getSelectedRow();
-            String barcode = tableSanPham.getValueAt(indexRow, 3) + "";
-            chiTietHoaDon sp = MDChiTietHoaDon.getSanPhamChiTietHoaDon(barcode);
-            addGioHang(sp);
+            String id = tableSanPham.getValueAt(indexRow, 1) + "";
+            chiTietHoaDon sp = MDChiTietHoaDon.getSanPhamChiTietHoaDonbyID(id);
+            if (sp.getTonKho() - sp.getSoLuong() == 0) {
+                JOptionPane.showMessageDialog(this, "Sản phẩm đã hết hàng !");
+            } else {
+                addGioHang(sp);
+            }
         }
     }//GEN-LAST:event_tableSanPhamMousePressed
     public void loadComboboxLoaiSanPham() {
@@ -931,7 +933,7 @@ public class frmXemHoaDon extends javax.swing.JDialog {
         cbLoaiSanPham.setSelectedIndex(0);
         DefaultTableModel model = (DefaultTableModel) tableSanPham.getModel();
         model.setRowCount(0);
-        ArrayList<sanPham> dataSanPhamTable = MDSanPham.getDataToTable();
+        ArrayList<sanPham> dataSanPhamTable = MDSanPham.getDataToTableBanHang();
         for (sanPham item : dataSanPhamTable) {
             if (item.getIdSanPham().toLowerCase().contains(keyword.toLowerCase())
                     || item.getName().toLowerCase().contains(keyword.toLowerCase())
@@ -956,7 +958,7 @@ public class frmXemHoaDon extends javax.swing.JDialog {
     public void loadTableSanPham(String loaiSanPham) {
         DefaultTableModel model = (DefaultTableModel) tableSanPham.getModel();
         model.setRowCount(0);
-        ArrayList<sanPham> dataSanPhamTable = MDSanPham.getDataToTable();
+        ArrayList<sanPham> dataSanPhamTable = MDSanPham.getDataToTableBanHang();
         for (sanPham item : dataSanPhamTable) {
             if (loaiSanPham.equals("Tất cả") || item.getIdLoaiSanPham().equals(loaiSanPham)) {
                 ImageIcon imageIcon = new ImageIcon(new ImageIcon(path + item.getHinhAnh()).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
