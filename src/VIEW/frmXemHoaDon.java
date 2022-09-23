@@ -101,7 +101,7 @@ public class frmXemHoaDon extends javax.swing.JDialog {
     }
 
     public void addGioHang(chiTietHoaDon sp) {
-        boolean isTonTai = true;
+       boolean isTonTai = true;
 
         if (sp == null) {
             if (JOptionPane.showConfirmDialog(null, "Sản phẩm chưa có. Thêm mới sản phẩm ?") == 0) {
@@ -140,6 +140,7 @@ public class frmXemHoaDon extends javax.swing.JDialog {
             dataChiTietHoaDon.add(sp);
         }
         loadGioHang();
+        loadGioHang();
     }
 
     public void loadGioHang() {
@@ -159,6 +160,7 @@ public class frmXemHoaDon extends javax.swing.JDialog {
             return;
         }
         chiTietHoaDon sp = MDChiTietHoaDon.getSanPhamChiTietHoaDon(barcode);
+
         if (sp == null) {
             if (JOptionPane.showConfirmDialog(null, "Sản phẩm chưa có. Thêm mới sản phẩm ?") == 0) {
                 themNhanhSanPham();
@@ -166,6 +168,11 @@ public class frmXemHoaDon extends javax.swing.JDialog {
             txtBarcode.setText("");
             txtBarcode.requestFocus();
             return;
+        } else {
+            if (sp.getTonKho() == 0) {
+                JOptionPane.showMessageDialog(this, "Sản phẩm đã hết hàng !");
+                return;
+            }
         }
         addGioHang(sp);
         txtBarcode.requestFocus();
@@ -912,11 +919,11 @@ public class frmXemHoaDon extends javax.swing.JDialog {
             int indexRow = tableSanPham.getSelectedRow();
             String id = tableSanPham.getValueAt(indexRow, 1) + "";
             chiTietHoaDon sp = MDChiTietHoaDon.getSanPhamChiTietHoaDonbyID(id);
-            if (sp.getTonKho() - sp.getSoLuong() == 0) {
-                JOptionPane.showMessageDialog(this, "Sản phẩm đã hết hàng !");
-            } else {
-                addGioHang(sp);
-            }
+//            if (sp.getTonKho() - sp.getSoLuong() == 0) {
+//                JOptionPane.showMessageDialog(this, "Sản phẩm đã hết hàng !");
+//            } else {
+            addGioHang(sp);
+//            }
         }
     }//GEN-LAST:event_tableSanPhamMousePressed
     public void loadComboboxLoaiSanPham() {

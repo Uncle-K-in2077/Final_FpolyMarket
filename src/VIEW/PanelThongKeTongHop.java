@@ -1,6 +1,7 @@
 package VIEW;
 
 import CLASS.Account;
+import MODEL.MDHoaDon;
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.Image;
@@ -8,24 +9,26 @@ import javax.swing.table.DefaultTableModel;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableCellRenderer;
 
 public class PanelThongKeTongHop extends javax.swing.JPanel {
-
+    
     public static Account acc;
-
+    
     public PanelThongKeTongHop(Account account) {
         this.acc = account;
         initComponents();
-
+        
         setModelTableSanPham();
         hienThiSanPhamSapHetHang();
-
+        loadDuLieu();
+        MDHoaDon.showHoaDonTrongNgay(tableHoaDonTrongNgay);
+        MDHoaDon.showDoanhThuTrongNgay(tableDoanhThuLoiNhuan);
+        HELPER.helper.setTableTextCenterFullColumn(tableDoanhThuLoiNhuan);
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -33,20 +36,20 @@ public class PanelThongKeTongHop extends javax.swing.JPanel {
         gridPanel = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        donHangTrongNgay = new javax.swing.JLabel();
+        numDonHangTrongNgay = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        donHangTrongTuan = new javax.swing.JLabel();
+        numDonHangTrongTuan = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
-        doanhThuHomNay = new javax.swing.JLabel();
+        numDoanhThuHomNay = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        doanhThuTrongThang = new javax.swing.JLabel();
+        numDoanhThuTrongThang = new javax.swing.JLabel();
         panelThongKe = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableHoaDonTrongNgay = new javax.swing.JTable();
@@ -69,9 +72,9 @@ public class PanelThongKeTongHop extends javax.swing.JPanel {
         jLabel1.setForeground(new java.awt.Color(255, 0, 0));
         jLabel1.setText("Đơn hàng trong ngày");
 
-        donHangTrongNgay.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        donHangTrongNgay.setForeground(new java.awt.Color(0, 153, 255));
-        donHangTrongNgay.setText("55");
+        numDonHangTrongNgay.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        numDonHangTrongNgay.setForeground(new java.awt.Color(0, 153, 255));
+        numDonHangTrongNgay.setText("55");
 
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/hon-hang-hom-nay.png"))); // NOI18N
@@ -83,10 +86,10 @@ public class PanelThongKeTongHop extends javax.swing.JPanel {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(donHangTrongNgay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(numDonHangTrongNgay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -94,7 +97,7 @@ public class PanelThongKeTongHop extends javax.swing.JPanel {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(donHangTrongNgay, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(numDonHangTrongNgay, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -113,9 +116,9 @@ public class PanelThongKeTongHop extends javax.swing.JPanel {
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/don-hang-trong-tuan.png"))); // NOI18N
 
-        donHangTrongTuan.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        donHangTrongTuan.setForeground(new java.awt.Color(0, 153, 255));
-        donHangTrongTuan.setText("1002");
+        numDonHangTrongTuan.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        numDonHangTrongTuan.setForeground(new java.awt.Color(0, 153, 255));
+        numDonHangTrongTuan.setText("1002");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -124,10 +127,10 @@ public class PanelThongKeTongHop extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(donHangTrongTuan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(numDonHangTrongTuan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -135,7 +138,7 @@ public class PanelThongKeTongHop extends javax.swing.JPanel {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(donHangTrongTuan, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(numDonHangTrongTuan, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -147,9 +150,9 @@ public class PanelThongKeTongHop extends javax.swing.JPanel {
 
         jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 255, 51), 3));
 
-        doanhThuHomNay.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        doanhThuHomNay.setForeground(new java.awt.Color(0, 153, 255));
-        doanhThuHomNay.setText("5,200,000");
+        numDoanhThuHomNay.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        numDoanhThuHomNay.setForeground(new java.awt.Color(0, 153, 255));
+        numDoanhThuHomNay.setText("5,200,000");
 
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/doanh-thu-hom-nay.png"))); // NOI18N
@@ -165,10 +168,10 @@ public class PanelThongKeTongHop extends javax.swing.JPanel {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(doanhThuHomNay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(numDoanhThuHomNay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -176,7 +179,7 @@ public class PanelThongKeTongHop extends javax.swing.JPanel {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(doanhThuHomNay, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(numDoanhThuHomNay, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -195,9 +198,9 @@ public class PanelThongKeTongHop extends javax.swing.JPanel {
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/doanh-trong-trong-thang.png"))); // NOI18N
 
-        doanhThuTrongThang.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        doanhThuTrongThang.setForeground(new java.awt.Color(0, 153, 255));
-        doanhThuTrongThang.setText("87,500,000");
+        numDoanhThuTrongThang.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        numDoanhThuTrongThang.setForeground(new java.awt.Color(0, 153, 255));
+        numDoanhThuTrongThang.setText("87,500,000");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -206,18 +209,19 @@ public class PanelThongKeTongHop extends javax.swing.JPanel {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(doanhThuTrongThang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(numDoanhThuTrongThang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel8)
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)))
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(doanhThuTrongThang, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(numDoanhThuTrongThang, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -386,17 +390,17 @@ public class PanelThongKeTongHop extends javax.swing.JPanel {
         tableDoanhThuLoiNhuan.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tableDoanhThuLoiNhuan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Sản phẩm", "Giá bán", "Số lượng bán", "Thời gian", "Nhân viên", "Doanh thu", "Lợi nhuận"
+                "Sản phẩm", "giá", "Số lượng", "Thời gian", "Doanh thu", "Lợi nhuận"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -412,6 +416,10 @@ public class PanelThongKeTongHop extends javax.swing.JPanel {
             }
         });
         jScrollPane3.setViewportView(tableDoanhThuLoiNhuan);
+        if (tableDoanhThuLoiNhuan.getColumnModel().getColumnCount() > 0) {
+            tableDoanhThuLoiNhuan.getColumnModel().getColumn(0).setMinWidth(120);
+            tableDoanhThuLoiNhuan.getColumnModel().getColumn(3).setMinWidth(110);
+        }
 
         javax.swing.GroupLayout panelThongKeLayout = new javax.swing.GroupLayout(panelThongKe);
         panelThongKe.setLayout(panelThongKeLayout);
@@ -420,9 +428,9 @@ public class PanelThongKeTongHop extends javax.swing.JPanel {
             .addGroup(panelThongKeLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelThongKeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 745, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 839, Short.MAX_VALUE)
                     .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelThongKeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2)
                     .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -453,10 +461,10 @@ public class PanelThongKeTongHop extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(gridPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(gridPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 1477, Short.MAX_VALUE)
                     .addComponent(panelThongKe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -471,7 +479,10 @@ public class PanelThongKeTongHop extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-//    public void 
+    public void loadDuLieu() {
+        MDHoaDon.loadThongKeDuLieu(numDonHangTrongNgay, numDonHangTrongTuan, numDoanhThuHomNay, numDoanhThuTrongThang);
+    }
+    
     public void setModelTableSanPham() {
         DefaultTableCellRenderer centerRendere = new DefaultTableCellRenderer();
         centerRendere.setHorizontalAlignment(JLabel.CENTER);
@@ -483,25 +494,25 @@ public class PanelThongKeTongHop extends javax.swing.JPanel {
         tableSanPhamSapHetHang.setRowMargin(4);
         String[] column = {"Hình ảnh", "Mã", "Sản phẩm", "Đơn vị tính", "Tồn kho"};
         Object[][] rows = {};
-
+        
         DefaultTableModel model = new DefaultTableModel(rows, column) {
             @Override
             public Class<?> getColumnClass(int column) {
                 switch (column) {
                     case 0:
                         return ImageIcon.class;
-
+                    
                     default:
                         return Object.class;
                 }
             }
-
+            
             public boolean isCellEditable(int rowIndex,
                     int columnIndex) {
                 return false;
             }
         };
-
+        
         tableSanPhamSapHetHang.setModel(model);
         tableSanPhamSapHetHang.setRowHeight(100);
         tableSanPhamSapHetHang.setRowMargin(7);
@@ -533,25 +544,22 @@ public class PanelThongKeTongHop extends javax.swing.JPanel {
     private void tableHoaDonTrongNgayMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableHoaDonTrongNgayMousePressed
         Component panel = (JPanel) this.getParent();
         if (tableHoaDonTrongNgay.getSelectedRows().length == 1 && evt.getClickCount() == 2) {
-//            new frmXemHoaDon((JFrame) panel.getParent().getParent().getParent().getParent().getParent().getParent(), true, acc).setVisible(true);
-            
-
-new frmXemHoaDon(null, true, acc).setVisible(true);
+            new frmXemHoaDon(null, true, acc).setVisible(true);
         }
     }//GEN-LAST:event_tableHoaDonTrongNgayMousePressed
+    
     public void hienThiSanPhamSapHetHang() {
         DefaultTableModel model = (DefaultTableModel) tableSanPhamSapHetHang.getModel();
         model.setRowCount(0);
         String sql = "select hinhanh, sanpham.id as 'id',sanpham.name as 'name',donvitinh.name as 'donvitinh',sanpham.soluong as 'soluong' from sanpham "
                 + "join donvitinh on donvitinh.id=sanpham.iddonvitinh "
                 + " where soluong<soluongtoithieu";
-
-//        String idSanPham, String name, String barcode, long giaNhap, long giaBan, int soLuong, int soLuongToiThieu, String idNhaCungCap, String idDonViTinh, String ghiChu, boolean trangThai
+        
         try {
             ResultSet rs = HELPER.SQLhelper.executeQuery(sql);
             while (rs.next()) {
                 ImageIcon imageIcon = new ImageIcon(new ImageIcon("src/IMAGE/" + rs.getString("hinhanh")).getImage().getScaledInstance(70, 70, Image.SCALE_DEFAULT));
-
+                
                 model.addRow(new Object[]{
                     imageIcon,
                     rs.getString("id"),
@@ -562,15 +570,11 @@ new frmXemHoaDon(null, true, acc).setVisible(true);
             }
         } catch (SQLException e) {
         }
-
+        
         tableSanPhamSapHetHang.setModel(model);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel doanhThuHomNay;
-    private javax.swing.JLabel doanhThuTrongThang;
-    private javax.swing.JLabel donHangTrongNgay;
-    private javax.swing.JLabel donHangTrongTuan;
     private javax.swing.JPanel gridPanel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -590,6 +594,10 @@ new frmXemHoaDon(null, true, acc).setVisible(true);
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JLabel numDoanhThuHomNay;
+    private javax.swing.JLabel numDoanhThuTrongThang;
+    private javax.swing.JLabel numDonHangTrongNgay;
+    private javax.swing.JLabel numDonHangTrongTuan;
     private javax.swing.JPanel panelThongKe;
     private javax.swing.JTable tableDoanhThuLoiNhuan;
     private javax.swing.JTable tableHoaDonTrongNgay;

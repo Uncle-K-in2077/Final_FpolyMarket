@@ -659,7 +659,7 @@ public class frmMAIN extends javax.swing.JFrame {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "Mã", "Khách hàng", "Nhân viên", "Giảm giá", "Tổng tiền", "Thời gian"
+                "Mã", "Khách hàng", "Nhân viên", "Tổng tiền", "Giảm giá", "Thời gian"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -739,9 +739,9 @@ public class frmMAIN extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelDanhSachHoaDonBanHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel5)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 512, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(panelDanhSachHoaDonBanHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 512, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
                 .addContainerGap())
         );
         panelDanhSachHoaDonBanHangLayout.setVerticalGroup(
@@ -756,14 +756,18 @@ public class frmMAIN extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 608, Short.MAX_VALUE))
                     .addGroup(panelDanhSachHoaDonBanHangLayout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(37, 37, 37)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 608, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(panelDanhSachHoaDonBanHangLayout.createSequentialGroup()
                 .addGap(120, 120, 120)
-                .addComponent(jSeparator11)
-                .addGap(6, 6, 6))
+                .addGroup(panelDanhSachHoaDonBanHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelDanhSachHoaDonBanHangLayout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(panelDanhSachHoaDonBanHangLayout.createSequentialGroup()
+                        .addComponent(jSeparator11)
+                        .addGap(6, 6, 6))))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
