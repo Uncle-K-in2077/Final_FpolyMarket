@@ -786,6 +786,7 @@ public class panelTaoHoaDonBanHang extends javax.swing.JPanel {
             dataChiTietHoaDon.add(sp);
         }
         loadGioHang();
+        loadGioHang();
     }
 
     public void enterBarcode() {
@@ -797,6 +798,7 @@ public class panelTaoHoaDonBanHang extends javax.swing.JPanel {
             return;
         }
         chiTietHoaDon sp = MDChiTietHoaDon.getSanPhamChiTietHoaDon(barcode);
+
         if (sp == null) {
             if (JOptionPane.showConfirmDialog(null, "Sản phẩm chưa có. Thêm mới sản phẩm ?") == 0) {
                 themNhanhSanPham();
@@ -804,6 +806,11 @@ public class panelTaoHoaDonBanHang extends javax.swing.JPanel {
             txtBarcode.setText("");
             txtBarcode.requestFocus();
             return;
+        } else {
+            if (sp.getTonKho() == 0) {
+                JOptionPane.showMessageDialog(this, "Sản phẩm đã hết hàng !");
+                return;
+            }
         }
         addGioHang(sp);
         txtBarcode.requestFocus();
@@ -911,9 +918,12 @@ public class panelTaoHoaDonBanHang extends javax.swing.JPanel {
     private void btnThanhToanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnThanhToanKeyPressed
 
     }//GEN-LAST:event_btnThanhToanKeyPressed
-// hello
+
     private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanActionPerformed
-        thanhToan();
+        if (dataChiTietHoaDon.size() != 0) {
+            thanhToan();
+
+        }
 
     }//GEN-LAST:event_btnThanhToanActionPerformed
     public void thanhToan() {
@@ -942,7 +952,8 @@ public class panelTaoHoaDonBanHang extends javax.swing.JPanel {
                 hinhThucThanhToan,
                 ghiChu,
                 giamGia,
-                tongtien - giamGia,
+                tongtien,
+                cbChonGia.getSelectedIndex(),
                 true);
         MDHoaDon.taoHoaDon(
                 hoadon,
@@ -1023,11 +1034,11 @@ public class panelTaoHoaDonBanHang extends javax.swing.JPanel {
             int indexRow = tableSanPham.getSelectedRow();
             String id = tableSanPham.getValueAt(indexRow, 1) + "";
             chiTietHoaDon sp = MDChiTietHoaDon.getSanPhamChiTietHoaDonbyID(id);
-            if (sp.getTonKho() - sp.getSoLuong() == 0) {
-                JOptionPane.showMessageDialog(this, "Sản phẩm đã hết hàng !");
-            } else {
-                addGioHang(sp);
-            }
+//            if (sp.getTonKho() - sp.getSoLuong() == 0) {
+//                JOptionPane.showMessageDialog(this, "Sản phẩm đã hết hàng !");
+//            } else {
+            addGioHang(sp);
+//            }
         }
     }//GEN-LAST:event_tableSanPhamMousePressed
     public void loadTableSanPham(String loaiSanPham) {

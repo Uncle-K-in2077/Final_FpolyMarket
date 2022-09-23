@@ -9,6 +9,7 @@ public class hoaDon {
     String id, idNhanVien, idKhachHang, thoiGian, ghiChu;
     long giamGia, tongTien;
     int hinhThucThanhToan;
+    int loaiGia;
     boolean trangThai;
 
     public String getId() {
@@ -92,7 +93,9 @@ public class hoaDon {
             String ghiChu,
             long giamGia,
             long tongTien,
+            int loaiGia,
             boolean trangThai) {
+        this.loaiGia=loaiGia;
         this.id = id;
         this.idNhanVien = idNhanVien;
         this.idKhachHang = idKhachHang;
@@ -102,6 +105,14 @@ public class hoaDon {
         this.giamGia = giamGia;
         this.tongTien = tongTien;
         this.trangThai = trangThai;
+    }
+
+    public int getLoaiGia() {
+        return loaiGia;
+    }
+
+    public void setLoaiGia(int loaiGia) {
+        this.loaiGia = loaiGia;
     }
 
     public hoaDon() {

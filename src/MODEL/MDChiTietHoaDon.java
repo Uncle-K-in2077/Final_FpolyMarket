@@ -8,7 +8,7 @@ public class MDChiTietHoaDon {
     public static chiTietHoaDon getSanPhamChiTietHoaDon(String barcode) {
         String sql = "select sanpham.*, donvitinh.Name as 'dvt' from sanpham "
                 + " join donvitinh on donvitinh.id = sanpham.IDDonViTinh "
-                + "where sanpham.Barcode = ?";
+                + "where sanpham.Barcode = ? ";
         chiTietHoaDon chiTiet = null;
         ResultSet rs = HELPER.SQLhelper.executeQuery(sql, barcode);
         try {

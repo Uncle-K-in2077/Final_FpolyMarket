@@ -41,7 +41,7 @@ public class MDKhachHang {
 
     public static ArrayList<khachHang> getDataToTable() {
         ArrayList<khachHang> data = new ArrayList<>();
-        String sql = "select * from khachhang";
+        String sql = "select * from khachhang where khachhang.id != 'KH01'";
         ResultSet rs = HELPER.SQLhelper.executeQuery(sql);
         try {
             while (rs.next()) {
