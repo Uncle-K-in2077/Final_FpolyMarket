@@ -115,7 +115,10 @@ public class MDAccount {
     // return 1 dô´i tuo?ng
     public static Account getAccount(String username, String password) {
         String sql = "select * from account where account.username = ? and account.password = ?";
+//        String sql = "select * from account where account.username = '" + username + "' and account.password = '" + password + "'";
+
         ResultSet rs = HELPER.SQLhelper.executeQuery(sql, username, password);
+//         ResultSet rs = HELPER.SQLhelper.executeQuery(sql );
         Account acc = new Account();
         try {
             while (rs.next()) {

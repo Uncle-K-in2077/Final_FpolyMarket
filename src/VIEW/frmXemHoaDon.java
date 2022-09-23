@@ -104,10 +104,17 @@ public class frmXemHoaDon extends javax.swing.JDialog {
     public void addGioHang(chiTietHoaDon sp) {
         boolean isTonTai = true;
 
+        if (sp == null) {
+            if (JOptionPane.showConfirmDialog(null, "Sản phẩm chưa có. Thêm mới sản phẩm ?") == 0) {
+                themNhanhSanPham();
+                loadTableSanPham();
+            }
+            txtBarcode.setText("");
+            txtBarcode.requestFocus();
+        }
         if (dataChiTietHoaDon.size() == 0) {
             dataChiTietHoaDon.add(sp);
-            loadTableGioHang();
-
+            loadGioHang();
             return;
         } else {
             for (chiTietHoaDon item : dataChiTietHoaDon) {
@@ -133,10 +140,10 @@ public class frmXemHoaDon extends javax.swing.JDialog {
         } else {
             dataChiTietHoaDon.add(sp);
         }
-        loadTableGioHang();
+        loadGioHang();
     }
 
-    public void loadTableGioHang() {
+    public void loadGioHang() {
         if (cbChonGia.getSelectedIndex() == 0) {
             loadTableGioHangGiaBan();
         } else {
@@ -149,17 +156,20 @@ public class frmXemHoaDon extends javax.swing.JDialog {
             return;
         }
         String barcode = txtBarcode.getText();
+        if (barcode.length() < 7) {
+            return;
+        }
         chiTietHoaDon sp = MDChiTietHoaDon.getSanPhamChiTietHoaDon(barcode);
         if (sp == null) {
             if (JOptionPane.showConfirmDialog(null, "Sản phẩm chưa có. Thêm mới sản phẩm ?") == 0) {
                 themNhanhSanPham();
-                loadTableSanPham();
             }
             txtBarcode.setText("");
             txtBarcode.requestFocus();
             return;
         }
         addGioHang(sp);
+        txtBarcode.requestFocus();
     }
 
     public void loadTableGioHangGiaBan() {
@@ -193,7 +203,6 @@ public class frmXemHoaDon extends javax.swing.JDialog {
                 tongTienFinal = thanhTienBanDau - soTienGiam;
             }
         }
-        System.out.println(tongTienFinal);
         txtTongTien.setText(helper.LongToString(tongTienFinal));
     }
 
@@ -229,7 +238,6 @@ public class frmXemHoaDon extends javax.swing.JDialog {
                 tongTienFinal = thanhTienBanDau - soTienGiam;
             }
         }
-        System.out.println(tongTienFinal);
         txtTongTien.setText(helper.LongToString(tongTienFinal));
     }
 
@@ -262,7 +270,7 @@ public class frmXemHoaDon extends javax.swing.JDialog {
 //
 
     public void loadTableSanPham() {
-        ArrayList<sanPham> data = MDSanPham.getDataToTable();
+        ArrayList<sanPham> data = MDSanPham.getDataToTableBanHang();
         DefaultTableModel model = (DefaultTableModel) tableSanPham.getModel();
         model.setRowCount(0);
         for (sanPham item : data) {
@@ -285,10 +293,11 @@ public class frmXemHoaDon extends javax.swing.JDialog {
         for (int i = 0; i < tableGioHang.getRowCount(); i++) {
             boolean check = (boolean) tableGioHang.getValueAt(i, 5);
             if (check == false) {
+//                model.removeRow(i);
                 dataChiTietHoaDon.remove(i);
             }
         }
-        loadTableGioHang();
+        loadGioHang();
     }
 
     public void setModelTableSanPham() {
@@ -475,10 +484,10 @@ public class frmXemHoaDon extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSeparator1)
                     .addComponent(jScrollPane3)
+                    .addComponent(jSeparator1)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 191, Short.MAX_VALUE)
+                        .addGap(0, 264, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(cbLoaiSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -798,8 +807,8 @@ public class frmXemHoaDon extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 630, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -811,6 +820,8 @@ public class frmXemHoaDon extends javax.swing.JDialog {
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
+
+        getAccessibleContext().setAccessibleParent(null);
 
         pack();
         setLocationRelativeTo(null);
@@ -894,15 +905,19 @@ public class frmXemHoaDon extends javax.swing.JDialog {
 
         }
 
-        loadTableGioHang();
+        loadGioHang();
     }//GEN-LAST:event_tableGioHangKeyReleased
 
     private void tableSanPhamMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableSanPhamMousePressed
         if (tableSanPham.getSelectedRows().length == 1 && evt.getClickCount() == 2) {
             int indexRow = tableSanPham.getSelectedRow();
-            String barcode = tableSanPham.getValueAt(indexRow, 3) + "";
-            chiTietHoaDon sp = MDChiTietHoaDon.getSanPhamChiTietHoaDon(barcode);
-            addGioHang(sp);
+            String id = tableSanPham.getValueAt(indexRow, 1) + "";
+            chiTietHoaDon sp = MDChiTietHoaDon.getSanPhamChiTietHoaDonbyID(id);
+            if (sp.getTonKho() - sp.getSoLuong() == 0) {
+                JOptionPane.showMessageDialog(this, "Sản phẩm đã hết hàng !");
+            } else {
+                addGioHang(sp);
+            }
         }
     }//GEN-LAST:event_tableSanPhamMousePressed
     public void loadComboboxLoaiSanPham() {
@@ -918,7 +933,7 @@ public class frmXemHoaDon extends javax.swing.JDialog {
         cbLoaiSanPham.setSelectedIndex(0);
         DefaultTableModel model = (DefaultTableModel) tableSanPham.getModel();
         model.setRowCount(0);
-        ArrayList<sanPham> dataSanPhamTable = MDSanPham.getDataToTable();
+        ArrayList<sanPham> dataSanPhamTable = MDSanPham.getDataToTableBanHang();
         for (sanPham item : dataSanPhamTable) {
             if (item.getIdSanPham().toLowerCase().contains(keyword.toLowerCase())
                     || item.getName().toLowerCase().contains(keyword.toLowerCase())
@@ -943,7 +958,7 @@ public class frmXemHoaDon extends javax.swing.JDialog {
     public void loadTableSanPham(String loaiSanPham) {
         DefaultTableModel model = (DefaultTableModel) tableSanPham.getModel();
         model.setRowCount(0);
-        ArrayList<sanPham> dataSanPhamTable = MDSanPham.getDataToTable();
+        ArrayList<sanPham> dataSanPhamTable = MDSanPham.getDataToTableBanHang();
         for (sanPham item : dataSanPhamTable) {
             if (loaiSanPham.equals("Tất cả") || item.getIdLoaiSanPham().equals(loaiSanPham)) {
                 ImageIcon imageIcon = new ImageIcon(new ImageIcon(path + item.getHinhAnh()).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));

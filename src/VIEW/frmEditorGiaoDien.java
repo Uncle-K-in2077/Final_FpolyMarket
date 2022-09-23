@@ -182,14 +182,13 @@ public class frmEditorGiaoDien extends javax.swing.JDialog {
         int index = cbGiaoDien.getSelectedIndex() + 1;
         config.setTheme(index);
         HELPER.helper.setConfig(config);
-        System.out.println(config.getUsername() + " " + config.getPassword() + " " + config.getTheme());
         JOptionPane.showMessageDialog(this, "Khởi động lại phần mềm để áp dụng giao diện !");
         this.setVisible(false);
-    }//GEN-LAST:event_jButton1ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+    
+
     public static void main(String args[]) {
         FlatLightLaf.setup();
         java.awt.EventQueue.invokeLater(new Runnable() {

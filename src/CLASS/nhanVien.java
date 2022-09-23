@@ -25,7 +25,16 @@ public class nhanVien {
     public nhanVien() {
     }
 
-    public nhanVien(String idNhanVien, String name, String soDienthoai, String diaChi, String ngaySinh, long Luong, boolean gioiTinh, String ngayVaoLam, String ghiChu, boolean trangThai) {
+    public nhanVien(String idNhanVien, 
+            String name,
+            String soDienthoai, 
+            String diaChi,
+            String ngaySinh, 
+            long Luong,
+            boolean gioiTinh,
+            String ngayVaoLam, 
+            String ghiChu,
+            boolean trangThai) {
         this.idNhanVien = idNhanVien;
         this.name = name;
         this.soDienthoai = soDienthoai;

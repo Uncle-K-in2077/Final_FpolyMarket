@@ -26,7 +26,6 @@ import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.regex.Pattern;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -35,6 +34,8 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableCellRenderer;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class helper {
 
@@ -49,10 +50,39 @@ public class helper {
         }
     }
 
+    public static boolean isEmail(String email) {
+        String regex = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
+        return email.matches(regex);
+    }
+
+    public static boolean isUsername(final String username) {
+        String USERNAME_PATTERN
+                = "^[a-zA-Z0-9]([._-](?![._-])|[a-zA-Z0-9]){3,18}[a-zA-Z0-9]$";
+        Pattern pattern = Pattern.compile(USERNAME_PATTERN);
+        Matcher matcher = pattern.matcher(username);
+        return matcher.matches();
+    }
+
+    public static boolean isBarcode(String username) {
+        String USERNAME_PATTERN
+                = "\\d+";
+        Pattern pattern = Pattern.compile(USERNAME_PATTERN);
+        Matcher matcher = pattern.matcher(username);
+        return matcher.matches();
+    }
+
     public static void setTextFieldMoney(JTextField txt) {
         String txtGiaBan = txt.getText();
         long tienLuong = SoLong(txtGiaBan);
         txt.setText(SoString(tienLuong));
+    }
+
+    public static boolean isFullname(String str) {
+        String input = removeAccent(str);
+        String regx = "^([a-vxyỳọáầảấờễàạằệếýộậốũứĩõúữịỗìềểẩớặòùồợãụủíỹắẫựỉỏừỷởóéửỵẳẹèẽổẵẻỡơôưăêâđĐ]+)((\\s{1}[a-vxyỳọáầảấờễàạằệếýộậốũứĩõúữịỗìềểẩớặòùồợãụủíỹắẫựỉỏừỷởóéửỵẳẹèẽổẵẻỡơôưăêâđ]+){1,})$";
+        Pattern pattern = Pattern.compile(regx, Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(input);
+        return matcher.find();
     }
 
     public static config getConfig() {
@@ -92,6 +122,24 @@ public class helper {
         for (int i = 0; i < table.getColumnCount(); i++) {
             table.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
         }
+    }
+
+    public static boolean isNumberPhone(String str) {
+        // Bieu thuc chinh quy mo ta dinh dang so dien thoai
+        String reg = "^(0|\\+84)(\\s|\\.)?((3[2-9])|(5[689])|(7[06-9])|(8[1-689])|(9[0-46-9]))(\\d)(\\s|\\.)?(\\d{3})(\\s|\\.)?(\\d{3})$";
+
+        // Kiem tra dinh dang
+        boolean kt = str.matches(reg);
+        try {
+            if (kt == false) {
+                return false;
+            } else {
+
+                return true;
+            }
+        } catch (Exception e) {
+        }
+        return true;
     }
 
     public static String LayNgayString(Date date, String Format) {
