@@ -1,6 +1,5 @@
 package CLASS;
 
-import javax.swing.JOptionPane;
 
 public class chiTietHoaDon {
     

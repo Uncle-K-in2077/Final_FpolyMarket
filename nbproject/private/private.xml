@@ -5,9 +5,11 @@
         <group>
             <file>file:/D:/gocHocTap/app/Final_FpolyMarket/src/VIEW/frmEditorAccount.java</file>
             <file>file:/D:/gocHocTap/app/Final_FpolyMarket/src/HELPER/helper.java</file>
-            <file>file:/D:/gocHocTap/app/Final_FpolyMarket/src/CLASS/nhanVien.java</file>
             <file>file:/D:/gocHocTap/app/Final_FpolyMarket/src/VIEW/panelTaoHoaDonBanHang.java</file>
+            <file>file:/D:/gocHocTap/app/Final_FpolyMarket/src/MODEL/MDSanPham.java</file>
+            <file>file:/D:/gocHocTap/app/Final_FpolyMarket/src/VIEW/frmEditorGiaoDien.java</file>
             <file>file:/D:/gocHocTap/app/Final_FpolyMarket/src/MODEL/MDNhanVien.java</file>
+            <file>file:/D:/gocHocTap/app/Final_FpolyMarket/src/CLASS/chiTietHoaDon.java</file>
             <file>file:/D:/gocHocTap/app/Final_FpolyMarket/src/VIEW/frmXemHoaDon.java</file>
             <file>file:/D:/gocHocTap/app/Final_FpolyMarket/src/VIEW/frmMAIN.java</file>
             <file>file:/D:/gocHocTap/app/Final_FpolyMarket/src/NewMain.java</file>

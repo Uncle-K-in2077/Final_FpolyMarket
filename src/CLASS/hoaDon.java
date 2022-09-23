@@ -6,13 +6,18 @@ package CLASS;
 
 public class hoaDon {
 
-    String idNhanVien;
-    String idKhachHang;
+    String id, idNhanVien, idKhachHang, thoiGian, ghiChu;
+    long giamGia, tongTien;
     int hinhThucThanhToan;
-    long giamGia;
-    long tongTienThanhToan;
-    String ghiChu;
     boolean trangThai;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getIdNhanVien() {
         return idNhanVien;
@@ -30,28 +35,20 @@ public class hoaDon {
         this.idKhachHang = idKhachHang;
     }
 
+    public String getThoiGian() {
+        return thoiGian;
+    }
+
+    public void setIdThoiGian(String thoiGian) {
+        this.thoiGian = thoiGian;
+    }
+
     public int getHinhThucThanhToan() {
         return hinhThucThanhToan;
     }
 
     public void setHinhThucThanhToan(int hinhThucThanhToan) {
         this.hinhThucThanhToan = hinhThucThanhToan;
-    }
-
-    public long getGiamGia() {
-        return giamGia;
-    }
-
-    public void setGiamGia(long giamGia) {
-        this.giamGia = giamGia;
-    }
-
-    public long getTongTienThanhToan() {
-        return tongTienThanhToan;
-    }
-
-    public void setTongTienThanhToan(long tongTienThanhToan) {
-        this.tongTienThanhToan = tongTienThanhToan;
     }
 
     public String getGhiChu() {
@@ -62,6 +59,22 @@ public class hoaDon {
         this.ghiChu = ghiChu;
     }
 
+    public long getGiamGia() {
+        return giamGia;
+    }
+
+    public void setGiamGia(long giamGia) {
+        this.giamGia = giamGia;
+    }
+
+    public long getTongTien() {
+        return tongTien;
+    }
+
+    public void setTongTien(long tongTien) {
+        this.tongTien = tongTien;
+    }
+
     public boolean isTrangThai() {
         return trangThai;
     }
@@ -70,17 +83,28 @@ public class hoaDon {
         this.trangThai = trangThai;
     }
 
-    public hoaDon() {
-    }
-
-    public hoaDon(String idNhanVien, String idKhachHang, int hinhThucThanhToan, long giamGia, long tongTienThanhToan, String ghiChu, boolean trangThai) {
+    public hoaDon(
+            String id,
+            String idNhanVien,
+            String idKhachHang,
+            String thoiGian,
+            int hinhThucThanhToan,
+            String ghiChu,
+            long giamGia,
+            long tongTien,
+            boolean trangThai) {
+        this.id = id;
         this.idNhanVien = idNhanVien;
         this.idKhachHang = idKhachHang;
+        this.thoiGian = thoiGian;
         this.hinhThucThanhToan = hinhThucThanhToan;
-        this.giamGia = giamGia;
-        this.tongTienThanhToan = tongTienThanhToan;
         this.ghiChu = ghiChu;
+        this.giamGia = giamGia;
+        this.tongTien = tongTien;
         this.trangThai = trangThai;
+    }
+
+    public hoaDon() {
     }
 
 }
