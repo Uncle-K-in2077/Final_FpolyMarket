@@ -107,8 +107,7 @@ public class MDKhachHang {
     public static khachHang getKhachHang(String id) {
         String sql = "select * from khachHang where id = ?";
         khachHang kh = new khachHang();
-        HELPER.SQLhelper.executeQuery(sql);
-        ResultSet rs = HELPER.SQLhelper.executeQuery(sql);
+        ResultSet rs = HELPER.SQLhelper.executeQuery(sql,id);
         try {
             while (rs.next()) {
                 kh = new khachHang(

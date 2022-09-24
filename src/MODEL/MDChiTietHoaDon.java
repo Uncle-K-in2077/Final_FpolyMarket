@@ -1,7 +1,10 @@
 package MODEL;
 
 import CLASS.chiTietHoaDon;
+import CLASS.hoaDon;
+import static MODEL.MDHoaDon.getHoaDon;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 public class MDChiTietHoaDon {
 
@@ -30,6 +33,45 @@ public class MDChiTietHoaDon {
         } catch (Exception e) {
         }
         return chiTiet;
+    }
+
+    public static ArrayList<chiTietHoaDon> getChiTietHoaDon(String idHoaDon) {
+        ArrayList<chiTietHoaDon> data = new ArrayList<>();
+
+        hoaDon hoadon = getHoaDon(idHoaDon);
+        String sql = "select chitiethoadon.*, sanpham.name as 'tensanpham',sanpham.GiaBan as 'giabanle', donvitinh.name as 'tendonvitinh',sanpham.SoLuong as 'tonkho',sanpham.giaSi as 'giaBanSi' from chitiethoadon "
+                + "join sanpham on sanpham.id = chitiethoadon.idsanpham "
+                + "join donvitinh on donvitinh.id = sanpham.IDDonViTinh "
+                + " "
+                + "where chitiethoadon.idhoadon = ?";
+        ResultSet rs = HELPER.SQLhelper.executeQuery(sql, idHoaDon);
+        try {
+            while (rs.next()) {
+                if (hoadon.getLoaiGia() == 0) { // giá lẽ
+                    data.add(new chiTietHoaDon(
+                            rs.getString("idsanpham"), //id sanpham
+                            rs.getString("tensanpham"),//tensanpham
+                            rs.getString("tendonvitinh"),//donvitinh
+                            rs.getInt("soluong"),//soluong
+                            rs.getInt("tonkho"),//tonkho
+                            rs.getLong("giaban"),//giaban
+                            rs.getLong("giabansi"),//giasi
+                            true));
+                } else {  // giá sĩ
+                    data.add(new chiTietHoaDon(
+                            rs.getString("idsanpham"), //id sanpham
+                            rs.getString("tensanpham"),//tensanpham
+                            rs.getString("tendonvitinh"),//donvitinh
+                            rs.getInt("soluong"),//soluong
+                            rs.getInt("tonkho"),//tonkho
+                            rs.getLong("giabanle"),//giaban
+                            rs.getLong("giaban"),//giasi
+                            true));
+                }
+            }
+        } catch (Exception e) {
+        }
+        return data;
     }
 
     public static chiTietHoaDon getSanPhamChiTietHoaDonbyID(String idsp) {

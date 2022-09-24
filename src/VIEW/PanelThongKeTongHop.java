@@ -14,13 +14,13 @@ import javax.swing.JPanel;
 import javax.swing.table.DefaultTableCellRenderer;
 
 public class PanelThongKeTongHop extends javax.swing.JPanel {
-    
+
     public static Account acc;
-    
+
     public PanelThongKeTongHop(Account account) {
         this.acc = account;
         initComponents();
-        
+
         setModelTableSanPham();
         hienThiSanPhamSapHetHang();
         loadDuLieu();
@@ -28,7 +28,7 @@ public class PanelThongKeTongHop extends javax.swing.JPanel {
         MDHoaDon.showDoanhThuTrongNgay(tableDoanhThuLoiNhuan);
         HELPER.helper.setTableTextCenterFullColumn(tableDoanhThuLoiNhuan);
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -482,7 +482,7 @@ public class PanelThongKeTongHop extends javax.swing.JPanel {
     public void loadDuLieu() {
         MDHoaDon.loadThongKeDuLieu(numDonHangTrongNgay, numDonHangTrongTuan, numDoanhThuHomNay, numDoanhThuTrongThang);
     }
-    
+
     public void setModelTableSanPham() {
         DefaultTableCellRenderer centerRendere = new DefaultTableCellRenderer();
         centerRendere.setHorizontalAlignment(JLabel.CENTER);
@@ -494,25 +494,25 @@ public class PanelThongKeTongHop extends javax.swing.JPanel {
         tableSanPhamSapHetHang.setRowMargin(4);
         String[] column = {"Hình ảnh", "Mã", "Sản phẩm", "Đơn vị tính", "Tồn kho"};
         Object[][] rows = {};
-        
+
         DefaultTableModel model = new DefaultTableModel(rows, column) {
             @Override
             public Class<?> getColumnClass(int column) {
                 switch (column) {
                     case 0:
                         return ImageIcon.class;
-                    
+
                     default:
                         return Object.class;
                 }
             }
-            
+
             public boolean isCellEditable(int rowIndex,
                     int columnIndex) {
                 return false;
             }
         };
-        
+
         tableSanPhamSapHetHang.setModel(model);
         tableSanPhamSapHetHang.setRowHeight(100);
         tableSanPhamSapHetHang.setRowMargin(7);
@@ -544,22 +544,23 @@ public class PanelThongKeTongHop extends javax.swing.JPanel {
     private void tableHoaDonTrongNgayMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableHoaDonTrongNgayMousePressed
         Component panel = (JPanel) this.getParent();
         if (tableHoaDonTrongNgay.getSelectedRows().length == 1 && evt.getClickCount() == 2) {
-            new frmXemHoaDon(null, true, acc).setVisible(true);
+            String idhoadon = tableHoaDonTrongNgay.getValueAt(tableHoaDonTrongNgay.getSelectedRow(), 0) + "";
+            new frmXemHoaDon(null, true, acc, idhoadon).setVisible(true);
         }
     }//GEN-LAST:event_tableHoaDonTrongNgayMousePressed
-    
+
     public void hienThiSanPhamSapHetHang() {
         DefaultTableModel model = (DefaultTableModel) tableSanPhamSapHetHang.getModel();
         model.setRowCount(0);
         String sql = "select hinhanh, sanpham.id as 'id',sanpham.name as 'name',donvitinh.name as 'donvitinh',sanpham.soluong as 'soluong' from sanpham "
                 + "join donvitinh on donvitinh.id=sanpham.iddonvitinh "
                 + " where soluong<soluongtoithieu";
-        
+
         try {
             ResultSet rs = HELPER.SQLhelper.executeQuery(sql);
             while (rs.next()) {
                 ImageIcon imageIcon = new ImageIcon(new ImageIcon("src/IMAGE/" + rs.getString("hinhanh")).getImage().getScaledInstance(70, 70, Image.SCALE_DEFAULT));
-                
+
                 model.addRow(new Object[]{
                     imageIcon,
                     rs.getString("id"),
@@ -570,7 +571,7 @@ public class PanelThongKeTongHop extends javax.swing.JPanel {
             }
         } catch (SQLException e) {
         }
-        
+
         tableSanPhamSapHetHang.setModel(model);
     }
 

@@ -2,22 +2,19 @@ package VIEW;
 
 import CLASS.Account;
 import CLASS.chiTietHoaDon;
+import CLASS.hoaDon;
 import CLASS.khachHang;
 import CLASS.sanPham;
-import COMPONENT.DetailedComboBox;
 import HELPER.helper;
 import MODEL.MDChiTietHoaDon;
+import MODEL.MDHoaDon;
 import MODEL.MDKhachHang;
 import MODEL.MDLoaiSanPham;
 import MODEL.MDSanPham;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
 import javax.swing.InputMap;
@@ -31,38 +28,64 @@ import javax.swing.table.DefaultTableModel;
 
 public class frmXemHoaDon extends javax.swing.JDialog {
 
-    private DetailedComboBox comboboxKhachHang;
     public static Account acc;
-    private ArrayList<chiTietHoaDon> dataChiTietHoaDon = new ArrayList<>();
-//    private ArrayList<sanPham> dataSanPham = MDSanPham.getAll();
+    private ArrayList<chiTietHoaDon> dataChiTietHoaDon;
     private ArrayList<String> listLoaiSanPham = MDLoaiSanPham.getNames();
-
     private String path = "src/IMAGE/";
     private ArrayList<khachHang> dataKhachHang = MDKhachHang.getDataToComboBox();
-    private String idKhachHang = "KH01";
-    private String idHoaDon = "";
+    private static String idHoaDon = "";
+    private hoaDon hoadon;
 
-    public frmXemHoaDon(java.awt.Frame parent, boolean modal, Account account) {
+    public frmXemHoaDon(java.awt.Frame parent, boolean modal, Account account, String idhoaDon) {
 
         this.acc = account;
+        this.hoadon = MDHoaDon.getHoaDon(idhoaDon);
+        this.dataChiTietHoaDon = MDChiTietHoaDon.getChiTietHoaDon(idhoaDon);
         initComponents();
-        this.setTitle("Phiếu bán hàng " + idHoaDon);
+        // load comboo box khách hàng.
+        lb.setVisible(false);
+        txtTienKhachDua.setVisible(false);
+        //load combobox giá sĩ giá lẽ
+        if (hoadon.getLoaiGia() == 0) {
+            cbChonGia.setSelectedIndex(0);
+        } else {
+            cbChonGia.setSelectedIndex(1);
+        }
+
+        khachHang kh = MDKhachHang.getKhachHang(hoadon.getIdKhachHang());
+        txtTenKhachHang.setText(kh.getName());
+        cbHinhThucThanhToan.setSelectedIndex(hoadon.getHinhThucThanhToan() - 1);
+        if (cbHinhThucThanhToan.getSelectedIndex() == 2) {
+            lb.setVisible(true);
+            txtTienKhachDua.setVisible(true);
+            txtTienKhachDua.setText(helper.LongToString(hoadon.getSoTienNhanDuoc()));
+        }
+        this.setTitle("Phiếu bán hàng : " + hoadon.getId());
         ImageIcon img = new ImageIcon("src/ICON/favicon.jpg");
         this.setIconImage(img.getImage());
-        // load combobox thông tin khách hàng
-        loadComboboxKhachHang();
 
+        // load combobox thông tin khách hàng
         UIManager.put("Table.consistentHomeEndKeyBehavior", true);
+
         // load comboBox loại sản phẩm
         loadComboboxLoaiSanPham();
+
         // add icon search 
         helper.addIconSearch(txtTimKiemSanPham);
+
         // add key listener cho nút quét mã vạch
         addKeyEnter();
+
         //set model table sản phẩm
         setModelTableSanPham();
         loadTableSanPham();
         editMode(false);
+        loadGioHang();
+        loadAll();
+    }
+
+    public void loadAll() {
+
     }
 
     //set enable
@@ -74,8 +97,6 @@ public class frmXemHoaDon extends javax.swing.JDialog {
         txtTimKiemSanPham.setEnabled(mode);
         tableSanPham.setEnabled(mode);
         tableGioHang.setEnabled(mode);
-        comboboxKhachHang.setEnabled(mode);
-        btnThemKhachHang.setEnabled(mode);
         cbHinhThucThanhToan.setEnabled(mode);
         cbTuyChonGiamGia.setEnabled(mode);
         cbLoaiSanPham.setEnabled(mode);
@@ -86,6 +107,9 @@ public class frmXemHoaDon extends javax.swing.JDialog {
         btnXoa.setEnabled(!mode);
         btnSua.setEnabled(!mode);
         cbChonGia.setEnabled(mode);
+        if (cbHinhThucThanhToan.getSelectedIndex() == 2) {
+            txtTienKhachDua.setEnabled(mode);
+        }
     }
 
     public void addKeyEnter() {
@@ -101,7 +125,7 @@ public class frmXemHoaDon extends javax.swing.JDialog {
     }
 
     public void addGioHang(chiTietHoaDon sp) {
-       boolean isTonTai = true;
+        boolean isTonTai = true;
 
         if (sp == null) {
             if (JOptionPane.showConfirmDialog(null, "Sản phẩm chưa có. Thêm mới sản phẩm ?") == 0) {
@@ -247,34 +271,40 @@ public class frmXemHoaDon extends javax.swing.JDialog {
         txtTongTien.setText(helper.LongToString(tongTienFinal));
     }
 
-    public void loadComboboxKhachHang() {
-        String[] columns = new String[]{"Mã khách hàng", "Tên", "Điện thoại", "Địa chỉ", "Công nợ"};
-        int[] widths = new int[]{80, 300, 120, 360, 150};
-        this.comboboxKhachHang = new DetailedComboBox(columns, widths, 1);
-
-        List<List<?>> tableData = new ArrayList<List<?>>();
-        tableData.add(new ArrayList<>(
-                Arrays.asList("KH01", "KHÁCH MỚI", "", "", "")));
-        for (khachHang kh : dataKhachHang) {
-            tableData.add(new ArrayList<>(
-                    Arrays.asList(kh.getIdKhachHang(), kh.getName(), kh.getSoDienThoai(), kh.getDiaChi(), helper.LongToString(kh.getNo()))));
-        }
-        comboboxKhachHang.setTableData(tableData);
-        comboboxKhachHang.setFont(new Font("Arial", Font.ITALIC, 16));
-        comboboxKhachHang.setSelectedIndex(0);
-        comboboxKhachHang.setPopupAlignment(DetailedComboBox.Alignment.LEFT);
-        comboboxKhachHang.addItemListener(new ItemListener() {
-            @Override
-            public void itemStateChanged(ItemEvent e) {
-                List<?> rowData = comboboxKhachHang.getSelectedRow();
-                idKhachHang = (String) rowData.get(0) + "";
-            }
-        });
-        comboboxKhachHang.setVisible(true);
-        panelComBoKhachHang.add(comboboxKhachHang);
-    }
+//    public void loadComboboxKhachHang() {
+//        String[] columns = new String[]{"Mã khách hàng", "Tên", "Điện thoại", "Địa chỉ", "Công nợ"};
+//        int[] widths = new int[]{80, 300, 120, 360, 150};
+//        this.comboboxKhachHang = new DetailedComboBox(columns, widths, 1);
 //
-
+//        List<List<?>> tableData = new ArrayList<List<?>>();
+//        tableData.add(new ArrayList<>(
+//                Arrays.asList("KH01", "KHÁCH MỚI", "", "", "")));
+//        for (khachHang kh : dataKhachHang) {
+//            tableData.add(new ArrayList<>(
+//                    Arrays.asList(kh.getIdKhachHang(), kh.getName(), kh.getSoDienThoai(), kh.getDiaChi(), helper.LongToString(kh.getNo()))));
+//        }
+//        comboboxKhachHang.setTableData(tableData);
+//        comboboxKhachHang.setFont(new Font("Arial", Font.ITALIC, 16));
+//        int index = 0;
+//        for (int i = 0; i < dataKhachHang.size(); i++) {
+//            if (hoadon.getIdKhachHang().equals(dataKhachHang.get(i).getIdKhachHang())) {
+//                index = i;
+//                break;
+//            }
+//        }
+//        comboboxKhachHang.setSelectedIndex(index);
+//        comboboxKhachHang.setPopupAlignment(DetailedComboBox.Alignment.LEFT);
+//        comboboxKhachHang.addItemListener(new ItemListener() {
+//            @Override
+//            public void itemStateChanged(ItemEvent e) {
+//                List<?> rowData = comboboxKhachHang.getSelectedRow();
+//                idKhachHang = (String) rowData.get(0) + "";
+//            }
+//        });
+//        comboboxKhachHang.setVisible(true);
+//        panelComBoKhachHang.add(comboboxKhachHang);
+//    }
+//
     public void loadTableSanPham() {
         ArrayList<sanPham> data = MDSanPham.getDataToTableBanHang();
         DefaultTableModel model = (DefaultTableModel) tableSanPham.getModel();
@@ -373,7 +403,6 @@ public class frmXemHoaDon extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        panelComBoKhachHang = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         cbHinhThucThanhToan = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
@@ -386,10 +415,12 @@ public class frmXemHoaDon extends javax.swing.JDialog {
         btnSua = new javax.swing.JButton();
         btnXoa = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
-        btnThemKhachHang = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         cbTuyChonGiamGia = new javax.swing.JComboBox<>();
         txtGiaTriGiam = new javax.swing.JTextField();
+        txtTenKhachHang = new javax.swing.JTextField();
+        lb = new javax.swing.JLabel();
+        txtTienKhachDua = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableGioHang = new javax.swing.JTable();
         jLabel10 = new javax.swing.JLabel();
@@ -539,8 +570,6 @@ public class frmXemHoaDon extends javax.swing.JDialog {
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         jLabel4.setText("Khách hàng :");
 
-        panelComBoKhachHang.setLayout(new java.awt.BorderLayout());
-
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         jLabel5.setText("Hình thức :");
 
@@ -599,8 +628,6 @@ public class frmXemHoaDon extends javax.swing.JDialog {
             }
         });
 
-        btnThemKhachHang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/new-user.png"))); // NOI18N
-
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         jLabel9.setText("Tùy chọn giảm giá :");
 
@@ -617,6 +644,11 @@ public class frmXemHoaDon extends javax.swing.JDialog {
                 txtGiaTriGiamKeyReleased(evt);
             }
         });
+
+        txtTenKhachHang.setEditable(false);
+
+        lb.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        lb.setText("Khách đưa :");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -638,35 +670,33 @@ public class frmXemHoaDon extends javax.swing.JDialog {
                             .addGap(31, 31, 31)
                             .addComponent(jLabel8))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtTongTien, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
-                            .addGap(5, 5, 5)
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel3Layout.createSequentialGroup()
-                                    .addComponent(btnLuu)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(btnSua)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(btnXoa))
-                                .addGroup(jPanel3Layout.createSequentialGroup()
-                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(panelComBoKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGroup(jPanel3Layout.createSequentialGroup()
-                                            .addGap(1, 1, 1)
-                                            .addComponent(cbTuyChonGiamGia, 0, 0, Short.MAX_VALUE)))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(btnThemKhachHang)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jLabel5)
-                                        .addComponent(jLabel6))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(cbHinhThucThanhToan, 0, 168, Short.MAX_VALUE)
-                                        .addComponent(txtGiaTriGiam)))))))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                        .addGap(5, 5, 5)
+                        .addComponent(btnLuu)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnSua)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnXoa))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtTenKhachHang)
+                                    .addComponent(cbTuyChonGiamGia, 0, 177, Short.MAX_VALUE))
+                                .addGap(20, 20, 20)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel6)
+                                    .addComponent(lb)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                .addComponent(txtTongTien, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(116, 116, 116)))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cbHinhThucThanhToan, 0, 168, Short.MAX_VALUE)
+                            .addComponent(txtGiaTriGiam)
+                            .addComponent(txtTienKhachDua))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -677,8 +707,7 @@ public class frmXemHoaDon extends javax.swing.JDialog {
                     .addComponent(cbHinhThucThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
                     .addComponent(jLabel4)
-                    .addComponent(panelComBoKhachHang, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnThemKhachHang))
+                    .addComponent(txtTenKhachHang))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jLabel9)
@@ -688,7 +717,9 @@ public class frmXemHoaDon extends javax.swing.JDialog {
                 .addGap(25, 25, 25)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(txtTongTien, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE))
+                    .addComponent(txtTongTien, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
+                    .addComponent(lb)
+                    .addComponent(txtTienKhachDua, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -877,7 +908,10 @@ public class frmXemHoaDon extends javax.swing.JDialog {
     }//GEN-LAST:event_btnLuuKeyPressed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-
+        if (JOptionPane.showConfirmDialog(this, "Xóa hóa đơn này ?") == 0) {
+            MDHoaDon.remove(hoadon.getId());
+            this.setVisible(false);
+        }
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void tableGioHangFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tableGioHangFocusLost
@@ -1065,7 +1099,7 @@ public class frmXemHoaDon extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                frmXemHoaDon dialog = new frmXemHoaDon(new javax.swing.JFrame(), true, acc);
+                frmXemHoaDon dialog = new frmXemHoaDon(new javax.swing.JFrame(), true, acc, idHoaDon);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -1081,7 +1115,6 @@ public class frmXemHoaDon extends javax.swing.JDialog {
     private javax.swing.JButton btnEnter;
     private javax.swing.JButton btnLuu;
     private javax.swing.JButton btnSua;
-    private javax.swing.JButton btnThemKhachHang;
     private javax.swing.JButton btnThemNhanh;
     private javax.swing.JButton btnXoa;
     private javax.swing.JComboBox<String> cbChonGia;
@@ -1105,12 +1138,14 @@ public class frmXemHoaDon extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JPanel panelComBoKhachHang;
+    private javax.swing.JLabel lb;
     private javax.swing.JTable tableGioHang;
     private javax.swing.JTable tableSanPham;
     public javax.swing.JTextField txtBarcode;
     private javax.swing.JTextArea txtGhiChu;
     private javax.swing.JTextField txtGiaTriGiam;
+    private javax.swing.JTextField txtTenKhachHang;
+    private javax.swing.JTextField txtTienKhachDua;
     private javax.swing.JTextField txtTimKiemSanPham;
     private javax.swing.JTextField txtTongTien;
     // End of variables declaration//GEN-END:variables
