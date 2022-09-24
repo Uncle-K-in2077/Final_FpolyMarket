@@ -1,7 +1,6 @@
 
-import CLASS.nhanVien;
-import MODEL.MDNhanVien;
-import java.util.ArrayList;
+import MODEL.MDHoaDon;
+import java.util.Random;
 
 public class NewMain {
 
@@ -11,10 +10,8 @@ public class NewMain {
 //        for (nhanVien item : data) {
 //            System.out.println(item.getName());
 //        }
-        ArrayList<nhanVien> data = MDNhanVien.getData();
-        for (nhanVien item : data) {
-            System.out.println(item.getName());
-        }
+       
+        System.out.println(MDHoaDon.craeteID());
     }
 
 }

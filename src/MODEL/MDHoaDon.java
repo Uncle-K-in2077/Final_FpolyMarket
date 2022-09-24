@@ -5,6 +5,7 @@ import CLASS.hoaDon;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Random;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -13,18 +14,15 @@ public class MDHoaDon {
 
     public static String craeteID() {
         String id = "HD";
-        String date = HELPER.helper.LayNgayString(new Date(), "yyyyMMdd");
-        String sql = "select count(id) as 'count' from hoadon where date(hoadon.thoigian) = ?";
-        int count = 0;
-        ResultSet rs = HELPER.SQLhelper.executeQuery(sql, date);
-        try {
-            while (rs.next()) {
-                count = rs.getInt("count");
-            }
-        } catch (Exception e) {
-        }
+        String date = HELPER.helper.LayNgayString(new Date(), "ddMM");
+        Random r = new Random();
 
-        return id + date + (count + 1);
+        String alphabet = "1234567890";
+        String random = "";
+        for (int i = 0; i < 6; i++) {
+            random += r.nextInt(alphabet.length());
+        }
+        return id + date + random;
     }
 
     public static void loadThongKeDuLieu(JLabel soHoaDonTrongNgay,
@@ -165,7 +163,7 @@ public class MDHoaDon {
     }
 
     public static void getDanhSachHoaDon(JTable table) {
-        String sql = " select hoadon.*,nhanvien.name as 'tennhanvien',khachhang.name as 'tenkhachhang' from hoadon"
+        String sql = " select hoadon.*,nhanvien.name as 'tennhanvien',khachhang.name as 'tenkhachhang',STR_TO_DATE(hoadon.thoigian, '%Y-%m-%d %H:%i:%s') as 'time' from hoadon"
                 + " join nhanvien on nhanvien.id = hoadon.idnhanvien "
                 + " join khachhang on khachhang.id = hoadon.idkhachhang"
                 + " where hoadon.trangthai=1 "
@@ -173,16 +171,24 @@ public class MDHoaDon {
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         model.setRowCount(0);
         ResultSet rs = HELPER.SQLhelper.executeQuery(sql);
+        String hinhThuc = "";
         try {
             while (rs.next()) {
-
+                if (rs.getInt("hinhthucthanhtoan") == 1) {
+                    hinhThuc = "Tiền mặt";
+                } else if (rs.getInt("hinhthucthanhtoan") == 2) {
+                    hinhThuc = "Chuyển khoản";
+                } else if (rs.getInt("hinhthucthanhtoan") == 3) {
+                    hinhThuc = "Nợ";
+                }
                 model.addRow(new Object[]{
                     rs.getString("id"),
                     rs.getString("tenkhachhang"),
                     rs.getString("tennhanvien"),
                     HELPER.helper.LongToString(rs.getLong("tongtienthanhtoan")),
                     HELPER.helper.LongToString(rs.getLong("giamgia")),
-                    rs.getString("thoigian"),});
+                    hinhThuc,
+                    rs.getString("time"),});
             }
         } catch (Exception e) {
         }
