@@ -14,9 +14,9 @@ public class MDHoaDon {
     public static String craeteID() {
         String id = "HD";
         String date = HELPER.helper.LayNgayString(new Date(), "yyyyMMdd");
-        String sql = "select count(id) as 'count' from hoadon";
+        String sql = "select count(id) as 'count' from hoadon where date(hoadon.thoigian) = ?";
         int count = 0;
-        ResultSet rs = HELPER.SQLhelper.executeQuery(sql);
+        ResultSet rs = HELPER.SQLhelper.executeQuery(sql, date);
         try {
             while (rs.next()) {
                 count = rs.getInt("count");

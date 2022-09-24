@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th9 16, 2022 lúc 02:16 PM
+-- Thời gian đã tạo: Th9 24, 2022 lúc 02:11 PM
 -- Phiên bản máy phục vụ: 10.4.24-MariaDB
 -- Phiên bản PHP: 8.1.6
 
@@ -49,7 +49,7 @@ CREATE TABLE `account` (
 
 INSERT INTO `account` (`Username`, `Password`, `IDNhanVien`, `TrangThai`, `BanHang`, `NhapHang`, `TaiKhoan`, `HangHoa`, `NhanVien`, `KhachHang`, `NhaCungCap`, `BaoCao`, `PhieuChi`) VALUES
 ('admin', '123', 'admin', 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-('NV1', '123456', 'NV1', 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+('Khai01', '01', 'NV09', 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 ('NV2', '123456', 'NV2', 1, 1, 1, 0, 1, 0, 1, 1, 1, 1),
 ('NV3', '123456', 'NV3', 1, 0, 1, 0, 1, 1, 0, 1, 1, 1),
 ('NV4', '123456', 'NV4', 1, 1, 1, 0, 1, 0, 1, 1, 1, 1);
@@ -64,21 +64,66 @@ CREATE TABLE `chitiethoadon` (
   `id` int(11) NOT NULL,
   `idhoadon` varchar(20) DEFAULT NULL,
   `idsanpham` varchar(20) DEFAULT NULL,
-  `soluong` int(11) DEFAULT NULL
+  `soluong` int(11) DEFAULT NULL,
+  `giaBan` decimal(10,0) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
-
 --
--- Cấu trúc bảng cho bảng `chitietkhachtrahang`
+-- Đang đổ dữ liệu cho bảng `chitiethoadon`
 --
 
-CREATE TABLE `chitietkhachtrahang` (
-  `ID` varchar(20) NOT NULL,
-  `IDHoaDon` varchar(20) DEFAULT NULL,
-  `IDSanPham` varchar(20) DEFAULT NULL,
-  `SoLuong` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+INSERT INTO `chitiethoadon` (`id`, `idhoadon`, `idsanpham`, `soluong`, `giaBan`) VALUES
+(38, 'HD202209231', 'SP019', 1, '5000'),
+(39, 'HD202209231', 'SP01956', 1, '5000'),
+(40, 'HD202209231', 'SP01Ac', 3, '10000'),
+(41, 'HD202209232', 'SP01Ac', 3, '10000'),
+(42, 'HD202209232', 'SP01956', 3, '5000'),
+(43, 'HD202209233', 'SP01956', 1, '5000'),
+(44, 'HD202209233', 'SP019', 1, '5000'),
+(45, 'HD202209234', 'SP019', 1, '5000'),
+(46, 'HD202209235', 'SP012', 8, '90000'),
+(47, 'HD202209235', 'SP014', 7, '5000'),
+(48, 'HD202209236', 'SP01Ac', 3, '999999'),
+(49, 'HD202209236', 'SP01956', 1, '4000'),
+(50, 'HD202209236', 'SP014', 1, '999999'),
+(51, 'HD202209236', 'SP012', 1, '999999'),
+(52, 'HD202209237', 'SP01Ac', 1, '10000'),
+(53, 'HD202209237', 'SP01B', 24, '15000'),
+(54, 'HD202209238', 'SP01956', 5, '5000'),
+(55, 'HD202209238', 'SP019', 5, '5000'),
+(56, 'HD202209239', 'SP012', 6, '90000'),
+(57, 'HD202209239', 'SP03Aiaavff', 10, '150000'),
+(58, 'HD202209239', 'SP03Aiaav', 1, '60000'),
+(59, 'HD2022092310', 'SP019', 90, '5000'),
+(60, 'HD2022092310', 'SP01956', 1, '5000'),
+(61, 'HD2022092310', 'SP014', 1, '5000'),
+(62, 'HD2022092311', 'SP01Bc', 5, '15000'),
+(63, 'HD2022092311', 'SP03Aiaa', 5, '15000'),
+(64, 'HD2022092311', 'SP015', 5, '46000'),
+(65, 'HD2022092312', 'SP019', 1, '5000'),
+(66, 'HD2022092312', 'SP01956', 2, '5000'),
+(67, 'HD2022092312', 'SP01Bc', 6, '15000'),
+(68, 'HD2022092312', 'SP013', 4, '50000'),
+(69, 'HD2022092313', 'SP013', 1, '50000'),
+(70, 'HD2022092313', 'SP01Bc', 1, '15000'),
+(71, 'HD2022092414', 'SP03Aiaavff', 3, '999999'),
+(72, 'HD2022092414', 'SP012', 4, '999999'),
+(73, 'HD2022092414', 'SP014', 2, '999999'),
+(74, 'HD2022092414', 'SP03Aiaav', 2, '999999'),
+(75, 'HD2022092415', 'SP03Aiaavff', 1, '150000'),
+(76, 'HD2022092415', 'SP012', 1, '90000'),
+(77, 'HD202209243', 'SP01Bc', 3, '15000'),
+(78, 'HD202209243', 'SP013', 3, '50000'),
+(79, 'HD202209243', 'SP012', 2, '90000'),
+(80, 'HD202209243', 'SP03Aiaavff', 3, '150000'),
+(81, 'HD202209243', 'SP014', 1, '5000'),
+(82, 'HD202209243', 'SP03Aiaav', 2, '60000'),
+(83, 'HD202209244', 'SP01956', 2, '777'),
+(84, 'HD202209244', 'SP01A', 1, '99'),
+(85, 'HD202209244', 'SP019', 1, '99'),
+(86, 'HD202209245', 'SP01Ac', 1, '10000'),
+(87, 'HD202209245', 'SP01A', 1, '10000'),
+(88, 'HD202209245', 'SP019', 1, '5000');
 
 -- --------------------------------------------------------
 
@@ -124,6 +169,19 @@ CREATE TABLE `chitiettrichkho` (
 -- --------------------------------------------------------
 
 --
+-- Cấu trúc bảng cho bảng `ctphieukhachtrahang`
+--
+
+CREATE TABLE `ctphieukhachtrahang` (
+  `ID` int(11) NOT NULL,
+  `IDPhieuKTH` varchar(20) DEFAULT NULL,
+  `IDSanPham` varchar(20) DEFAULT NULL,
+  `SoLuong` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Cấu trúc bảng cho bảng `donvitinh`
 --
 
@@ -156,6 +214,7 @@ CREATE TABLE `hoadon` (
   `HinhThucThanhToan` int(1) DEFAULT 1,
   `GiamGia` decimal(10,0) DEFAULT NULL,
   `TongTienThanhToan` decimal(10,0) DEFAULT NULL,
+  `loaiGia` int(11) DEFAULT 0,
   `GhiChu` varchar(250) DEFAULT NULL,
   `trangThai` int(1) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -164,12 +223,25 @@ CREATE TABLE `hoadon` (
 -- Đang đổ dữ liệu cho bảng `hoadon`
 --
 
-INSERT INTO `hoadon` (`ID`, `IDnhanvien`, `IDkhachHang`, `ThoiGian`, `HinhThucThanhToan`, `GiamGia`, `TongTienThanhToan`, `GhiChu`, `trangThai`) VALUES
-('HD01', 'NV1', 'KH01', '2022-09-04 19:10:22', 1, '0', '10000', 'KO', 1),
-('HD02', 'NV1', 'KH02', '2022-09-05 19:18:31', 1, '0', '35000', 'KO', 1),
-('HD03', 'NV1', 'KH03', '2022-09-05 19:19:51', 1, '0', '100000', 'heniken1,taomy5,bimbim10', 1),
-('HD04', 'NV1', 'KH04', '2022-09-05 19:25:18', 1, '0', '30000', 'heniken2', 1),
-('HD05', 'NV1', 'KH05', '2022-09-05 19:26:33', 1, '0', '20000', 'coca2', 1);
+INSERT INTO `hoadon` (`ID`, `IDnhanvien`, `IDkhachHang`, `ThoiGian`, `HinhThucThanhToan`, `GiamGia`, `TongTienThanhToan`, `loaiGia`, `GhiChu`, `trangThai`) VALUES
+('HD202209231', 'admin', 'KH01', '2022-09-23 01:14:02', 1, '4000', '28000', 0, '', 1),
+('HD2022092310', 'admin', 'KH01', '2022-09-23 01:36:31', 1, '0', '460000', 0, '', 1),
+('HD2022092311', 'admin', 'KH02', '2022-09-23 01:45:46', 3, '0', '380000', 0, '', 1),
+('HD2022092312', 'admin', 'KH01', '2022-09-23 11:48:38', 1, '0', '305000', 0, '', 1),
+('HD2022092313', 'admin', 'KH01', '2022-09-23 11:54:13', 1, '0', '65000', 0, '', 1),
+('HD202209232', 'admin', 'KH01', '2022-09-22 01:14:49', 1, '5000', '30000', 0, '', 1),
+('HD202209233', 'admin', 'KH01', '2022-09-23 01:15:23', 1, '1000', '8000', 0, '', 1),
+('HD202209234', 'admin', 'KH01', '2022-09-23 01:16:14', 1, '1000', '4000', 0, '', 1),
+('HD202209235', 'admin', 'KH01', '2022-09-23 01:16:44', 1, '5000', '750000', 0, '', 1),
+('HD202209236', 'admin', 'KH01', '2022-09-23 01:22:45', 1, '0', '5003995', 1, '', 1),
+('HD202209237', 'admin', 'KH01', '2022-09-23 01:31:51', 1, '0', '385000', 0, '', 1),
+('HD202209238', 'admin', 'KH01', '2022-09-23 01:32:37', 1, '0', '50000', 0, '', 1),
+('HD202209239', 'admin', 'KH01', '2022-09-23 01:33:19', 1, '0', '2100000', 0, '', 1),
+('HD2022092414', 'admin', 'KH01', '2022-09-24 12:23:46', 1, '0', '10999989', 1, '', 1),
+('HD2022092415', 'admin', 'KH01', '2022-09-24 12:24:38', 1, '50000', '190000', 0, '', 1),
+('HD202209243', 'admin', 'KH01', '2022-09-24 12:29:16', 1, '0', '950000', 0, '', 1),
+('HD202209244', 'admin', 'KH01', '2022-09-24 12:38:17', 1, '0', '1752', 0, '', 1),
+('HD202209245', 'admin', 'KH01', '2022-09-24 12:39:54', 1, '0', '25000', 0, '', 1);
 
 -- --------------------------------------------------------
 
@@ -192,27 +264,11 @@ CREATE TABLE `khachhang` (
 --
 
 INSERT INTO `khachhang` (`ID`, `Name`, `SoDienThoai`, `DiaChi`, `GhiChu`, `congno`, `TrangThai`) VALUES
-('KH01', 'HOÀNG', '0987656780', 'BMT,DAKLAK', 'KO', '0', 1),
-('KH02', 'LỘC', '098989898', 'BMT,DAKLAK', 'KO', '0', 1),
-('KH03', 'HOÀNH', '0935818820', 'BMT,DAKLAK', 'KO', '0', 1),
-('KH04', 'LAM', NULL, 'BMT,DAKLAK', 'KO', '0', 1),
+('KH01', 'KHÁCH MỚI', '0987656780', 'BMT,DAKLAK', 'KO', '75000000', 1),
+('KH02', 'LỘC', '098989898', 'BMT,DAKLAK', 'KO', '360000', 1),
+('KH03', 'HOÀNH', '0935818820', 'BMT,DAKLAK', 'KO', '900000', 1),
+('KH04', 'LAM', NULL, 'BMT,DAKLAK', 'KO', '200000', 1),
 ('KH05', 'KHUÊ', NULL, 'KRONG NO ,DAK NONG', NULL, '0', 1);
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `khachtrahang`
---
-
-CREATE TABLE `khachtrahang` (
-  `ID` varchar(20) NOT NULL,
-  `ThoiGian` datetime DEFAULT NULL,
-  `IDKhachHang` varchar(20) DEFAULT NULL,
-  `IDNhanVien` varchar(20) DEFAULT NULL,
-  `HoanTien` decimal(10,0) DEFAULT NULL,
-  `GhiChu` varchar(250) DEFAULT NULL,
-  `trangthai` int(1) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -264,7 +320,8 @@ INSERT INTO `nhacungcap` (`ID`, `Name`, `SoDienThoai`, `DiaChi`, `GhiChu`, `cong
 ('NCC03', 'Đồ ăn vặt bé Bự', '0707070707', 'BMT,DAK LAK', 'KO', '0', 1),
 ('NCC04', 'Nội Thất Đồ Gia Dụng Hưng Quang', '0606060606', 'CUMGAR ,DAKLAK', 'KO', '0', 1),
 ('NCC05', 'BỈM SỮA BABY BU', '0505050505', 'BMT,DAK LAK', 'KO', '0', 1),
-('NCC06', 'TRÁI CAY NGON BMT', '0972909000', 'BMT,DAKLAK', 'KO', '0', 1);
+('NCC06', 'TRÁI CAY NGON BMT', '0972909000', 'BMT,DAKLAK', 'KO', '0', 1),
+('NCC09', 'CTY Thực Phẩm LACUSINA', '0909999999', '120 Khu công nghiệp Bình Dương Tỉnh Bình Dương', NULL, '6000000', 1);
 
 -- --------------------------------------------------------
 
@@ -368,41 +425,94 @@ INSERT INTO `phieuchi` (`ID`, `ThoiGian`, `IDnhanvien`, `TienChi`, `GhiChu`) VAL
 -- --------------------------------------------------------
 
 --
+-- Cấu trúc bảng cho bảng `phieukhachtrahang`
+--
+
+CREATE TABLE `phieukhachtrahang` (
+  `ID` varchar(20) NOT NULL,
+  `IDKhachHang` varchar(20) DEFAULT NULL,
+  `IDNhanVien` varchar(20) DEFAULT NULL,
+  `SoTienHoaTra` decimal(10,0) DEFAULT NULL,
+  `GhiChu` varchar(250) DEFAULT NULL,
+  `ThoiGian` datetime DEFAULT NULL,
+  `TrangThai` int(11) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `phieutranoncc`
+--
+
+CREATE TABLE `phieutranoncc` (
+  `ID` int(11) NOT NULL,
+  `IDNcc` varchar(20) DEFAULT NULL,
+  `IDNhanVien` varchar(20) DEFAULT NULL,
+  `SoTienTra` decimal(10,0) DEFAULT NULL,
+  `ThoiGian` datetime DEFAULT NULL,
+  `GhiChu` varchar(250) DEFAULT NULL,
+  `TrangThai` int(11) DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Đang đổ dữ liệu cho bảng `phieutranoncc`
+--
+
+INSERT INTO `phieutranoncc` (`ID`, `IDNcc`, `IDNhanVien`, `SoTienTra`, `ThoiGian`, `GhiChu`, `TrangThai`) VALUES
+(1, 'NCC09', 'NV09', NULL, '2022-09-20 11:07:19', 'Khải 20-09-2022', 1),
+(2, 'NCC09', 'NV09', NULL, '2022-09-20 11:09:40', '20-09-2022', 1),
+(3, 'NCC09', 'NV09', '2000000', '2022-09-20 11:13:00', 'lần 2', 1),
+(4, 'NCC09', 'NV09', '1000000', '2022-09-20 11:40:19', 'test laanf 4', 1),
+(5, 'NCC09', 'admin', '8000000', '2022-09-20 11:47:44', 'hịu', 1),
+(6, 'NCC09', 'admin', '5000000', '2022-09-20 11:49:53', '', 1);
+
+-- --------------------------------------------------------
+
+--
 -- Cấu trúc bảng cho bảng `sanpham`
 --
 
 CREATE TABLE `sanpham` (
   `ID` varchar(20) NOT NULL,
-  `Name` varchar(100) DEFAULT NULL,
+  `Name` varchar(100) NOT NULL,
   `Barcode` varchar(30) DEFAULT NULL,
-  `hinhAnh` varchar(200) DEFAULT 'empty.png',
+  `hinhAnh` varchar(200) NOT NULL DEFAULT 'empty.png',
   `GiaNhap` decimal(10,0) DEFAULT 0,
   `GiaBan` decimal(10,0) DEFAULT 0,
+  `giaSi` decimal(10,0) NOT NULL DEFAULT 999999,
   `SoLuong` int(11) DEFAULT 0,
   `SoLuongToiThieu` int(11) DEFAULT 0,
-  `IDNhaCungCap` varchar(20) DEFAULT NULL,
-  `IDDonViTinh` varchar(20) DEFAULT NULL,
-  `idLoaiSanPham` varchar(20) DEFAULT NULL,
+  `IDNhaCungCap` varchar(20) NOT NULL,
+  `IDDonViTinh` varchar(20) NOT NULL,
+  `idLoaiSanPham` varchar(20) NOT NULL,
   `GhiChu` varchar(250) DEFAULT NULL,
-  `TrangThai` int(1) DEFAULT 1
+  `TrangThai` int(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Đang đổ dữ liệu cho bảng `sanpham`
 --
 
-INSERT INTO `sanpham` (`ID`, `Name`, `Barcode`, `hinhAnh`, `GiaNhap`, `GiaBan`, `SoLuong`, `SoLuongToiThieu`, `IDNhaCungCap`, `IDDonViTinh`, `idLoaiSanPham`, `GhiChu`, `TrangThai`) VALUES
-('SP01A', 'COCACOLA', '8935049510123', 'cocacola.png', '8000', '10000', 24, 120, 'NCC02', 'MN01', 'LSP01', 'KO', 1),
-('SP01Ac', 'Revice chanh muối', '8934588183133', 'revicechanhmuoi.png', '8000', '10000', 24, 120, 'NCC02', 'MN01', 'LSP01', 'KO', 1),
-('SP01B', 'HENIKEN', '8934822201333', 'lon-heineken.png', '12000', '15000', 24, 120, 'NCC02', 'MN01', 'LSP01', 'KO', 1),
-('SP01Bc', 'Trà ô lông', '8934588873058', 'traolong.png', '12000', '15000', 24, 120, 'NCC02', 'MN01', 'LSP01', 'KO', 1),
-('SP02A', 'String', '8934588232220', 'chaisting.png', '4000', '7000', 50, 70, 'NCC06', 'MN01', 'LSP02', 'KO', 1),
-('SP02Av', 'Nước lọc aquafina', '8934588063060', 'nuocloc.png', '4000', '7000', 50, 70, 'NCC06', 'MN01', 'LSP02', 'KO', 1),
-('SP03A', '7up 1,5L', '8934588023064', '7up1-5L.png', '3000', '5000', 20, 50, 'NCC03', 'MN01', 'LSP03', 'KO', 1),
-('SP03Ai', 'Thuốc lá Demi(mèo bạc)', '8934674015416', 'thuocdemi.png', '3000', '15000', 20, 50, 'NCC03', 'MN01', 'LSP03', '', 1),
-('SP03Aiaa', 'Cục sạc', 'KP1350H00211900044PH02', 'thuocdemi.png', '3000', '15000', 20, 50, 'NCC03', 'MN01', 'LSP03', '', 1),
-('SP03Aiaav', 'Enter Bacicus', '8938530836214', 'empty.png', '50000', '60000', 120, 50, 'NCC03', 'MN01', 'LSP03', '', 1),
-('SP03Aiaavff', 'KidOne 2++', '8936139990030', 'empty.png', '95000', '150000', 120, 50, 'NCC03', 'MN01', 'LSP03', '', 1);
+INSERT INTO `sanpham` (`ID`, `Name`, `Barcode`, `hinhAnh`, `GiaNhap`, `GiaBan`, `giaSi`, `SoLuong`, `SoLuongToiThieu`, `IDNhaCungCap`, `IDDonViTinh`, `idLoaiSanPham`, `GhiChu`, `TrangThai`) VALUES
+('SP012', 'Nước giặt Ariel 1.6 lít', '4902430650212', '1568083204882549375.jpg', '50000', '90000', '999999', 100, 20, 'NCC02', 'MN01', 'LSP04', '', 1),
+('SP013', 'Bánh Oreo 68.5g', '6901668053121', 'Bánh-quy-kem-vani-Oreo-gói-68.5g.jpg', '23000', '50000', '999999', 100, 50, 'NCC03', 'MN01', 'LSP02', 'đồ ăn vặt', 1),
+('SP014', 'Lưỡi lam Platinum', '8888826024583', '70af2aec3c3268a9a8359dcd06a3b72a.png', '3000', '5000', '999999', 100, 20, 'NCC02', 'MN02', 'LSP02', '', 1),
+('SP015', 'Bột canh 180G', '8934561281696', '287652673_558881695830581_2757102238107310630_n.jpg', '32000', '46000', '999999', 100, 10, 'NCC02', 'MN01', 'LSP02', '', 1),
+('SP016', 'STTT vinamilk 110ml dâu', '8934673574327', 'empty.png', '8000', '12000', '100000', 100, 100, 'NCC02', 'MN01', 'LSP05', '', 0),
+('SP018', 'ád', 'ád', 'id shoppee.png', '222', '2222', '999999', 100, 20, 'NCC02', 'MN01', 'LSP02', '', 1),
+('SP019', 'Đường ăn', '', 'empty.png', '2000', '5000', '4000', 98, 10, 'NCC02', 'MN01', 'LSP01', '', 1),
+('SP01956', 'Đường ăn65456', '', 'empty.png', '2000', '5000', '4000', 98, 10, 'NCC02', 'MN01', 'LSP01', '', 1),
+('SP01A', 'COCACOLA', '8934588012228', 'cocacola.png', '8000', '10000', '999999', 98, 20, 'NCC02', 'MN01', 'LSP01', 'KO', 1),
+('SP01Ac', 'Revice chanh muối', '8934588843051', 'revicechanhmuoi.png', '8000', '10000', '999999', 99, 120, 'NCC02', 'MN01', 'LSP01', 'KO', 1),
+('SP01B', 'HENIKEN', '8934822201333', 'lon-heineken.png', '12000', '15000', '999999', 100, 120, 'NCC02', 'MN01', 'LSP01', 'KO', 1),
+('SP01Bc', 'Trà ô lông', '8934588873058', 'traolong.png', '12000', '15000', '999999', 100, 120, 'NCC02', 'MN01', 'LSP01', 'KO', 1),
+('SP02A', 'String', '8934588232220', 'chaisting.png', '4000', '7000', '999999', 100, 70, 'NCC06', 'MN01', 'LSP02', 'KO', 1),
+('SP02Av', 'Nước lọc aquafina', '8934588063053', 'nuocloc.png', '4000', '7000', '999999', 100, 70, 'NCC06', 'MN01', 'LSP02', 'KO', 1),
+('SP03A', '7up 1,5L', '8934588023064', '7up1-5L.png', '3000', '5000', '999999', 100, 50, 'NCC03', 'MN01', 'LSP03', 'KO', 1),
+('SP03Ai', 'Thuốc lá Demi(mèo bạc)', '8934674015416', 'thuocdemi.png', '3000', '15000', '999999', 100, 20, 'NCC03', 'MN01', 'LSP03', '', 1),
+('SP03Aiaa', 'Bia tiger lon', '8934822101336', '9471798d16594cb09d617aee28d8297d.jpg', '3000', '15000', '999999', 100, 50, 'NCC03', 'MN01', 'LSP03', '', 1),
+('SP03Aiaav', 'Pepsi lon', '8934588013065', 'banner.jpg', '50000', '60000', '999999', 100, 50, 'NCC03', 'MN01', 'LSP03', '', 1),
+('SP03Aiaavff', 'Mirinda lon', '8934588132223', 'mirinda.png', '95000', '150000', '999999', 100, 50, 'NCC03', 'MN01', 'LSP03', '', 1);
 
 -- --------------------------------------------------------
 
@@ -411,13 +521,25 @@ INSERT INTO `sanpham` (`ID`, `Name`, `Barcode`, `hinhAnh`, `GiaNhap`, `GiaBan`, 
 --
 
 CREATE TABLE `thutienkhachhang` (
-  `ID` varchar(20) NOT NULL,
+  `ID` int(20) NOT NULL,
   `ThoiGian` datetime DEFAULT NULL,
   `IDNhanVien` varchar(20) DEFAULT NULL,
   `IDKhachHang` varchar(20) DEFAULT NULL,
   `SoTien` decimal(10,0) DEFAULT NULL,
   `GhiChu` varchar(250) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Đang đổ dữ liệu cho bảng `thutienkhachhang`
+--
+
+INSERT INTO `thutienkhachhang` (`ID`, `ThoiGian`, `IDNhanVien`, `IDKhachHang`, `SoTien`, `GhiChu`) VALUES
+(1, '2022-09-19 12:40:03', 'admin', 'KH01', NULL, ''),
+(2, '2022-09-19 12:41:09', 'admin', 'KH01', NULL, ''),
+(3, '2022-09-19 12:54:47', 'admin', 'KH01', '30000000', ''),
+(4, '2022-09-19 01:20:23', 'NV09', 'KH01', '10000000', 'Khải đã thu 10 triệu'),
+(5, '2022-09-19 01:21:29', 'NV09', 'KH01', '10000000', 'Khải đã thu tiền'),
+(6, '2022-09-20 09:39:19', 'NV09', 'KH01', '5000000', 'Khải thu ngày 20-09');
 
 -- --------------------------------------------------------
 
@@ -475,14 +597,6 @@ ALTER TABLE `chitiethoadon`
   ADD KEY `idsanpham` (`idsanpham`);
 
 --
--- Chỉ mục cho bảng `chitietkhachtrahang`
---
-ALTER TABLE `chitietkhachtrahang`
-  ADD PRIMARY KEY (`ID`),
-  ADD KEY `IDHoaDon` (`IDHoaDon`),
-  ADD KEY `IDSanPham` (`IDSanPham`);
-
---
 -- Chỉ mục cho bảng `chitietnhaphang`
 --
 ALTER TABLE `chitietnhaphang`
@@ -507,6 +621,14 @@ ALTER TABLE `chitiettrichkho`
   ADD KEY `IDTricKho` (`IDTricKho`);
 
 --
+-- Chỉ mục cho bảng `ctphieukhachtrahang`
+--
+ALTER TABLE `ctphieukhachtrahang`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `IDPhieuKTH` (`IDPhieuKTH`),
+  ADD KEY `IDSanPham` (`IDSanPham`);
+
+--
 -- Chỉ mục cho bảng `donvitinh`
 --
 ALTER TABLE `donvitinh`
@@ -525,14 +647,6 @@ ALTER TABLE `hoadon`
 --
 ALTER TABLE `khachhang`
   ADD PRIMARY KEY (`ID`);
-
---
--- Chỉ mục cho bảng `khachtrahang`
---
-ALTER TABLE `khachtrahang`
-  ADD PRIMARY KEY (`ID`),
-  ADD KEY `IDKhachHang` (`IDKhachHang`),
-  ADD KEY `IDNhanVien` (`IDNhanVien`);
 
 --
 -- Chỉ mục cho bảng `loaisanpham`
@@ -576,6 +690,22 @@ ALTER TABLE `phieuchi`
   ADD KEY `IDnhanvien` (`IDnhanvien`);
 
 --
+-- Chỉ mục cho bảng `phieukhachtrahang`
+--
+ALTER TABLE `phieukhachtrahang`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `IDKhachHang` (`IDKhachHang`),
+  ADD KEY `IDNhanVien` (`IDNhanVien`);
+
+--
+-- Chỉ mục cho bảng `phieutranoncc`
+--
+ALTER TABLE `phieutranoncc`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `IDNhanVien` (`IDNhanVien`),
+  ADD KEY `IDNcc` (`IDNcc`);
+
+--
 -- Chỉ mục cho bảng `sanpham`
 --
 ALTER TABLE `sanpham`
@@ -615,7 +745,25 @@ ALTER TABLE `trichkho`
 -- AUTO_INCREMENT cho bảng `chitiethoadon`
 --
 ALTER TABLE `chitiethoadon`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
+
+--
+-- AUTO_INCREMENT cho bảng `ctphieukhachtrahang`
+--
+ALTER TABLE `ctphieukhachtrahang`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT cho bảng `phieutranoncc`
+--
+ALTER TABLE `phieutranoncc`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT cho bảng `thutienkhachhang`
+--
+ALTER TABLE `thutienkhachhang`
+  MODIFY `ID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Các ràng buộc cho các bảng đã đổ
@@ -633,13 +781,6 @@ ALTER TABLE `account`
 ALTER TABLE `chitiethoadon`
   ADD CONSTRAINT `chitiethoadon_ibfk_1` FOREIGN KEY (`idhoadon`) REFERENCES `hoadon` (`ID`),
   ADD CONSTRAINT `chitiethoadon_ibfk_2` FOREIGN KEY (`idsanpham`) REFERENCES `sanpham` (`ID`);
-
---
--- Các ràng buộc cho bảng `chitietkhachtrahang`
---
-ALTER TABLE `chitietkhachtrahang`
-  ADD CONSTRAINT `chitietkhachtrahang_ibfk_1` FOREIGN KEY (`IDHoaDon`) REFERENCES `khachtrahang` (`ID`),
-  ADD CONSTRAINT `chitietkhachtrahang_ibfk_2` FOREIGN KEY (`IDSanPham`) REFERENCES `sanpham` (`ID`);
 
 --
 -- Các ràng buộc cho bảng `chitietnhaphang`
@@ -664,18 +805,18 @@ ALTER TABLE `chitiettrichkho`
   ADD CONSTRAINT `chitiettrichkho_ibfk_2` FOREIGN KEY (`IDTricKho`) REFERENCES `trichkho` (`ID`);
 
 --
+-- Các ràng buộc cho bảng `ctphieukhachtrahang`
+--
+ALTER TABLE `ctphieukhachtrahang`
+  ADD CONSTRAINT `ctphieukhachtrahang_ibfk_1` FOREIGN KEY (`IDPhieuKTH`) REFERENCES `phieukhachtrahang` (`ID`),
+  ADD CONSTRAINT `ctphieukhachtrahang_ibfk_2` FOREIGN KEY (`IDSanPham`) REFERENCES `sanpham` (`ID`);
+
+--
 -- Các ràng buộc cho bảng `hoadon`
 --
 ALTER TABLE `hoadon`
   ADD CONSTRAINT `hoadon_ibfk_1` FOREIGN KEY (`IDnhanvien`) REFERENCES `nhanvien` (`id`),
   ADD CONSTRAINT `hoadon_ibfk_2` FOREIGN KEY (`IDkhachHang`) REFERENCES `khachhang` (`ID`);
-
---
--- Các ràng buộc cho bảng `khachtrahang`
---
-ALTER TABLE `khachtrahang`
-  ADD CONSTRAINT `khachtrahang_ibfk_1` FOREIGN KEY (`IDKhachHang`) REFERENCES `khachhang` (`ID`),
-  ADD CONSTRAINT `khachtrahang_ibfk_2` FOREIGN KEY (`IDNhanVien`) REFERENCES `nhanvien` (`id`);
 
 --
 -- Các ràng buộc cho bảng `nhatkynhaphang`
@@ -696,6 +837,21 @@ ALTER TABLE `nhatkytrahangncc`
 --
 ALTER TABLE `phieuchi`
   ADD CONSTRAINT `phieuchi_ibfk_1` FOREIGN KEY (`IDnhanvien`) REFERENCES `nhanvien` (`id`);
+
+--
+-- Các ràng buộc cho bảng `phieukhachtrahang`
+--
+ALTER TABLE `phieukhachtrahang`
+  ADD CONSTRAINT `phieukhachtrahang_ibfk_1` FOREIGN KEY (`IDKhachHang`) REFERENCES `khachhang` (`ID`),
+  ADD CONSTRAINT `phieukhachtrahang_ibfk_2` FOREIGN KEY (`IDNhanVien`) REFERENCES `khachhang` (`ID`),
+  ADD CONSTRAINT `phieukhachtrahang_ibfk_3` FOREIGN KEY (`IDNhanVien`) REFERENCES `nhanvien` (`id`);
+
+--
+-- Các ràng buộc cho bảng `phieutranoncc`
+--
+ALTER TABLE `phieutranoncc`
+  ADD CONSTRAINT `phieutranoncc_ibfk_1` FOREIGN KEY (`IDNhanVien`) REFERENCES `nhanvien` (`id`),
+  ADD CONSTRAINT `phieutranoncc_ibfk_2` FOREIGN KEY (`IDNcc`) REFERENCES `nhacungcap` (`ID`);
 
 --
 -- Các ràng buộc cho bảng `sanpham`
