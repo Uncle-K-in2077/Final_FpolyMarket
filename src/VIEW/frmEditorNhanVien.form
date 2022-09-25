@@ -429,8 +429,8 @@
                 <Column editable="false" title="Ma&#x303;" type="java.lang.Object"/>
                 <Column editable="false" title="Kha&#x301;ch ha&#x300;ng" type="java.lang.Object"/>
                 <Column editable="false" title="Nh&#xe2;n vi&#xea;n" type="java.lang.Object"/>
-                <Column editable="false" title="Gia&#x309;m gia&#x301;" type="java.lang.Object"/>
                 <Column editable="false" title="T&#xf4;&#x309;ng ti&#xea;&#x300;n" type="java.lang.Object"/>
+                <Column editable="false" title="Gia&#x309;m gia&#x301;" type="java.lang.Object"/>
                 <Column editable="false" title="Hi&#x300;nh th&#x1b0;&#x301;c" type="java.lang.Object"/>
                 <Column editable="false" title="Th&#x1a1;&#x300;i gian" type="java.lang.Object"/>
                 <Column editable="false" title="Ghi chu&#x301;" type="java.lang.Object"/>

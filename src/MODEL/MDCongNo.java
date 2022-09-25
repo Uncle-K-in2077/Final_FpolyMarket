@@ -1,6 +1,5 @@
 package MODEL;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.sql.ResultSet;
 import javax.swing.JTable;
@@ -12,7 +11,8 @@ public class MDCongNo {
 
         String sql = "SELECT thutienkhachhang.*, khachhang.name as 'tenKhachHang',nhanvien.name as 'tenNhanVien' FROM thutienkhachhang"
                 + " join nhanvien on nhanvien.id =thutienkhachhang.IDNhanVien "
-                + " join khachhang on khachhang.id = thutienkhachhang.IDKhachHang ";
+                + " join khachhang on khachhang.id = thutienkhachhang.IDKhachHang "
+                + " order by thutienkhachhang.thoigian desc";
 
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         model.setRowCount(0);

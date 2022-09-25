@@ -52,6 +52,22 @@ public class helper {
         }
     }
 
+    public static boolean isPassword(String password) {
+        String regex = "^(?=.*[0-9])"
+                + "(?=.*[a-z])(?=.*[A-Z])"
+                + "(?=.*[@#$%^&+=])"
+                + "(?=\\S+$).{8,20}$";
+
+        Pattern p = Pattern.compile(regex);
+
+        if (password == null) {
+            return false;
+        }
+        Matcher m = p.matcher(password);
+
+        return m.matches();
+    }
+
     public static boolean isEmail(String email) {
         String regex = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
         return email.matches(regex);

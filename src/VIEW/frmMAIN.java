@@ -46,7 +46,7 @@ public class frmMAIN extends javax.swing.JFrame {
     public static Component thisFrame;
 
     public frmMAIN(Account acount) {
-        
+
         this.acc = acount;
         thisFrame = this;
         initComponents();
@@ -92,9 +92,6 @@ public class frmMAIN extends javax.swing.JFrame {
         setTableTextCenter();
         addKeyEsc();
     }
-
-    
- 
 
     public void loadTableThuNoKhachHang() {
         MDCongNo.dataTableThuNoKhachHang(tableThuNoKhachHang);
@@ -273,13 +270,11 @@ public class frmMAIN extends javax.swing.JFrame {
             model.addRow(new Object[]{
                 item.getUsername(),
                 item.getPassword(),
-                item.getPassword(),
+                item.getIdNhanVien(),
                 item.isTrangThai(),
                 item.isBanHang(),
                 item.isNhapHang(),
-                item.isTaiKhoan(),
                 item.isHangHoa(),
-                item.isNhanVien(),
                 item.isKhachHang(),
                 item.isNhaCungCap(),
                 item.isPhieuChi(),
@@ -1121,20 +1116,20 @@ public class frmMAIN extends javax.swing.JFrame {
         tableTaiKhoan.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tableTaiKhoan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Username", "Password", "Nhân viên", "Còn sử dụng ?", "Bán hàng", "Nhập hàng", "QL tài khoản", "QL hàng hóa", "QL nhân viên", "QL khách hàng", "QL nhà cung cấp", "QL phiếu chi", "Báo cáo"
+                "Username", "Password", "Nhân viên", "Còn sử dụng ?", "Bán hàng", "Nhập hàng", "QL hàng hóa", "QL khách hàng", "QL nhà cung cấp", "QL phiếu chi", "Báo cáo"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -1150,6 +1145,11 @@ public class frmMAIN extends javax.swing.JFrame {
         tableTaiKhoan.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 tableTaiKhoanFocusLost(evt);
+            }
+        });
+        tableTaiKhoan.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tableTaiKhoanMousePressed(evt);
             }
         });
         jScrollPane6.setViewportView(tableTaiKhoan);
@@ -2325,6 +2325,8 @@ public class frmMAIN extends javax.swing.JFrame {
             String idhoadon = tableDanhSachHoaDonBanHang.getValueAt(tableDanhSachHoaDonBanHang.getSelectedRow(), 0) + "";
             new frmXemHoaDon(this, true, acc, idhoadon).setVisible(true);
             loadTableSanPham();
+            loadTableDanhSachHoaDonBanHang();
+            loadTableKhachHang();
         }
     }//GEN-LAST:event_tableDanhSachHoaDonBanHangMousePressed
 
@@ -2608,7 +2610,7 @@ public class frmMAIN extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem30ActionPerformed
 
     private void btnThemNhaCungCap1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemNhaCungCap1ActionPerformed
-        new frmEditorAccount(this, true).setVisible(true);
+        new frmEditorAccount(this, true, "add").setVisible(true);
         loadTableAccount();
     }//GEN-LAST:event_btnThemNhaCungCap1ActionPerformed
 
@@ -2618,8 +2620,16 @@ public class frmMAIN extends javax.swing.JFrame {
     }//GEN-LAST:event_menuDanhSachHoaDonBanHangActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        
+
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void tableTaiKhoanMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableTaiKhoanMousePressed
+        if (tableTaiKhoan.getSelectedRows().length == 1 && evt.getClickCount() == 2) {
+            String username = tableTaiKhoan.getValueAt(tableTaiKhoan.getSelectedRow(), 0) + "";
+            new frmEditorAccount(this, true, username).setVisible(true);
+            loadTableAccount();
+        }
+    }//GEN-LAST:event_tableTaiKhoanMousePressed
 
     public void openTab(JPanel TypeOfPanel, String name) {
         JPanel tab = TypeOfPanel;

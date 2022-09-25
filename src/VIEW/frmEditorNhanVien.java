@@ -1,13 +1,18 @@
 package VIEW;
 
 import CLASS.nhanVien;
+import MODEL.MDHoaDon;
 import MODEL.MDNhanVien;
+import static VIEW.PanelThongKeTongHop.acc;
+import java.awt.Component;
+import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 public class frmEditorNhanVien extends javax.swing.JDialog {
 
@@ -25,6 +30,8 @@ public class frmEditorNhanVien extends javax.swing.JDialog {
         setThongTinNhanVien();
         btnLuu.setEnabled(false);
         setBtnLuu(option);
+        MDHoaDon.showHoaDonCuaNhanVien(idNhanVien, tableDanhSachHoaDonBanHang);
+        HELPER.helper.setTableTextCenterFullColumn(tableDanhSachHoaDonBanHang);
     }
 
     public frmEditorNhanVien(java.awt.Frame parent, boolean modal) {
@@ -378,7 +385,7 @@ public class frmEditorNhanVien extends javax.swing.JDialog {
                 {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Mã", "Khách hàng", "Nhân viên", "Giảm giá", "Tổng tiền", "Hình thức", "Thời gian", "Ghi chú"
+                "Mã", "Khách hàng", "Nhân viên", "Tổng tiền", "Giảm giá", "Hình thức", "Thời gian", "Ghi chú"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -454,8 +461,12 @@ public class frmEditorNhanVien extends javax.swing.JDialog {
     }//GEN-LAST:event_tableDanhSachHoaDonBanHangMouseClicked
 
     private void tableDanhSachHoaDonBanHangMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableDanhSachHoaDonBanHangMousePressed
+
         if (tableDanhSachHoaDonBanHang.getSelectedRows().length == 1 && evt.getClickCount() == 2) {
-            //double click
+            String idhoadon = tableDanhSachHoaDonBanHang.getValueAt(tableDanhSachHoaDonBanHang.getSelectedRow(), 0) + "";
+            this.setVisible(false);
+            new frmXemHoaDon(null, true, acc, idhoadon).setVisible(true);
+            MDHoaDon.showHoaDonCuaNhanVien(idNhanVien, tableDanhSachHoaDonBanHang);
         }
     }//GEN-LAST:event_tableDanhSachHoaDonBanHangMousePressed
 
@@ -482,6 +493,11 @@ public class frmEditorNhanVien extends javax.swing.JDialog {
     }//GEN-LAST:event_btnLuuActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
+        if (txtIDNhanVien.getText().trim().equals("admin")) {
+            JOptionPane.showMessageDialog(this, "KHÔNG ĐƯỢC XÓA TÀI KHOẢN ĐIỀU HÀNH !!");
+            return;
+        }
+
         if (JOptionPane.showConfirmDialog(null, "Xóa nhân viên ?") == 0) {
             MDNhanVien.remove(txtIDNhanVien.getText());
         }

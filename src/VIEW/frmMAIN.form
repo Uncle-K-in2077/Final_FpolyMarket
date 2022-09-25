@@ -976,16 +976,14 @@
                   <Font name="Segoe UI" size="14" style="0"/>
                 </Property>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="13" rowCount="4">
+                  <Table columnCount="11" rowCount="4">
                     <Column editable="false" title="Username" type="java.lang.Object"/>
                     <Column editable="false" title="Password" type="java.lang.Object"/>
                     <Column editable="false" title="Nh&#xe2;n vi&#xea;n" type="java.lang.Object"/>
                     <Column editable="false" title="Co&#x300;n s&#x1b0;&#x309; du&#x323;ng ?" type="java.lang.Boolean"/>
                     <Column editable="false" title="Ba&#x301;n ha&#x300;ng" type="java.lang.Boolean"/>
                     <Column editable="false" title="Nh&#xe2;&#x323;p ha&#x300;ng" type="java.lang.Boolean"/>
-                    <Column editable="false" title="QL ta&#x300;i khoa&#x309;n" type="java.lang.Boolean"/>
                     <Column editable="false" title="QL ha&#x300;ng ho&#x301;a" type="java.lang.Boolean"/>
-                    <Column editable="false" title="QL nh&#xe2;n vi&#xea;n" type="java.lang.Boolean"/>
                     <Column editable="false" title="QL kha&#x301;ch ha&#x300;ng" type="java.lang.Boolean"/>
                     <Column editable="false" title="QL nha&#x300; cung c&#xe2;&#x301;p" type="java.lang.Boolean"/>
                     <Column editable="false" title="QL phi&#xea;&#x301;u chi" type="java.lang.Boolean"/>
@@ -1049,16 +1047,6 @@
                       <Editor/>
                       <Renderer/>
                     </Column>
-                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                      <Title/>
-                      <Editor/>
-                      <Renderer/>
-                    </Column>
-                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                      <Title/>
-                      <Editor/>
-                      <Renderer/>
-                    </Column>
                   </TableColumnModel>
                 </Property>
                 <Property name="rowHeight" type="int" value="35"/>
@@ -1069,6 +1057,7 @@
               </Properties>
               <Events>
                 <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="tableTaiKhoanFocusLost"/>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tableTaiKhoanMousePressed"/>
               </Events>
             </Component>
           </SubComponents>
