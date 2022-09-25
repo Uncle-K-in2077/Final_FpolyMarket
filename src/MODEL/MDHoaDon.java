@@ -18,6 +18,10 @@ public class MDHoaDon {
         HELPER.SQLhelper.executeUpdate(sql, id);
     }
     
+    public static void updateHoaDon(){
+        
+    }
+    
     public static String craeteID() {
         String id = "HD";
         String date = HELPER.helper.LayNgayString(new Date(), "ddMM");

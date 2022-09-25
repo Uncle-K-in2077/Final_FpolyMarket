@@ -5,12 +5,14 @@ import CLASS.config;
 import HELPER.helper;
 import MODEL.MDAccount;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
 import javax.swing.InputMap;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
+import javax.swing.Timer;
 
 public class frmDangNhap extends javax.swing.JFrame {
 
@@ -204,7 +206,31 @@ public class frmDangNhap extends javax.swing.JFrame {
                 helper.setConfig(newConfig);
 
                 this.setVisible(false);
-                new frmMAIN(account).setVisible(true);
+
+                frmLoadingData frmLoading = new frmLoadingData(this, false);
+                frmLoading.setVisible(true);
+                Timer loadingPage = new Timer(20, new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        int values = frmLoading.progBar.getValue();
+                        if (values < 100) {
+                            frmLoading.progBar.setValue(values + 2);
+                            if (frmLoading.progBar.getValue() == 98) {
+                                new frmMAIN(account).setVisible(true);
+                            }
+                        } else {
+                            frmLoading.setVisible(false);
+                            return;
+                        }
+                    }
+                });
+
+                if (frmLoading.progBar.getValue() < frmLoading.progBar.getMaximum()) {
+                    loadingPage.start();
+                } else {
+                    loadingPage.stop();
+                }
+
             } else {
                 config newConfig = new config("", "", config.getTheme());
                 helper.setConfig(newConfig);
@@ -216,7 +242,28 @@ public class frmDangNhap extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_btnDangNhapActionPerformed
+    public void loading() {
+        frmLoadingData frmLoading = new frmLoadingData(this, false);
+        frmLoading.setVisible(true);
+        Timer loadingPage = new Timer(20, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int values = frmLoading.progBar.getValue();
+                if (values < 100) {
+                    frmLoading.progBar.setValue(values + 2);
+                } else {
+                    frmLoading.setVisible(false);
+                    return;
+                }
+            }
+        });
 
+        if (frmLoading.progBar.getValue() < frmLoading.progBar.getMaximum()) {
+            loadingPage.start();
+        } else {
+            loadingPage.stop();
+        }
+    }
     private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
         if (JOptionPane.showConfirmDialog(this, "Thoát phần mềm ?") == 0) {
             System.exit(0);

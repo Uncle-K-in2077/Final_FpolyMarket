@@ -18,9 +18,12 @@ import MODEL.MDNhaCungCap;
 import MODEL.MDNhanVien;
 import MODEL.MDSanPham;
 import MODEL.MDThuChi;
+import java.awt.Component;
 import java.awt.Font;
+import java.awt.Frame;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.function.IntConsumer;
@@ -33,19 +36,22 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
+import javax.swing.Timer;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 public class frmMAIN extends javax.swing.JFrame {
 
     public static Account acc;
+    public static Component thisFrame;
 
     public frmMAIN(Account acount) {
+        
         this.acc = acount;
+        thisFrame = this;
         initComponents();
         // set Title cho phần mềm
         this.setTitle("FPOLY Market");
-
         // set logo Favicon
         ImageIcon img = new ImageIcon("src/ICON/favicon.jpg");
         this.setIconImage(img.getImage());
@@ -86,6 +92,9 @@ public class frmMAIN extends javax.swing.JFrame {
         setTableTextCenter();
         addKeyEsc();
     }
+
+    
+ 
 
     public void loadTableThuNoKhachHang() {
         MDCongNo.dataTableThuNoKhachHang(tableThuNoKhachHang);
@@ -1965,6 +1974,11 @@ public class frmMAIN extends javax.swing.JFrame {
         jButton6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton6.setPreferredSize(new java.awt.Dimension(120, 120));
         jButton6.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
         jToolBar1.add(jButton6);
         jToolBar1.add(jSeparator6);
 
@@ -2603,6 +2617,10 @@ public class frmMAIN extends javax.swing.JFrame {
         openTab(panelDanhSachHoaDonBanHang, "Danh sách hóa đơn");
     }//GEN-LAST:event_menuDanhSachHoaDonBanHangActionPerformed
 
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        
+    }//GEN-LAST:event_jButton6ActionPerformed
+
     public void openTab(JPanel TypeOfPanel, String name) {
         JPanel tab = TypeOfPanel;
         tab.setName(name);
@@ -2618,9 +2636,7 @@ public class frmMAIN extends javax.swing.JFrame {
     }
 
     public static void main(String args[]) {
-//        5,8,
-//sáng :10
-        helper.setupTheme(8);
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new frmMAIN(acc).setVisible(true);

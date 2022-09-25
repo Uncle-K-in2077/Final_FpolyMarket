@@ -460,6 +460,7 @@ public class panelTaoHoaDonBanHang extends javax.swing.JPanel {
         });
         tableGioHang.setRowHeight(30);
         tableGioHang.setRowMargin(3);
+        tableGioHang.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tableGioHang.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 tableGioHangFocusLost(evt);
