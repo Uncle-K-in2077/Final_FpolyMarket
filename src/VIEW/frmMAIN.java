@@ -11,15 +11,19 @@ import HELPER.helper;
 import MODEL.MDAccount;
 import MODEL.MDCongNo;
 import MODEL.MDDonViTinh;
+import MODEL.MDHoaDon;
 import MODEL.MDKhachHang;
 import MODEL.MDLoaiSanPham;
 import MODEL.MDNhaCungCap;
 import MODEL.MDNhanVien;
 import MODEL.MDSanPham;
 import MODEL.MDThuChi;
+import java.awt.Component;
 import java.awt.Font;
+import java.awt.Frame;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.function.IntConsumer;
@@ -32,19 +36,22 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
+import javax.swing.Timer;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 public class frmMAIN extends javax.swing.JFrame {
 
     public static Account acc;
+    public static Component thisFrame;
 
     public frmMAIN(Account acount) {
+
         this.acc = acount;
+        thisFrame = this;
         initComponents();
         // set Title cho phần mềm
         this.setTitle("FPOLY Market");
-
         // set logo Favicon
         ImageIcon img = new ImageIcon("src/ICON/favicon.jpg");
         this.setIconImage(img.getImage());
@@ -206,6 +213,10 @@ public class frmMAIN extends javax.swing.JFrame {
         tableNhaCungCap.setModel(model);
     }
 
+    public void loadTableDanhSachHoaDonBanHang() {
+        MDHoaDon.getDanhSachHoaDon(tableDanhSachHoaDonBanHang);
+    }
+
     public void loadTableKhachHang() {
         ArrayList<khachHang> data = MDKhachHang.getDataToTable();
         DefaultTableModel model = (DefaultTableModel) tableKhachHang.getModel();
@@ -259,13 +270,11 @@ public class frmMAIN extends javax.swing.JFrame {
             model.addRow(new Object[]{
                 item.getUsername(),
                 item.getPassword(),
-                item.getPassword(),
+                item.getIdNhanVien(),
                 item.isTrangThai(),
                 item.isBanHang(),
                 item.isNhapHang(),
-                item.isTaiKhoan(),
                 item.isHangHoa(),
-                item.isNhanVien(),
                 item.isKhachHang(),
                 item.isNhaCungCap(),
                 item.isPhieuChi(),
@@ -277,6 +286,7 @@ public class frmMAIN extends javax.swing.JFrame {
 
     public void setTableTextCenter() {
         // set table text center
+        helper.setTableTextCenterFullColumn(tableChiTietHoaDonBanHang);
         helper.setTableTextCenterFullColumn(tableTraNoNhaCungCap);
         HELPER.helper.setTableTextCenter(tableNhaCungCap);
         HELPER.helper.setTableTextCenter(tableNhanVien);
@@ -292,6 +302,7 @@ public class frmMAIN extends javax.swing.JFrame {
         for (int i = 0; i < 3; i++) {
             tableTaiKhoan.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
         }
+        helper.setTableTextCenterFullColumn(tableDanhSachHoaDonBanHang);
     }
 
     public void setModuleForAccount() {
@@ -643,27 +654,28 @@ public class frmMAIN extends javax.swing.JFrame {
 
         jSeparator11.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
+        tableDanhSachHoaDonBanHang.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         tableDanhSachHoaDonBanHang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Mã", "Khách hàng", "Nhân viên", "Giảm giá", "Tổng tiền", "Hình thức", "Thời gian", "Ghi chú"
+                "Mã", "Khách hàng", "Nhân viên", "Tổng tiền", "Giảm giá", "Hình thức", "Thời gian"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        tableDanhSachHoaDonBanHang.setRowHeight(35);
-        tableDanhSachHoaDonBanHang.setRowMargin(3);
+        tableDanhSachHoaDonBanHang.setRowHeight(40);
+        tableDanhSachHoaDonBanHang.setRowMargin(4);
         tableDanhSachHoaDonBanHang.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 tableDanhSachHoaDonBanHangFocusLost(evt);
@@ -679,6 +691,7 @@ public class frmMAIN extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tableDanhSachHoaDonBanHang);
 
+        tableChiTietHoaDonBanHang.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         tableChiTietHoaDonBanHang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -698,14 +711,19 @@ public class frmMAIN extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tableChiTietHoaDonBanHang.setRowHeight(35);
-        tableChiTietHoaDonBanHang.setRowMargin(3);
+        tableChiTietHoaDonBanHang.setRowHeight(40);
+        tableChiTietHoaDonBanHang.setRowMargin(4);
         tableChiTietHoaDonBanHang.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 tableChiTietHoaDonBanHangFocusLost(evt);
             }
         });
         jScrollPane2.setViewportView(tableChiTietHoaDonBanHang);
+        if (tableChiTietHoaDonBanHang.getColumnModel().getColumnCount() > 0) {
+            tableChiTietHoaDonBanHang.getColumnModel().getColumn(0).setMinWidth(140);
+            tableChiTietHoaDonBanHang.getColumnModel().getColumn(1).setMaxWidth(65);
+            tableChiTietHoaDonBanHang.getColumnModel().getColumn(2).setMaxWidth(90);
+        }
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel5.setText("CHI TIẾT HÓA ĐƠN");
@@ -725,9 +743,9 @@ public class frmMAIN extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelDanhSachHoaDonBanHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel5)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 512, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(panelDanhSachHoaDonBanHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 512, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
                 .addContainerGap())
         );
         panelDanhSachHoaDonBanHangLayout.setVerticalGroup(
@@ -742,14 +760,18 @@ public class frmMAIN extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 608, Short.MAX_VALUE))
                     .addGroup(panelDanhSachHoaDonBanHangLayout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(37, 37, 37)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 608, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(panelDanhSachHoaDonBanHangLayout.createSequentialGroup()
                 .addGap(120, 120, 120)
-                .addComponent(jSeparator11)
-                .addGap(6, 6, 6))
+                .addGroup(panelDanhSachHoaDonBanHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelDanhSachHoaDonBanHangLayout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(panelDanhSachHoaDonBanHangLayout.createSequentialGroup()
+                        .addComponent(jSeparator11)
+                        .addGap(6, 6, 6))))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -1094,20 +1116,20 @@ public class frmMAIN extends javax.swing.JFrame {
         tableTaiKhoan.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tableTaiKhoan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Username", "Password", "Nhân viên", "Còn sử dụng ?", "Bán hàng", "Nhập hàng", "QL tài khoản", "QL hàng hóa", "QL nhân viên", "QL khách hàng", "QL nhà cung cấp", "QL phiếu chi", "Báo cáo"
+                "Username", "Password", "Nhân viên", "Còn sử dụng ?", "Bán hàng", "Nhập hàng", "QL hàng hóa", "QL khách hàng", "QL nhà cung cấp", "QL phiếu chi", "Báo cáo"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -1123,6 +1145,11 @@ public class frmMAIN extends javax.swing.JFrame {
         tableTaiKhoan.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 tableTaiKhoanFocusLost(evt);
+            }
+        });
+        tableTaiKhoan.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tableTaiKhoanMousePressed(evt);
             }
         });
         jScrollPane6.setViewportView(tableTaiKhoan);
@@ -1947,6 +1974,11 @@ public class frmMAIN extends javax.swing.JFrame {
         jButton6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton6.setPreferredSize(new java.awt.Dimension(120, 120));
         jButton6.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
         jToolBar1.add(jButton6);
         jToolBar1.add(jSeparator6);
 
@@ -2152,6 +2184,11 @@ public class frmMAIN extends javax.swing.JFrame {
 
         menuDanhSachHoaDonBanHang.setText("Danh sách hóa đơn bán hàng");
         menuDanhSachHoaDonBanHang.setMargin(new java.awt.Insets(6, 6, 6, 6));
+        menuDanhSachHoaDonBanHang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuDanhSachHoaDonBanHangActionPerformed(evt);
+            }
+        });
         jMenu5.add(menuDanhSachHoaDonBanHang);
         jMenu5.add(jSeparator9);
 
@@ -2246,6 +2283,7 @@ public class frmMAIN extends javax.swing.JFrame {
         }
         panel.txtBarcode.requestFocus();
         panel.txtBarcode.requestFocus();
+
     }
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         if (JOptionPane.showConfirmDialog(this, "Đăng xuất ?") == 0) {
@@ -2261,6 +2299,7 @@ public class frmMAIN extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void btnDanhSachHoaDonBanHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDanhSachHoaDonBanHangActionPerformed
+        loadTableDanhSachHoaDonBanHang();
         openTab(panelDanhSachHoaDonBanHang, "Danh sách hóa đơn");
     }//GEN-LAST:event_btnDanhSachHoaDonBanHangActionPerformed
 
@@ -2277,12 +2316,17 @@ public class frmMAIN extends javax.swing.JFrame {
     }//GEN-LAST:event_txtTimKiemHoaDonBanHangActionPerformed
 
     private void tableDanhSachHoaDonBanHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableDanhSachHoaDonBanHangMouseClicked
-
+        String idHoaDon = tableDanhSachHoaDonBanHang.getValueAt(tableDanhSachHoaDonBanHang.getSelectedRow(), 0) + "";
+        MDHoaDon.showChiTietHoaDon(idHoaDon, tableChiTietHoaDonBanHang);
     }//GEN-LAST:event_tableDanhSachHoaDonBanHangMouseClicked
 
     private void tableDanhSachHoaDonBanHangMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableDanhSachHoaDonBanHangMousePressed
         if (tableDanhSachHoaDonBanHang.getSelectedRows().length == 1 && evt.getClickCount() == 2) {
-            new frmXemHoaDon(this, true, acc).setVisible(true);
+            String idhoadon = tableDanhSachHoaDonBanHang.getValueAt(tableDanhSachHoaDonBanHang.getSelectedRow(), 0) + "";
+            new frmXemHoaDon(this, true, acc, idhoadon).setVisible(true);
+            loadTableSanPham();
+            loadTableDanhSachHoaDonBanHang();
+            loadTableKhachHang();
         }
     }//GEN-LAST:event_tableDanhSachHoaDonBanHangMousePressed
 
@@ -2292,22 +2336,27 @@ public class frmMAIN extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void menuQuanLyNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuQuanLyNhanVienActionPerformed
+        loadTableNhanVien();
         openTab(panelQuanLyNhanVien, "Danh sách nhân viên");
     }//GEN-LAST:event_menuQuanLyNhanVienActionPerformed
 
     private void menuQuanLyKhachHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuQuanLyKhachHangActionPerformed
+        loadTableKhachHang();
         openTab(panelQuanLyKhachHang, "Danh sách khách hàng");
     }//GEN-LAST:event_menuQuanLyKhachHangActionPerformed
 
     private void menuQuanLyNhaCungCapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuQuanLyNhaCungCapActionPerformed
+        loadTableNhaCungCap();
         openTab(panelQuanLyNhaCungCap, "Danh sách nhà cung cấp");
     }//GEN-LAST:event_menuQuanLyNhaCungCapActionPerformed
 
     private void menuQuanLyTaiKhoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuQuanLyTaiKhoanActionPerformed
+        loadTableAccount();
         openTab(panelQuanLyTaiKhoan, "Quản lý tài khoản");
     }//GEN-LAST:event_menuQuanLyTaiKhoanActionPerformed
 
     private void menuQuanLyHangHoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuQuanLyHangHoaActionPerformed
+        loadTableSanPham();
         openTab(panelQuanLyHangHoa, "Kho hàng hóa");
     }//GEN-LAST:event_menuQuanLyHangHoaActionPerformed
 
@@ -2561,9 +2610,26 @@ public class frmMAIN extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem30ActionPerformed
 
     private void btnThemNhaCungCap1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemNhaCungCap1ActionPerformed
-        new frmEditorAccount(this, true).setVisible(true);
+        new frmEditorAccount(this, true, "add").setVisible(true);
         loadTableAccount();
     }//GEN-LAST:event_btnThemNhaCungCap1ActionPerformed
+
+    private void menuDanhSachHoaDonBanHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuDanhSachHoaDonBanHangActionPerformed
+        loadTableDanhSachHoaDonBanHang();
+        openTab(panelDanhSachHoaDonBanHang, "Danh sách hóa đơn");
+    }//GEN-LAST:event_menuDanhSachHoaDonBanHangActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void tableTaiKhoanMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableTaiKhoanMousePressed
+        if (tableTaiKhoan.getSelectedRows().length == 1 && evt.getClickCount() == 2) {
+            String username = tableTaiKhoan.getValueAt(tableTaiKhoan.getSelectedRow(), 0) + "";
+            new frmEditorAccount(this, true, username).setVisible(true);
+            loadTableAccount();
+        }
+    }//GEN-LAST:event_tableTaiKhoanMousePressed
 
     public void openTab(JPanel TypeOfPanel, String name) {
         JPanel tab = TypeOfPanel;
@@ -2580,9 +2646,7 @@ public class frmMAIN extends javax.swing.JFrame {
     }
 
     public static void main(String args[]) {
-//        5,8,
-//sáng :10
-        helper.setupTheme(8);
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new frmMAIN(acc).setVisible(true);

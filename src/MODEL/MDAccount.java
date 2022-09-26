@@ -7,25 +7,30 @@ import java.util.ArrayList;
 public class MDAccount {
 
     public static Account getAccount(String username) {
-        String sql = "select * from account where username = ?;";
+        String sql = "select *,nhanvien.name as 'tennhanvien' from account"
+                + " join nhanvien on nhanvien.id = account.idnhanvien "
+                + " where username = ?;";
 
         ResultSet rs = HELPER.SQLhelper.executeQuery(sql, username);
         Account acc = null; // ta?o ra
         try {
             while (rs.next()) {
-                acc.setUsername(rs.getString("UserName"));
-                acc.setPassword(rs.getString("Password"));
-                acc.setIdNhanVien(rs.getString("IDNhanVien"));
-                acc.setTrangThai(rs.getInt("trangThai") == 1 ? true : false);
-                acc.setBanHang(rs.getInt("banhang") == 1 ? true : false);
-                acc.setNhapHang(rs.getInt("nhaphang") == 1 ? true : false);
-                acc.setTaiKhoan(rs.getInt("taikhoan") == 1 ? true : false);
-                acc.setHangHoa(rs.getInt("hanghoa") == 1 ? true : false);
-                acc.setNhanVien(rs.getInt("nhanvien") == 1 ? true : false);
-                acc.setKhachHang(rs.getInt("khachhang") == 1 ? true : false);
-                acc.setBaoCao(rs.getInt("baocao") == 1 ? true : false);
-                acc.setNhaCungCap(rs.getInt("nhacungcap") == 1 ? true : false);
-                acc.setPhieuChi(rs.getInt("phieuchi") == 1 ? true : false);
+
+                acc = new Account(
+                        rs.getString("UserName"),
+                        rs.getString("Password"),
+                        rs.getString("tenNhanVien"),
+                        rs.getInt("trangThai") == 1 ? true : false,
+                        rs.getInt("banhang") == 1 ? true : false,
+                        rs.getInt("nhaphang") == 1 ? true : false,
+                        rs.getInt("taikhoan") == 1 ? true : false,
+                        rs.getInt("hanghoa") == 1 ? true : false,
+                        rs.getInt("nhanvien") == 1 ? true : false,
+                        rs.getInt("khachhang") == 1 ? true : false,
+                        rs.getInt("nhacungcap") == 1 ? true : false,
+                        rs.getInt("baocao") == 1 ? true : false,
+                        rs.getInt("phieuchi") == 1 ? true : false
+                );
             }
         } catch (Exception e) {
         }
@@ -36,7 +41,8 @@ public class MDAccount {
     public static ArrayList<Account> getDataToTable() {
 
         String sql = "select username,account.password,nhanvien.name as 'tennhanvien',account.TrangThai,banhang,nhaphang,taikhoan,hanghoa,nhanvien,khachhang,account.nhacungcap,baocao,phieuchi from account\n"
-                + "join nhanvien on nhanvien.id=account.IDNhanVien";
+                + "join nhanvien on nhanvien.id=account.IDNhanVien"
+                + " where username != 'admin' ";
         ArrayList<Account> data = new ArrayList<>();
         ResultSet rs = HELPER.SQLhelper.executeQuery(sql);
         try {

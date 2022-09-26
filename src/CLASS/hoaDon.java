@@ -7,9 +7,18 @@ package CLASS;
 public class hoaDon {
 
     String id, idNhanVien, idKhachHang, thoiGian, ghiChu;
-    long giamGia, tongTien;
+    long giamGia, tongTien, soTienNhanDuoc;
     int hinhThucThanhToan;
+    int loaiGia;
     boolean trangThai;
+
+    public long getSoTienNhanDuoc() {
+        return soTienNhanDuoc;
+    }
+
+    public void setSoTienNhanDuoc(long soTienNhanDuoc) {
+        this.soTienNhanDuoc = soTienNhanDuoc;
+    }
 
     public String getId() {
         return id;
@@ -39,7 +48,7 @@ public class hoaDon {
         return thoiGian;
     }
 
-    public void setIdThoiGian(String thoiGian) {
+    public void setThoiGian(String thoiGian) {
         this.thoiGian = thoiGian;
     }
 
@@ -89,11 +98,15 @@ public class hoaDon {
             String idKhachHang,
             String thoiGian,
             int hinhThucThanhToan,
+            long soTienNhanDuoc,
             String ghiChu,
             long giamGia,
             long tongTien,
+            int loaiGia,
             boolean trangThai) {
+        this.loaiGia = loaiGia;
         this.id = id;
+        this.soTienNhanDuoc = soTienNhanDuoc;
         this.idNhanVien = idNhanVien;
         this.idKhachHang = idKhachHang;
         this.thoiGian = thoiGian;
@@ -102,6 +115,14 @@ public class hoaDon {
         this.giamGia = giamGia;
         this.tongTien = tongTien;
         this.trangThai = trangThai;
+    }
+
+    public int getLoaiGia() {
+        return loaiGia;
+    }
+
+    public void setLoaiGia(int loaiGia) {
+        this.loaiGia = loaiGia;
     }
 
     public hoaDon() {

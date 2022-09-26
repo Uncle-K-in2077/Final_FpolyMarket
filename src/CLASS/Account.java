@@ -10,6 +10,7 @@ package CLASS;
  * @author Admin
  */
 public class Account {
+
     String IdNhanVien;
     String username;
     String password;
@@ -27,7 +28,19 @@ public class Account {
     public Account() {
     }
 
-    public Account(String IDNhanVien, String username, String password, boolean trangThai, boolean banHang, boolean nhapHang, boolean taiKhoan, boolean hangHoa, boolean nhanVien, boolean khachHang, boolean nhaCungCap, boolean baoCao, boolean phieuChi) {
+    public Account(String IDNhanVien,
+            String username,
+            String password,
+            boolean trangThai,
+            boolean banHang,
+            boolean nhapHang,
+            boolean taiKhoan,
+            boolean hangHoa,
+            boolean nhanVien,
+            boolean khachHang,
+            boolean nhaCungCap,
+            boolean baoCao,
+            boolean phieuChi) {
         this.IdNhanVien = IDNhanVien;
         this.username = username;
         this.password = password;
@@ -46,11 +59,11 @@ public class Account {
     public String getIdNhanVien() {
         return IdNhanVien;
     }
-    
-     public void setIdNhanVien(String IDNhanVien) {
+
+    public void setIdNhanVien(String IDNhanVien) {
         this.IdNhanVien = IDNhanVien;
     }
-    
+
     public String getUsername() {
         return username;
     }
