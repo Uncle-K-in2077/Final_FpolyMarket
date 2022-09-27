@@ -213,8 +213,7 @@ public class PanelThongKeTongHop extends javax.swing.JPanel {
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)))
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
@@ -396,7 +395,7 @@ public class PanelThongKeTongHop extends javax.swing.JPanel {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "Sản phẩm", "giá", "Số lượng", "Thời gian", "Doanh thu", "Lợi nhuận"
+                "Sản phẩm", "Giá", "Số lượng", "Thời gian", "Doanh thu", "Lợi nhuận"
             }
         ) {
             boolean[] canEdit = new boolean [] {
