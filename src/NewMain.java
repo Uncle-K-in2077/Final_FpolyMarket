@@ -1,4 +1,5 @@
 
+import CLASS.config;
 import java.util.regex.*;
 
 class GFG {
@@ -34,10 +35,7 @@ class GFG {
 
     // Driver Code.
     public static void main(String args[]) {
-        System.out.println(HELPER.helper.isFullname("Nguyễn Viết Hồng Anh"));
-        System.out.println(HELPER.helper.isFullname("Nguyễn 2 viết Hồng Anh"));
-        System.out.println(HELPER.helper.isFullname("Nguyễn Viết Hồng Anh "));
-        System.out.println(HELPER.helper.isEmail("heiasfuo"));
-        System.out.println(HELPER.helper.isEmail("hichau25@gmail.com"));
+       config config = new  config("admin", "123", 8);
+       HELPER.helper.setConfig(config);
     }
 }

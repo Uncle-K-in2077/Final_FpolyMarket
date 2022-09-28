@@ -39,7 +39,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 public class panelTaoHoaDonBanHang extends javax.swing.JPanel {
-    
+
     private DetailedComboBox comboboxKhachHang;
     public static Account acc;
     private ArrayList<chiTietHoaDon> dataChiTietHoaDon = new ArrayList<>();
@@ -50,7 +50,7 @@ public class panelTaoHoaDonBanHang extends javax.swing.JPanel {
 //    private ArrayList<khachHang> dataKhachHang = MDKhachHang.getDataToComboBox();
     private String idKhachHang = "KH01";
     private long soTienGoc;
-    
+
     public panelTaoHoaDonBanHang(Account account) {
         initComponents();
         this.acc = account;
@@ -59,7 +59,7 @@ public class panelTaoHoaDonBanHang extends javax.swing.JPanel {
         listLoaiSanPham = MDLoaiSanPham.getNames();
         // load combobox thông tin khách hàng
         loadComboboxKhachHang();
-        
+
         UIManager.put("Table.consistentHomeEndKeyBehavior", true);
         // load comboBox loại sản phẩm
         loadComboboxLoaiSanPham();
@@ -74,13 +74,13 @@ public class panelTaoHoaDonBanHang extends javax.swing.JPanel {
         lbtienkhachdua.setVisible(false);
         txtTienKhachDua.setVisible(false);
     }
-    
+
     public void themNhanhSanPham() {
         frmThemNhanhSanPham frm = new frmThemNhanhSanPham((Frame) this.getParent().getParent().getParent().getParent().getParent().getParent(), true);
         frm.setVisible(true);
-        
+
     }
-    
+
     public void loadComboboxLoaiSanPham() {
         cbLoaiSanPham.removeAllItems();
         cbLoaiSanPham.addItem("Tất cả");
@@ -89,14 +89,14 @@ public class panelTaoHoaDonBanHang extends javax.swing.JPanel {
         }
         cbLoaiSanPham.setSelectedIndex(0);
     }
-    
+
     public void setKeyPress() {
         // nút enter
         InputMap inputMap = btnEnter.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
         inputMap.put(KeyStroke.getKeyStroke("ENTER"), "KEY_ENTER");
         btnEnter.getActionMap().put("KEY_ENTER", new AbstractAction() {
             public void actionPerformed(ActionEvent evt) {
-                
+
                 if (txtBarcode.isFocusable()) {
                     btnEnter.doClick();
                 }
@@ -108,9 +108,9 @@ public class panelTaoHoaDonBanHang extends javax.swing.JPanel {
         f9.put(KeyStroke.getKeyStroke("F9"), "VK_F9");
         btnThanhToan.getActionMap().put("VK_F9", new AbstractAction() {
             public void actionPerformed(ActionEvent evt) {
-                
+
                 btnThanhToan.doClick();
-                
+
             }
         });
 
@@ -119,25 +119,25 @@ public class panelTaoHoaDonBanHang extends javax.swing.JPanel {
         f10.put(KeyStroke.getKeyStroke("F10"), "VK_F10");
         jButton5.getActionMap().put("VK_F10", new AbstractAction() {
             public void actionPerformed(ActionEvent evt) {
-                
+
                 jButton5.doClick();
-                
+
             }
         });
     }
-    
+
     public void loadTableSanPhamKeyReleased(String keyword) {
         ArrayList<sanPham> dataSanPhamTable = MDSanPham.getDataToTableBanHang();
         cbLoaiSanPham.setSelectedIndex(0);
         DefaultTableModel model = (DefaultTableModel) tableSanPham.getModel();
         model.setRowCount(0);
-        
+
         for (sanPham item : dataSanPhamTable) {
             if (item.getIdSanPham().toLowerCase().contains(keyword.toLowerCase())
                     || item.getName().toLowerCase().contains(keyword.toLowerCase())
                     || helper.removeAccent(item.getIdSanPham().toLowerCase()).contains(keyword.toLowerCase())
                     || helper.removeAccent(item.getName().toLowerCase()).contains(keyword.toLowerCase())) {
-                
+
                 ImageIcon imageIcon = new ImageIcon(new ImageIcon(path + item.getHinhAnh()).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
                 model.addRow(new Object[]{
                     imageIcon,
@@ -152,7 +152,7 @@ public class panelTaoHoaDonBanHang extends javax.swing.JPanel {
         }
         tableSanPham.setModel(model);
     }
-    
+
     public void loadTableSanPham() {
         ArrayList<sanPham> dataSanPhamTable = MDSanPham.getDataToTableBanHang();
         DefaultTableModel model = (DefaultTableModel) tableSanPham.getModel();
@@ -171,7 +171,7 @@ public class panelTaoHoaDonBanHang extends javax.swing.JPanel {
         }
         tableSanPham.setModel(model);
     }
-    
+
     public void setModelTableSanPham() {
         DefaultTableCellRenderer centerRendere = new DefaultTableCellRenderer();
         centerRendere.setHorizontalAlignment(JLabel.CENTER);
@@ -180,7 +180,7 @@ public class panelTaoHoaDonBanHang extends javax.swing.JPanel {
         }
         tableGioHang.setFont(new Font("Arial", Font.CENTER_BASELINE, 13));
         tableGioHang.setRowHeight(40);
-        
+
         String[] column = {"Hình ảnh", "Mã", "Sản phẩm", "Mã vạch", "ĐVT", "Tồn kho", "Giá"};
         Object[][] rows = {};
         DefaultTableModel model = new DefaultTableModel(rows, column) {
@@ -189,12 +189,12 @@ public class panelTaoHoaDonBanHang extends javax.swing.JPanel {
                 switch (column) {
                     case 0:
                         return ImageIcon.class;
-                    
+
                     default:
                         return Object.class;
                 }
             }
-            
+
             public boolean isCellEditable(int rowIndex,
                     int columnIndex) {
                 return false;
@@ -219,14 +219,14 @@ public class panelTaoHoaDonBanHang extends javax.swing.JPanel {
         tableSanPham.getColumnModel().getColumn(4).setPreferredWidth(30);
         tableSanPham.getColumnModel().getColumn(5).setPreferredWidth(30);
         tableSanPham.getColumnModel().getColumn(6).setPreferredWidth(60);
-        
+
     }
-    
+
     public void loadComboboxKhachHang() {
         String[] columns = new String[]{"Mã khách hàng", "Tên", "Điện thoại", "Địa chỉ", "Công nợ"};
         int[] widths = new int[]{80, 300, 120, 360, 150};
         this.comboboxKhachHang = new DetailedComboBox(columns, widths, 1);
-        
+
         List<List<?>> tableData = new ArrayList<List<?>>();
         tableData.add(new ArrayList<>(
                 Arrays.asList("KH01", "KHÁCH MỚI", "", "", "")));
@@ -248,7 +248,7 @@ public class panelTaoHoaDonBanHang extends javax.swing.JPanel {
         comboboxKhachHang.setVisible(true);
         panelComBoKhachHang.add(comboboxKhachHang);
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -748,10 +748,10 @@ public class panelTaoHoaDonBanHang extends javax.swing.JPanel {
             loadTableGioHangGiaSi();
         }
     }
-    
+
     public void addGioHang(chiTietHoaDon sp) {
         boolean isTonTai = true;
-        
+
         if (sp == null) {
             if (JOptionPane.showConfirmDialog(null, "Sản phẩm chưa có. Thêm mới sản phẩm ?") == 0) {
                 themNhanhSanPham();
@@ -773,11 +773,11 @@ public class panelTaoHoaDonBanHang extends javax.swing.JPanel {
                 } else {
                     //chưa tồn tại
                     isTonTai = false;
-                    
+
                 }
             }
         }
-        
+
         if (isTonTai == true) {
             for (chiTietHoaDon item : dataChiTietHoaDon) {
                 if (item.getIdSanPham().equals(sp.getIdSanPham())) {
@@ -791,7 +791,7 @@ public class panelTaoHoaDonBanHang extends javax.swing.JPanel {
         loadGioHang();
         loadGioHang();
     }
-    
+
     public void enterBarcode() {
         if (txtBarcode.isFocusable() == false) {
             return;
@@ -801,7 +801,7 @@ public class panelTaoHoaDonBanHang extends javax.swing.JPanel {
             return;
         }
         chiTietHoaDon sp = MDChiTietHoaDon.getSanPhamChiTietHoaDon(barcode);
-        
+
         if (sp == null) {
             if (JOptionPane.showConfirmDialog(null, "Sản phẩm chưa có. Thêm mới sản phẩm ?") == 0) {
                 themNhanhSanPham();
@@ -818,9 +818,9 @@ public class panelTaoHoaDonBanHang extends javax.swing.JPanel {
         addGioHang(sp);
         txtBarcode.requestFocus();
     }
-    
+
     public void loadTableGioHangGiaSi() {
-        
+
         DefaultTableModel model = (DefaultTableModel) tableGioHang.getModel();
         model.setRowCount(0);
         long thanhTienBanDau = 0;
@@ -835,7 +835,7 @@ public class panelTaoHoaDonBanHang extends javax.swing.JPanel {
                 item.isTrangThai()
             });
         }
-        
+
         tableGioHang.setModel(model);
         long tongTienFinal = thanhTienBanDau;
         if (!txtGiaTriGiam.getText().equals("")) {
@@ -843,7 +843,7 @@ public class panelTaoHoaDonBanHang extends javax.swing.JPanel {
 
                 long giaTriGiam = helper.SoLong(txtGiaTriGiam.getText());
                 tongTienFinal = thanhTienBanDau - giaTriGiam;
-                
+
             } else {   // Giảm số phần trăm
                 long giaTriPhanTram = helper.SoLong(txtGiaTriGiam.getText());
                 long soTienGiam = thanhTienBanDau * giaTriPhanTram / 100;
@@ -853,7 +853,7 @@ public class panelTaoHoaDonBanHang extends javax.swing.JPanel {
         soTienGoc = thanhTienBanDau;
         txtTongTien.setText(helper.LongToString(tongTienFinal));
     }
-    
+
     public void loadTableGioHangGiaBan() {
         DefaultTableModel model = (DefaultTableModel) tableGioHang.getModel();
         model.setRowCount(0);
@@ -869,7 +869,7 @@ public class panelTaoHoaDonBanHang extends javax.swing.JPanel {
                 item.isTrangThai()
             });
         }
-        
+
         tableGioHang.setModel(model);
         long tongTienFinal = thanhTienBanDau;
         if (!txtGiaTriGiam.getText().equals("") || !(helper.SoLong(txtGiaTriGiam.getText()) == 0)) {
@@ -877,7 +877,7 @@ public class panelTaoHoaDonBanHang extends javax.swing.JPanel {
 
                 long giaTriGiam = helper.SoLong(txtGiaTriGiam.getText());
                 tongTienFinal = thanhTienBanDau - giaTriGiam;
-                
+
             } else {   // Giảm số phần trăm
                 long giaTriPhanTram = helper.SoLong(txtGiaTriGiam.getText());
                 long soTienGiam = thanhTienBanDau * giaTriPhanTram / 100;
@@ -924,6 +924,9 @@ public class panelTaoHoaDonBanHang extends javax.swing.JPanel {
 
     private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanActionPerformed
         if (dataChiTietHoaDon.size() != 0) {
+            if (comboboxKhachHang.getSelectedIndex() == 0) {
+                idKhachHang = "KH01";
+            }
             thanhToan();
         } else {
             JOptionPane.showMessageDialog(this, "Chưa có sản phẩm !");
@@ -978,7 +981,7 @@ public class panelTaoHoaDonBanHang extends javax.swing.JPanel {
         } catch (AWTException ex) {
             Logger.getLogger(panelTaoHoaDonBanHang.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
 
@@ -1033,9 +1036,9 @@ public class panelTaoHoaDonBanHang extends javax.swing.JPanel {
                     dataChiTietHoaDon.remove(i);
                 }
             }
-            
+
         }
-        
+
         loadGioHang();
     }//GEN-LAST:event_tableGioHangKeyReleased
 
@@ -1056,7 +1059,7 @@ public class panelTaoHoaDonBanHang extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) tableSanPham.getModel();
         model.setRowCount(0);
         for (sanPham item : dataSanPhamTable) {
-            
+
             if (loaiSanPham.equals("Tất cả") || item.getIdLoaiSanPham().equals(loaiSanPham)) {
                 ImageIcon imageIcon = new ImageIcon(new ImageIcon(path + item.getHinhAnh()).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
                 model.addRow(new Object[]{

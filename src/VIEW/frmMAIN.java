@@ -520,7 +520,6 @@ public class frmMAIN extends javax.swing.JFrame {
         btnTaoPhieuChi = new javax.swing.JButton();
         jSeparator4 = new javax.swing.JToolBar.Separator();
         btnNhapHang = new javax.swing.JButton();
-        jSeparator5 = new javax.swing.JToolBar.Separator();
         jSeparator6 = new javax.swing.JToolBar.Separator();
         jButton7 = new javax.swing.JButton();
         panelMain = new javax.swing.JPanel();
@@ -548,7 +547,6 @@ public class frmMAIN extends javax.swing.JFrame {
         jMenu4 = new javax.swing.JMenu();
         menuNhapHang = new javax.swing.JMenuItem();
         menuNhatKyNhapHang = new javax.swing.JMenuItem();
-        jSeparator8 = new javax.swing.JPopupMenu.Separator();
         jMenu5 = new javax.swing.JMenu();
         menuTaoHoaDonBanHang = new javax.swing.JMenuItem();
         menuDanhSachHoaDonBanHang = new javax.swing.JMenuItem();
@@ -1959,7 +1957,6 @@ public class frmMAIN extends javax.swing.JFrame {
             }
         });
         jToolBar1.add(btnNhapHang);
-        jToolBar1.add(jSeparator5);
         jToolBar1.add(jSeparator6);
 
         jButton7.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
@@ -2138,7 +2135,6 @@ public class frmMAIN extends javax.swing.JFrame {
         menuNhatKyNhapHang.setText("Nhật ký nhập hàng");
         menuNhatKyNhapHang.setMargin(new java.awt.Insets(6, 6, 6, 6));
         jMenu4.add(menuNhatKyNhapHang);
-        jMenu4.add(jSeparator8);
 
         jMenuBar1.add(jMenu4);
 
@@ -2288,8 +2284,12 @@ public class frmMAIN extends javax.swing.JFrame {
     }//GEN-LAST:event_txtTimKiemHoaDonBanHangActionPerformed
 
     private void tableDanhSachHoaDonBanHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableDanhSachHoaDonBanHangMouseClicked
-        String idHoaDon = tableDanhSachHoaDonBanHang.getValueAt(tableDanhSachHoaDonBanHang.getSelectedRow(), 0) + "";
-        MDHoaDon.showChiTietHoaDon(idHoaDon, tableChiTietHoaDonBanHang);
+        try {
+            String idHoaDon = tableDanhSachHoaDonBanHang.getValueAt(tableDanhSachHoaDonBanHang.getSelectedRow(), 0) + "";
+            MDHoaDon.showChiTietHoaDon(idHoaDon, tableChiTietHoaDonBanHang);
+        } catch (Exception e) {
+            return;
+        }
     }//GEN-LAST:event_tableDanhSachHoaDonBanHangMouseClicked
 
     private void tableDanhSachHoaDonBanHangMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableDanhSachHoaDonBanHangMousePressed
@@ -2418,6 +2418,8 @@ public class frmMAIN extends javax.swing.JFrame {
 
     private void btnReloadTableSanPhamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReloadTableSanPhamActionPerformed
         loadTableSanPham();
+        loadTableDonViTinh();
+        loadTableLoaiSanPham();
     }//GEN-LAST:event_btnReloadTableSanPhamActionPerformed
 
     private void tabbedKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tabbedKeyPressed
@@ -2720,10 +2722,8 @@ public class frmMAIN extends javax.swing.JFrame {
     private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JToolBar.Separator jSeparator3;
     private javax.swing.JToolBar.Separator jSeparator4;
-    private javax.swing.JToolBar.Separator jSeparator5;
     private javax.swing.JToolBar.Separator jSeparator6;
     private javax.swing.JPopupMenu.Separator jSeparator7;
-    private javax.swing.JPopupMenu.Separator jSeparator8;
     private javax.swing.JPopupMenu.Separator jSeparator9;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JToolBar jToolBar1;
