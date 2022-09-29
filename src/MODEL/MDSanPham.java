@@ -25,7 +25,8 @@ public class MDSanPham {
                 "Chưa đầy đủ thông tin !!!"
         );
     }
-public static ArrayList<sanPham> getDataToTable() {
+
+    public static ArrayList<sanPham> getDataToTable() {
         ArrayList<sanPham> data = new ArrayList<>();
         String sql = "SELECT sanpham.* ,donvitinh.name as 'dvt', loaisanpham.name as 'lsp' from sanpham "
                 + "join donvitinh on donvitinh.id = sanpham.IDDonViTinh "
@@ -55,6 +56,7 @@ public static ArrayList<sanPham> getDataToTable() {
         }
         return data;
     }
+
     public static ArrayList<sanPham> getDataToTableBanHang() {
         ArrayList<sanPham> data = new ArrayList<>();
         String sql = "SELECT sanpham.* ,donvitinh.name as 'dvt', loaisanpham.name as 'lsp' from sanpham "

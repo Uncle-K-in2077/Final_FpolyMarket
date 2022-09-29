@@ -214,7 +214,7 @@ public class MDHoaDon {
             HELPER.SQLhelper.executeUpdate(congNoKhachHang, tienNo, hoadon.getIdKhachHang());
         }
         // tạo chi tiết hóa đơn sau
-        String sqlChiTietHoaDon = "insert into chitiethoadon(idhoadon,idsanpham,soluong,chitiethoadon.giaban) values(?,?,?,?)";
+        String sqlChiTietHoaDon = "insert into chitiethoadon(idhoadon,idsanpham,soluong,chitiethoadon.giaban,trangthai) values(?,?,?,?,1)";
         String sqlTruTonKho = "update sanpham set sanpham.soluong = sanpham.soluong - ? where sanpham.id = ?";
 
         int rows = tableGioHang.getRowCount();

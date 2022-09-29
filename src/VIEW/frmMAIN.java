@@ -2233,7 +2233,8 @@ public class frmMAIN extends javax.swing.JFrame {
     }//GEN-LAST:event_menuTaoPhieuChiActionPerformed
 
     private void btnNhapHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNhapHangActionPerformed
-
+        frmNhapHang frmnhaphang = new frmNhapHang();
+        openTab(frmnhaphang, "Phiếu nhập hàng : ");
     }//GEN-LAST:event_btnNhapHangActionPerformed
 
     private void btnTaoHoaDonBanHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoHoaDonBanHangActionPerformed
