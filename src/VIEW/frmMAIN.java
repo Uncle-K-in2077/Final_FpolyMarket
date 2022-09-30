@@ -2242,16 +2242,39 @@ public class frmMAIN extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTaoHoaDonBanHangActionPerformed
     public void taoPhieuBanHang() {
         panelTaoHoaDonBanHang panel = new panelTaoHoaDonBanHang(acc);
-        if (tabbed.getTabCount() == 0) {
-            panelMain.removeAll();
-            panelMain.add(tabbed);
-            tabbed.add(panel);
+
+        popupWaiting popup = new popupWaiting(this, false);
+        popup.setVisible(true);
+        Timer loadingPage = new Timer(30, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int values = popup.prog.getValue();
+                if (values < 100) {
+                    popup.prog.setValue(values + 5);
+                    if (popup.prog.getValue() == 95) {
+                        if (tabbed.getTabCount() == 0) {
+                            panelMain.removeAll();
+                            panelMain.add(tabbed);
+                            tabbed.add(panel);
+                        } else {
+                            tabbed.add(panel);
+                            tabbed.setSelectedIndex(tabbed.getTabCount() - 1);
+                        }
+                        panel.txtBarcode.requestFocus();
+                        panel.txtBarcode.requestFocus();
+                    }
+                } else {
+                    popup.setVisible(false);
+                    return;
+                }
+            }
+        });
+
+        if (popup.prog.getValue() < popup.prog.getMaximum()) {
+            loadingPage.start();
         } else {
-            tabbed.add(panel);
-            tabbed.setSelectedIndex(tabbed.getTabCount() - 1);
+            loadingPage.stop();
         }
-        panel.txtBarcode.requestFocus();
-        panel.txtBarcode.requestFocus();
 
     }
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
