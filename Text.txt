@@ -1,1 +1,5 @@
 Demo 20-09
+
+26 - 09 - 2022: bỏ bảng nhật ký trả hàng ncc, bỏ bảng khách trả hàng, trích kho, chi tiết trích kho, thu tiền ncc,
+tạo một bảng khuyeensmai(id, idSP, ... tính ra giá sau cùng để load lên bảng tạo hóa đơn),
+trong cái sơ đồ bỏ cái ô danh mục đi, nối thẳng từ admin ra mấy cái sản phẩm, nhân viên,... luôn

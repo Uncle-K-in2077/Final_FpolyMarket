@@ -1873,7 +1873,6 @@ public class frmMAIN extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setAutoRequestFocus(false);
 
         jToolBar1.setBorder(null);
         jToolBar1.setRollover(true);
