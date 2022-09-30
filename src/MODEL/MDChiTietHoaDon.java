@@ -43,7 +43,7 @@ public class MDChiTietHoaDon {
                 + "join sanpham on sanpham.id = chitiethoadon.idsanpham "
                 + "join donvitinh on donvitinh.id = sanpham.IDDonViTinh "
                 + " "
-                + "where chitiethoadon.idhoadon = ?";
+                + "where chitiethoadon.idhoadon = ? and chitiethoadon.trangthai=1";
         ResultSet rs = HELPER.SQLhelper.executeQuery(sql, idHoaDon);
         try {
             while (rs.next()) {

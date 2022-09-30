@@ -149,7 +149,7 @@ public class MDAccount {
     }
 
     //Hàm xóa
-    public static void remove(String Username) {
+    public static void remove(String Username ) {
         // không xóa hoàn toản, đưa trạng thái về 0
         String sql = " Update Account set TrangThai = 0 Where Username = ?";
         HELPER.SQLhelper.executeUpdate(sql, Username);

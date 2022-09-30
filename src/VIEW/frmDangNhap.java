@@ -214,8 +214,8 @@ public class frmDangNhap extends javax.swing.JFrame {
                     public void actionPerformed(ActionEvent e) {
                         int values = frmLoading.progBar.getValue();
                         if (values < 100) {
-                            frmLoading.progBar.setValue(values + 2);
-                            if (frmLoading.progBar.getValue() == 98) {
+                            frmLoading.progBar.setValue(values + 4);
+                            if (frmLoading.progBar.getValue() > 95) {
                                 new frmMAIN(account).setVisible(true);
                             }
                         } else {
@@ -242,28 +242,7 @@ public class frmDangNhap extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_btnDangNhapActionPerformed
-    public void loading() {
-        frmLoadingData frmLoading = new frmLoadingData(this, false);
-        frmLoading.setVisible(true);
-        Timer loadingPage = new Timer(20, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int values = frmLoading.progBar.getValue();
-                if (values < 100) {
-                    frmLoading.progBar.setValue(values + 2);
-                } else {
-                    frmLoading.setVisible(false);
-                    return;
-                }
-            }
-        });
-
-        if (frmLoading.progBar.getValue() < frmLoading.progBar.getMaximum()) {
-            loadingPage.start();
-        } else {
-            loadingPage.stop();
-        }
-    }
+   
     private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
         if (JOptionPane.showConfirmDialog(this, "Thoát phần mềm ?") == 0) {
             System.exit(0);
@@ -273,6 +252,7 @@ public class frmDangNhap extends javax.swing.JFrame {
     public static void main(String args[]) {
 
         helper.setupTheme(config.getTheme());
+//        helper.setupTheme(8);
         System.setProperty("flatlaf.uiScale", "150%");
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

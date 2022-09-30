@@ -4,7 +4,9 @@
  */
 package VIEW;
 
+import CLASS.donViTinh;
 import CLASS.loaiSanPham;
+import MODEL.MDDonViTinh;
 import MODEL.MDLoaiSanPham;
 import javax.swing.JOptionPane;
 
@@ -26,7 +28,16 @@ public class frmEditorLoaiSanPham extends javax.swing.JDialog {
         if (option == "add") {
             lb.setVisible(false);
             cbboc.setVisible(false);
+        } else {
+            loadThongTin();
         }
+    }
+
+    public void loadThongTin() {
+        loaiSanPham lsp = MDLoaiSanPham.getLoaiSanPham(option);
+        txtName.setText(lsp.getName());
+        txtMoTa.setText(lsp.getGhiChu());
+        cbboc.setSelectedIndex(lsp.isTrangThai() == true ? 0 : 1);
     }
 
     /**
@@ -144,7 +155,7 @@ public class frmEditorLoaiSanPham extends javax.swing.JDialog {
             }
         } else {
             if (!name.equals("")) {
-                loaiSanPham item = new loaiSanPham(MDLoaiSanPham.createId(), name, moTa, cbboc.getSelectedIndex() == 1 ? true : false);
+                loaiSanPham item = new loaiSanPham(option, name, moTa, cbboc.getSelectedIndex() == 1 ? true : false);
                 MDLoaiSanPham.update(item);
                 JOptionPane.showMessageDialog(this, "Sữa thành công !!!");
                 this.setVisible(false);
