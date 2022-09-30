@@ -145,6 +145,7 @@ public class frmNhapHang extends javax.swing.JPanel {
 
         txtGhiChu.setColumns(20);
         txtGhiChu.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtGhiChu.setLineWrap(true);
         txtGhiChu.setRows(5);
         jScrollPane4.setViewportView(txtGhiChu);
 
