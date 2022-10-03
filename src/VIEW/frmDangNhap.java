@@ -215,7 +215,7 @@ public class frmDangNhap extends javax.swing.JFrame {
                         int values = frmLoading.progBar.getValue();
                         if (values < 100) {
                             frmLoading.progBar.setValue(values + 4);
-                            if (frmLoading.progBar.getValue() > 95) {
+                            if (frmLoading.progBar.getValue() > 98) {
                                 new frmMAIN(account).setVisible(true);
                             }
                         } else {
@@ -242,7 +242,7 @@ public class frmDangNhap extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_btnDangNhapActionPerformed
-   
+
     private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
         if (JOptionPane.showConfirmDialog(this, "Thoát phần mềm ?") == 0) {
             System.exit(0);
