@@ -209,13 +209,13 @@ public class frmDangNhap extends javax.swing.JFrame {
 
                 frmLoadingData frmLoading = new frmLoadingData(this, false);
                 frmLoading.setVisible(true);
-                Timer loadingPage = new Timer(20, new ActionListener() {
+                Timer loadingPage = new Timer(6, new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         int values = frmLoading.progBar.getValue();
                         if (values < 100) {
-                            frmLoading.progBar.setValue(values + 4);
-                            if (frmLoading.progBar.getValue() > 98) {
+                            frmLoading.progBar.setValue(values + 1);
+                            if (frmLoading.progBar.getValue() > 99) {
                                 new frmMAIN(account).setVisible(true);
                             }
                         } else {
@@ -239,8 +239,6 @@ public class frmDangNhap extends javax.swing.JFrame {
                 new frmMAIN(account).setVisible(true);
             }
         }
-
-
     }//GEN-LAST:event_btnDangNhapActionPerformed
 
     private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed

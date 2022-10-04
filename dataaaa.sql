@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th9 30, 2022 lúc 03:09 AM
+-- Thời gian đã tạo: Th10 04, 2022 lúc 06:06 AM
 -- Phiên bản máy phục vụ: 10.4.24-MariaDB
 -- Phiên bản PHP: 8.1.6
 
@@ -28,19 +28,19 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `account` (
-  `Username` varchar(100) NOT NULL,
-  `Password` varchar(100) NOT NULL,
-  `IDNhanVien` varchar(20) NOT NULL,
-  `TrangThai` int(1) NOT NULL DEFAULT 1,
-  `BanHang` int(1) NOT NULL DEFAULT 1,
-  `NhapHang` int(1) NOT NULL DEFAULT 1,
-  `TaiKhoan` int(1) NOT NULL DEFAULT 1,
-  `HangHoa` int(1) NOT NULL DEFAULT 1,
-  `NhanVien` int(1) NOT NULL DEFAULT 1,
-  `KhachHang` int(1) NOT NULL DEFAULT 1,
-  `NhaCungCap` int(1) NOT NULL DEFAULT 1,
-  `BaoCao` int(1) NOT NULL DEFAULT 1,
-  `PhieuChi` int(1) NOT NULL DEFAULT 1
+  `Username` varchar(50) NOT NULL,
+  `Password` varchar(50) NOT NULL,
+  `IDNhanVien` varchar(10) NOT NULL,
+  `TrangThai` smallint(1) NOT NULL DEFAULT 1,
+  `BanHang` smallint(1) NOT NULL DEFAULT 1,
+  `NhapHang` smallint(1) NOT NULL DEFAULT 1,
+  `TaiKhoan` smallint(1) NOT NULL DEFAULT 1,
+  `HangHoa` smallint(1) NOT NULL DEFAULT 1,
+  `NhanVien` smallint(1) NOT NULL DEFAULT 1,
+  `KhachHang` smallint(1) NOT NULL DEFAULT 1,
+  `NhaCungCap` smallint(1) NOT NULL DEFAULT 1,
+  `BaoCao` smallint(1) NOT NULL DEFAULT 1,
+  `PhieuChi` smallint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -50,9 +50,6 @@ CREATE TABLE `account` (
 INSERT INTO `account` (`Username`, `Password`, `IDNhanVien`, `TrangThai`, `BanHang`, `NhapHang`, `TaiKhoan`, `HangHoa`, `NhanVien`, `KhachHang`, `NhaCungCap`, `BaoCao`, `PhieuChi`) VALUES
 ('admin', '123', 'admin', 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 ('Khai01', '01', 'NV09', 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-('NV2', '123456', 'NV2', 1, 1, 1, 0, 1, 0, 1, 1, 1, 1),
-('NV3', '123456', 'NV3', 1, 0, 1, 0, 1, 1, 0, 1, 1, 1),
-('NV4', '123456', 'NV4', 1, 1, 1, 0, 1, 0, 1, 1, 1, 1),
 ('Venus19032001', 'Venus19032001@', 'NV06', 1, 1, 1, 0, 1, 0, 1, 1, 1, 1);
 
 -- --------------------------------------------------------
@@ -63,102 +60,12 @@ INSERT INTO `account` (`Username`, `Password`, `IDNhanVien`, `TrangThai`, `BanHa
 
 CREATE TABLE `chitiethoadon` (
   `id` int(11) NOT NULL,
-  `idhoadon` varchar(20) DEFAULT NULL,
-  `idsanpham` varchar(20) DEFAULT NULL,
+  `idhoadon` varchar(10) DEFAULT NULL,
+  `idsanpham` varchar(10) DEFAULT NULL,
   `soluong` int(11) DEFAULT NULL,
   `giaBan` decimal(10,0) NOT NULL DEFAULT 0,
-  `trangThai` int(11) NOT NULL
+  `trangThai` smallint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Đang đổ dữ liệu cho bảng `chitiethoadon`
---
-
-INSERT INTO `chitiethoadon` (`id`, `idhoadon`, `idsanpham`, `soluong`, `giaBan`, `trangThai`) VALUES
-(160, 'HD2509830358', 'SP03Aiaavff', 1, '150000', 1),
-(161, 'HD2509830358', 'SP012', 1, '90000', 1),
-(162, 'HD2509830358', 'SP03Aiaav', 1, '60000', 1),
-(163, 'HD2509830358', 'SP014', 1, '5000', 1),
-(164, 'HD2509932453', 'SP03Aiaavff', 2, '150000', 1),
-(165, 'HD2509932453', 'SP012', 1, '90000', 1),
-(166, 'HD2509932453', 'SP01Bc', 1, '15000', 1),
-(167, 'HD2509932453', 'SP013', 1, '50000', 1),
-(168, 'HD2509995499', 'SP012', 2, '90000', 1),
-(169, 'HD2509995499', 'SP03Aiaavff', 1, '150000', 1),
-(170, 'HD2509995499', 'SP03Aiaav', 1, '60000', 1),
-(171, 'HD2509201381', 'SP01956', 4, '5000', 1),
-(172, 'HD2509201381', 'SP01A', 3, '10000', 1),
-(173, 'HD2509201381', 'SP019', 1, '5000', 1),
-(174, 'HD2509201381', 'SP01Ac', 1, '10000', 1),
-(175, 'HD2509353818', 'SP01956', 2, '5000', 1),
-(176, 'HD2509353818', 'SP01A', 3, '10000', 1),
-(177, 'HD2509353818', 'SP01Ac', 1, '10000', 1),
-(178, 'HD2509672094', 'SP01A', 3, '10000', 1),
-(179, 'HD2509672094', 'SP01Ac', 1, '10000', 1),
-(180, 'HD2509672094', 'SP01956', 1, '5000', 1),
-(181, 'HD2509041561', 'SP019', 1, '5000', 1),
-(182, 'HD2509041561', 'SP01956', 1, '5000', 1),
-(184, 'HD2509610923', 'SP01956', 2, '4000', 1),
-(186, 'HD2509499728', 'SP019', 1, '5000', 1),
-(187, 'HD2509130367', 'SP01956', 1, '5000', 1),
-(188, 'HD2509130367', 'SP01Ac', 1, '10000', 1),
-(189, 'HD2509546883', 'SP01Ac', 1, '10000', 1),
-(190, 'HD2509546883', 'SP01956', 1, '5000', 1),
-(191, 'HD2509546883', 'SP03Aiaavff', 1, '150000', 1),
-(192, 'HD2509546883', 'SP03Aiaav', 1, '60000', 1),
-(193, 'HD2509546883', 'SP03Aiaa', 1, '15000', 1),
-(194, 'HD2509441250', 'SP012', 2, '90000', 1),
-(195, 'HD2509441250', 'SP03Aiaavff', 1, '150000', 1),
-(196, 'HD2509441250', 'SP03Aiaav', 1, '60000', 1),
-(197, 'HD2509441250', 'SP014', 1, '5000', 1),
-(198, 'HD2509840146', 'SP03Aiaavff', 2, '150000', 1),
-(199, 'HD2509840146', 'SP012', 2, '90000', 1),
-(200, 'HD2509840146', 'SP014', 1, '5000', 1),
-(201, 'HD2509546909', 'SP03Ai', 5, '15000', 1),
-(202, 'HD2509025166', 'SP03A', 1, '5000', 1),
-(203, 'HD2509947466', 'SP019', 1, '5000', 1),
-(204, 'HD2509947466', 'SP01956', 1, '5000', 1),
-(205, 'HD2509934923', 'SP01Ac', 1, '10000', 1),
-(206, 'HD2509934923', 'SP01B', 1, '15000', 1),
-(207, 'HD2509679372', 'SP03A', 5, '5000', 1),
-(208, 'HD2509679372', 'SP03Ai', 5, '15000', 1),
-(209, 'HD2709308509', 'SP01Ac', 1, '10000', 1),
-(210, 'HD2709308509', 'SP01956', 1, '5000', 1),
-(211, 'HD2709308509', 'SP019', 1, '5000', 1),
-(212, 'HD2709056886', 'SP019', 1, '5000', 1),
-(213, 'HD2709056886', 'SP01956', 1, '5000', 1),
-(214, 'HD2709056886', 'SP01Ac', 1, '10000', 1),
-(215, 'HD2709075575', 'SP012', 1, '90000', 1),
-(216, 'HD2709075575', 'SP03Aiaavff', 1, '150000', 1),
-(217, 'HD2709075575', 'SP03Aiaav', 1, '60000', 1),
-(218, 'HD2709075575', 'SP014', 1, '5000', 1),
-(219, 'HD2709276480', 'SP01956', 1, '5000', 1),
-(220, 'HD2709276480', 'SP01Ac', 1, '10000', 1),
-(221, 'HD2709276480', 'SP018', 1, '2222', 1),
-(222, 'HD2709276480', 'SP02A', 1, '7000', 1),
-(223, 'HD2709276480', 'SP03Aiaavff', 1, '150000', 1),
-(224, 'HD2709276480', 'SP012', 1, '90000', 1),
-(225, 'HD2709276480', 'SP014', 1, '5000', 1),
-(226, 'HD2809819924', 'SP01956', 2, '5000', 1),
-(227, 'HD2809819924', 'SP019', 1, '5000', 1),
-(228, 'HD2809111790', 'SP020', 1, '12000', 1),
-(229, 'HD2809111790', 'SP012', 1, '90000', 1),
-(230, 'HD2809156606', 'SP012', 1, '90000', 1),
-(231, 'HD2809156606', 'SP020', 1, '12000', 1),
-(232, 'HD2809465536', 'SP012', 2, '90000', 1),
-(233, 'HD2809730136', 'SP013', 1, '50000', 1),
-(234, 'HD2809730136', 'SP015', 1, '46000', 1),
-(235, 'HD2809414060', 'SP03Aiaa', 1, '15000', 1),
-(236, 'HD2909107636', 'SP012', 1, '90000', 1),
-(237, 'HD2909107636', 'SP013', 1, '50000', 1),
-(238, 'HD2909107636', 'SP020', 1, '12000', 1),
-(239, 'HD2909234071', 'SP03Aiaavff', 2, '150000', 1),
-(240, 'HD2909234071', 'SP014', 1, '5000', 1),
-(241, 'HD2909234071', 'SP03Aiaav', 2, '60000', 1),
-(242, 'HD2909234071', 'SP03Aiaa', 1, '15000', 1),
-(243, 'HD2909033632', 'SP012', 1, '90000', 1),
-(244, 'HD2909033632', 'SP013', 1, '50000', 1),
-(245, 'HD2909033632', 'SP015', 1, '46000', 1);
 
 -- --------------------------------------------------------
 
@@ -167,10 +74,10 @@ INSERT INTO `chitiethoadon` (`id`, `idhoadon`, `idsanpham`, `soluong`, `giaBan`,
 --
 
 CREATE TABLE `donvitinh` (
-  `ID` varchar(20) NOT NULL,
-  `Name` varchar(100) DEFAULT NULL,
+  `ID` varchar(10) NOT NULL,
+  `Name` varchar(30) DEFAULT NULL,
   `GhiChu` varchar(250) DEFAULT NULL,
-  `TrangThai` int(1) DEFAULT 1
+  `TrangThai` smallint(1) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -190,56 +97,18 @@ INSERT INTO `donvitinh` (`ID`, `Name`, `GhiChu`, `TrangThai`) VALUES
 --
 
 CREATE TABLE `hoadon` (
-  `ID` varchar(20) NOT NULL,
-  `IDnhanvien` varchar(20) DEFAULT NULL,
-  `IDkhachHang` varchar(20) DEFAULT NULL,
+  `ID` varchar(10) NOT NULL,
+  `IDnhanvien` varchar(10) DEFAULT NULL,
+  `IDkhachHang` varchar(10) DEFAULT NULL,
   `ThoiGian` datetime DEFAULT NULL,
   `HinhThucThanhToan` int(1) DEFAULT 1,
   `GiamGia` decimal(10,0) DEFAULT NULL,
   `TongTienThanhToan` decimal(10,0) DEFAULT NULL,
   `soTienNhanDuoc` decimal(10,0) NOT NULL,
-  `loaiGia` int(11) DEFAULT 0,
+  `loaiGia` smallint(1) DEFAULT 0,
   `GhiChu` varchar(250) DEFAULT NULL,
-  `trangThai` int(1) DEFAULT 1
+  `trangThai` smallint(1) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Đang đổ dữ liệu cho bảng `hoadon`
---
-
-INSERT INTO `hoadon` (`ID`, `IDnhanvien`, `IDkhachHang`, `ThoiGian`, `HinhThucThanhToan`, `GiamGia`, `TongTienThanhToan`, `soTienNhanDuoc`, `loaiGia`, `GhiChu`, `trangThai`) VALUES
-('HD2509025166', 'admin', 'KH01', '2022-09-25 13:36:58', 1, '0', '5000', '5000', 0, '', 1),
-('HD2509041561', 'admin', 'KH01', '2022-09-25 11:36:36', 1, '5000', '5000', '5000', 0, '', 1),
-('HD2509130367', 'admin', 'KH01', '2022-09-25 12:29:52', 1, '0', '15000', '15000', 0, '', 1),
-('HD2509201381', 'admin', 'KH01', '2022-09-25 00:42:30', 1, '0', '65000', '65000', 0, '', 1),
-('HD2509353818', 'admin', 'KH05', '2022-09-25 00:42:50', 3, '0', '50000', '25000', 0, '', 1),
-('HD2509441250', 'admin', 'KH01', '2022-09-25 13:35:55', 1, '0', '395000', '395000', 0, '', 1),
-('HD2509499728', 'admin', 'KH01', '2022-09-25 12:29:44', 1, '0', '5000', '5000', 0, '', 1),
-('HD2509546883', 'admin', 'KH01', '2022-09-25 13:35:49', 1, '0', '240000', '240000', 0, '', 1),
-('HD2509546909', 'admin', 'KH01', '2022-09-25 13:36:31', 1, '0', '75000', '75000', 0, '', 1),
-('HD2509610923', 'admin', 'KH01', '2022-09-25 11:37:23', 1, '0', '2000006246', '2000006246', 1, '', 1),
-('HD2509672094', 'admin', 'KH01', '2022-09-25 00:43:00', 1, '5000', '40000', '40000', 0, '', 0),
-('HD2509679372', 'admin', 'KH01', '2022-09-25 15:00:03', 1, '0', '100000', '100000', 0, '', 0),
-('HD2509830358', 'admin', 'KH01', '2022-09-25 00:42:08', 1, '0', '305000', '305000', 0, '', 1),
-('HD2509840146', 'admin', 'KH01', '2022-09-25 13:36:14', 1, '0', '485000', '485000', 0, '', 1),
-('HD2509932453', 'admin', 'KH01', '2022-09-25 00:42:16', 1, '0', '455000', '455000', 0, '', 1),
-('HD2509934923', 'admin', 'KH01', '2022-09-25 14:58:41', 1, '0', '25000', '25000', 0, '', 1),
-('HD2509947466', 'admin', 'KH01', '2022-09-25 14:31:07', 1, '0', '10000', '10000', 0, '', 1),
-('HD2509995499', 'admin', 'KH01', '2022-09-25 00:42:26', 1, '0', '390000', '390000', 0, '', 1),
-('HD2709056886', 'admin', 'KH01', '2022-09-27 11:28:29', 1, '0', '20000', '20000', 0, '', 1),
-('HD2709075575', 'admin', 'KH01', '2022-09-27 11:28:36', 1, '0', '305000', '305000', 0, '', 1),
-('HD2709276480', 'admin', 'KH01', '2022-09-27 21:35:41', 1, '0', '269222', '269222', 0, '', 1),
-('HD2709308509', 'admin', 'KH01', '2022-09-27 08:52:27', 1, '0', '20000', '20000', 0, '', 1),
-('HD2809111790', 'admin', 'KH01', '2022-09-28 08:07:16', 1, '0', '102000', '102000', 0, '', 1),
-('HD2809156606', 'admin', 'KH01', '2022-09-28 12:29:54', 1, '0', '102000', '102000', 0, '', 1),
-('HD2809414060', 'admin', 'KH04', '2022-09-28 12:31:20', 1, '0', '15000', '15000', 0, '', 1),
-('HD2809465536', 'admin', 'KH02', '2022-09-28 12:31:06', 1, '0', '180000', '180000', 0, '', 1),
-('HD2809730136', 'admin', 'KH03', '2022-09-28 12:31:13', 1, '0', '96000', '96000', 0, '', 1),
-('HD2809819924', 'admin', 'KH01', '2022-09-28 07:14:41', 1, '0', '15000', '15000', 0, '', 1),
-('HD2809885175', 'admin', 'KH03', '2022-09-28 12:28:54', 1, '0', '90000', '90000', 0, '', 0),
-('HD2909033632', 'admin', 'KH01', '2022-09-29 21:39:33', 1, '0', '186000', '186000', 0, '', 1),
-('HD2909107636', 'admin', 'KH01', '2022-09-29 21:36:32', 1, '0', '152000', '152000', 0, '', 1),
-('HD2909234071', 'admin', 'KH01', '2022-09-29 21:36:42', 1, '0', '440000', '440000', 0, '', 1);
 
 -- --------------------------------------------------------
 
@@ -248,25 +117,26 @@ INSERT INTO `hoadon` (`ID`, `IDnhanvien`, `IDkhachHang`, `ThoiGian`, `HinhThucTh
 --
 
 CREATE TABLE `khachhang` (
-  `ID` varchar(20) NOT NULL,
-  `Name` varchar(100) DEFAULT NULL,
+  `ID` varchar(10) NOT NULL,
+  `Name` varchar(50) DEFAULT NULL,
   `SoDienThoai` varchar(10) DEFAULT NULL,
   `DiaChi` varchar(250) DEFAULT NULL,
   `GhiChu` varchar(250) DEFAULT NULL,
   `congno` decimal(10,0) DEFAULT 0,
-  `TrangThai` int(1) DEFAULT 1
+  `TrangThai` smallint(1) DEFAULT 1,
+  `ThoiGian` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Đang đổ dữ liệu cho bảng `khachhang`
 --
 
-INSERT INTO `khachhang` (`ID`, `Name`, `SoDienThoai`, `DiaChi`, `GhiChu`, `congno`, `TrangThai`) VALUES
-('KH01', 'KHÁCH MỚI', '0987656780', 'BMT,DAKLAK', 'KO', '75000000', 1),
-('KH02', 'LỘC', '098989898', 'BMT,DAKLAK', 'KO', '0', 1),
-('KH03', 'HOÀNH', '0935818820', 'BMT,DAKLAK', 'KO', '990000', 1),
-('KH04', 'LAM', NULL, 'BMT,DAKLAK', 'KO', '263556', 1),
-('KH05', 'KHUÊ', NULL, 'KRONG NO ,DAK NONG', NULL, '45000', 1);
+INSERT INTO `khachhang` (`ID`, `Name`, `SoDienThoai`, `DiaChi`, `GhiChu`, `congno`, `TrangThai`, `ThoiGian`) VALUES
+('KH01', 'KHÁCH MỚI', '0987656780', 'BMT,DAKLAK', 'KO', '75000000', 1, '2022-09-25 13:36:58'),
+('KH02', 'LỘC', '098989898', 'BMT,DAKLAK', 'KO', '0', 1, '2022-09-25 13:36:58'),
+('KH03', 'HOÀNH', '0935818820', 'BMT,DAKLAK', 'KO', '990000', 1, '2022-09-25 13:36:58'),
+('KH04', 'LAM', NULL, 'BMT,DAKLAK', 'KO', '263556', 1, '2022-09-25 13:36:58'),
+('KH05', 'KHUÊ', NULL, 'KRONG NO ,DAK NONG', NULL, '45000', 1, '2022-09-25 13:36:58');
 
 -- --------------------------------------------------------
 
@@ -275,10 +145,10 @@ INSERT INTO `khachhang` (`ID`, `Name`, `SoDienThoai`, `DiaChi`, `GhiChu`, `congn
 --
 
 CREATE TABLE `loaisanpham` (
-  `ID` varchar(20) NOT NULL,
-  `Name` varchar(100) DEFAULT NULL,
+  `ID` varchar(10) NOT NULL,
+  `Name` varchar(30) DEFAULT NULL,
   `GhiChu` varchar(250) DEFAULT NULL,
-  `TrangThai` int(1) DEFAULT 1
+  `TrangThai` smallint(1) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -301,27 +171,28 @@ INSERT INTO `loaisanpham` (`ID`, `Name`, `GhiChu`, `TrangThai`) VALUES
 --
 
 CREATE TABLE `nhacungcap` (
-  `ID` varchar(20) NOT NULL,
-  `Name` varchar(100) DEFAULT NULL,
+  `ID` varchar(10) NOT NULL,
+  `Name` varchar(50) DEFAULT NULL,
   `SoDienThoai` varchar(10) DEFAULT NULL,
-  `DiaChi` varchar(250) DEFAULT NULL,
-  `GhiChu` varchar(250) DEFAULT NULL,
+  `DiaChi` varchar(150) DEFAULT NULL,
+  `GhiChu` varchar(150) DEFAULT NULL,
   `congno` decimal(10,0) DEFAULT 0,
-  `TrangThai` int(1) DEFAULT 1
+  `TrangThai` smallint(1) DEFAULT 1,
+  `ThoiGian` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Đang đổ dữ liệu cho bảng `nhacungcap`
 --
 
-INSERT INTO `nhacungcap` (`ID`, `Name`, `SoDienThoai`, `DiaChi`, `GhiChu`, `congno`, `TrangThai`) VALUES
-('NCC01', 'Nước Ngọt Sông Lam', '0909090909', 'Sông Lam , Nghệ An', 'ko', '0', 1),
-('NCC02', 'COCACOLA VN', '0808080808', 'Q9,HCM', 'KO', '0', 1),
-('NCC03', 'Đồ ăn vặt bé Bự', '0707070707', 'BMT,DAK LAK', 'KO', '0', 1),
-('NCC04', 'Nội Thất Đồ Gia Dụng Hưng Quang', '0606060606', 'CUMGAR ,DAKLAK', 'KO', '0', 1),
-('NCC05', 'BỈM SỮA BABY BU', '0505050505', 'BMT,DAK LAK', 'KO', '0', 1),
-('NCC06', 'TRÁI CAY NGON BMT', '0972909000', 'BMT,DAKLAK', 'KO', '0', 1),
-('NCC09', 'CTY Thực Phẩm LACUSINA', '0909999999', '120 Khu công nghiệp Bình Dương Tỉnh Bình Dương', NULL, '6000000', 1);
+INSERT INTO `nhacungcap` (`ID`, `Name`, `SoDienThoai`, `DiaChi`, `GhiChu`, `congno`, `TrangThai`, `ThoiGian`) VALUES
+('NCC01', 'Nước Ngọt Sông Lam', '0909090909', 'Sông Lam , Nghệ An', 'ko', '0', 1, '2022-09-25 13:36:58'),
+('NCC02', 'COCACOLA VN', '0808080808', 'Q9,HCM', 'KO', '0', 1, '2022-09-25 13:36:58'),
+('NCC03', 'Đồ ăn vặt bé Bự', '0707070707', 'BMT,DAK LAK', 'KO', '0', 1, '2022-09-25 13:36:58'),
+('NCC04', 'Nội Thất Đồ Gia Dụng Hưng Quang', '0606060606', 'CUMGAR ,DAKLAK', 'KO', '0', 1, '2022-09-25 13:36:58'),
+('NCC05', 'BỈM SỮA BABY BU', '0505050505', 'BMT,DAK LAK', 'KO', '0', 1, '2022-09-25 13:36:58'),
+('NCC06', 'TRÁI CAY NGON BMT', '0972909000', 'BMT,DAKLAK', 'KO', '0', 1, '2022-09-25 13:36:58'),
+('NCC09', 'CTY Thực Phẩm LACUSINA', '0909999999', '120 Khu công nghiệp Bình Dương Tỉnh Bình Dương', NULL, '6000000', 1, '2022-09-25 13:36:58');
 
 -- --------------------------------------------------------
 
@@ -330,16 +201,16 @@ INSERT INTO `nhacungcap` (`ID`, `Name`, `SoDienThoai`, `DiaChi`, `GhiChu`, `cong
 --
 
 CREATE TABLE `nhanvien` (
-  `id` varchar(20) NOT NULL,
-  `Name` varchar(100) DEFAULT NULL,
+  `id` varchar(10) NOT NULL,
+  `Name` varchar(30) DEFAULT NULL,
   `SoDienThoai` varchar(10) DEFAULT NULL,
-  `DiaChi` varchar(250) DEFAULT NULL,
+  `DiaChi` varchar(150) DEFAULT NULL,
   `NgaySinh` datetime DEFAULT NULL,
   `Luong` decimal(10,0) DEFAULT NULL,
-  `GioiTinh` int(1) DEFAULT 1,
+  `GioiTinh` smallint(1) DEFAULT 1,
   `NgayVaoLam` datetime DEFAULT NULL,
-  `GhiChu` varchar(250) DEFAULT NULL,
-  `TrangThai` int(1) DEFAULT 1
+  `GhiChu` varchar(150) DEFAULT NULL,
+  `TrangThai` smallint(1) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -348,6 +219,7 @@ CREATE TABLE `nhanvien` (
 
 INSERT INTO `nhanvien` (`id`, `Name`, `SoDienThoai`, `DiaChi`, `NgaySinh`, `Luong`, `GioiTinh`, `NgayVaoLam`, `GhiChu`, `TrangThai`) VALUES
 ('admin', 'admin', '0935818820', 'BMT,DAK LAK', '2001-12-30 00:00:00', '100000000', 1, '2001-12-30 00:00:00', 'KO', 1),
+('NV010', '', '', '', '2022-10-04 00:00:00', '0', 1, '2022-10-04 00:00:00', '', 1),
 ('NV06', 'Châu Văn Hiệu', '0352461759', '209/12 Nguyễn Văn Cừ', '2000-12-31 00:00:00', '7500000', 1, '2021-12-26 00:00:00', 'hiệu', 1),
 ('NV07', 'chau van hieuiz', '56456465', 'ưqeqwe', '2022-09-15 00:00:00', '7000000', 1, '2022-09-15 00:00:00', '', 1),
 ('NV08', 'cvh', '123456789', '213 aSDAS D', '2001-03-19 00:00:00', '10000000', 1, '2022-09-15 00:00:00', '', 0),
@@ -364,14 +236,14 @@ INSERT INTO `nhanvien` (`id`, `Name`, `SoDienThoai`, `DiaChi`, `NgaySinh`, `Luon
 --
 
 CREATE TABLE `nhatkynhaphang` (
-  `ID` varchar(20) NOT NULL,
+  `ID` varchar(10) NOT NULL,
   `ThoiGian` datetime DEFAULT NULL,
-  `IDnhanvien` varchar(20) DEFAULT NULL,
-  `IDNhaCungCap` varchar(20) DEFAULT NULL,
+  `IDnhanvien` varchar(10) DEFAULT NULL,
+  `IDNhaCungCap` varchar(10) DEFAULT NULL,
   `TongTien` decimal(10,0) DEFAULT NULL,
   `ThanhToan` decimal(10,0) DEFAULT NULL,
-  `GhiChu` varchar(250) DEFAULT NULL,
-  `TrangThai` int(1) DEFAULT 1
+  `GhiChu` varchar(150) DEFAULT NULL,
+  `TrangThai` smallint(1) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -392,13 +264,13 @@ INSERT INTO `nhatkynhaphang` (`ID`, `ThoiGian`, `IDnhanvien`, `IDNhaCungCap`, `T
 --
 
 CREATE TABLE `nhatkytrahangncc` (
-  `ID` varchar(20) NOT NULL,
+  `ID` varchar(10) NOT NULL,
   `ThoiGian` datetime DEFAULT NULL,
-  `IDnhanvien` varchar(20) DEFAULT NULL,
-  `IDncc` varchar(20) DEFAULT NULL,
+  `IDnhanvien` varchar(10) DEFAULT NULL,
+  `IDncc` varchar(10) DEFAULT NULL,
   `TongTien` decimal(10,0) DEFAULT NULL,
-  `GhiChu` varchar(250) DEFAULT NULL,
-  `TrangThai` int(1) DEFAULT 1
+  `GhiChu` varchar(150) DEFAULT NULL,
+  `TrangThai` smallint(1) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -408,11 +280,11 @@ CREATE TABLE `nhatkytrahangncc` (
 --
 
 CREATE TABLE `phieuchi` (
-  `ID` varchar(20) NOT NULL,
+  `ID` varchar(10) NOT NULL,
   `ThoiGian` datetime DEFAULT NULL,
-  `IDnhanvien` varchar(20) DEFAULT NULL,
+  `IDnhanvien` varchar(10) DEFAULT NULL,
   `TienChi` decimal(10,0) DEFAULT NULL,
-  `GhiChu` varchar(250) DEFAULT NULL
+  `GhiChu` varchar(150) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -430,12 +302,12 @@ INSERT INTO `phieuchi` (`ID`, `ThoiGian`, `IDnhanvien`, `TienChi`, `GhiChu`) VAL
 
 CREATE TABLE `phieutranoncc` (
   `ID` int(11) NOT NULL,
-  `IDNcc` varchar(20) DEFAULT NULL,
-  `IDNhanVien` varchar(20) DEFAULT NULL,
+  `IDNcc` varchar(10) DEFAULT NULL,
+  `IDNhanVien` varchar(10) DEFAULT NULL,
   `SoTienTra` decimal(10,0) DEFAULT NULL,
   `ThoiGian` datetime DEFAULT NULL,
-  `GhiChu` varchar(250) DEFAULT NULL,
-  `TrangThai` int(11) DEFAULT 1
+  `GhiChu` varchar(150) DEFAULT NULL,
+  `TrangThai` smallint(1) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -457,8 +329,8 @@ INSERT INTO `phieutranoncc` (`ID`, `IDNcc`, `IDNhanVien`, `SoTienTra`, `ThoiGian
 --
 
 CREATE TABLE `sanpham` (
-  `ID` varchar(20) NOT NULL,
-  `Name` varchar(100) NOT NULL,
+  `ID` varchar(10) NOT NULL,
+  `Name` varchar(50) NOT NULL,
   `Barcode` varchar(30) DEFAULT NULL,
   `hinhAnh` varchar(200) NOT NULL DEFAULT 'empty.png',
   `GiaNhap` decimal(10,0) DEFAULT 0,
@@ -466,38 +338,40 @@ CREATE TABLE `sanpham` (
   `giaSi` decimal(10,0) NOT NULL DEFAULT 999999,
   `SoLuong` int(11) DEFAULT 0,
   `SoLuongToiThieu` int(11) DEFAULT 0,
-  `IDNhaCungCap` varchar(20) NOT NULL,
-  `IDDonViTinh` varchar(20) NOT NULL,
-  `idLoaiSanPham` varchar(20) NOT NULL,
-  `GhiChu` varchar(250) DEFAULT NULL,
-  `TrangThai` int(1) NOT NULL DEFAULT 1
+  `IDNhaCungCap` varchar(10) NOT NULL,
+  `IDDonViTinh` varchar(10) NOT NULL,
+  `idLoaiSanPham` varchar(10) NOT NULL,
+  `GhiChu` varchar(150) DEFAULT NULL,
+  `TrangThai` smallint(1) NOT NULL DEFAULT 1,
+  `ThoiGian` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Đang đổ dữ liệu cho bảng `sanpham`
 --
 
-INSERT INTO `sanpham` (`ID`, `Name`, `Barcode`, `hinhAnh`, `GiaNhap`, `GiaBan`, `giaSi`, `SoLuong`, `SoLuongToiThieu`, `IDNhaCungCap`, `IDDonViTinh`, `idLoaiSanPham`, `GhiChu`, `TrangThai`) VALUES
-('SP012', 'Nước giặt Ariel 1.6 lít', '4902430650212', '1568083204882549375.jpg', '50000', '90000', '999999', 78, 20, 'NCC02', 'MN01', 'LSP04', '', 1),
-('SP013', 'Bánh Oreo 68.5g', '6901668053121', 'Bánh-quy-kem-vani-Oreo-gói-68.5g.jpg', '23000', '50000', '999999', 96, 50, 'NCC03', 'MN01', 'LSP02', 'đồ ăn vặt', 1),
-('SP014', 'Lưỡi lam Platinum', '8888826024583', '70af2aec3c3268a9a8359dcd06a3b72a.png', '3000', '5000', '999999', 91, 20, 'NCC02', 'MN02', 'LSP02', '', 1),
-('SP015', 'Bột canh 180G', '8934561281696', '287652673_558881695830581_2757102238107310630_n.jpg', '32000', '46000', '999999', 88, 10, 'NCC02', 'MN01', 'LSP02', '', 1),
-('SP016', 'STTT vinamilk 110ml dâu', '8934673574327', 'empty.png', '8000', '12000', '100000', 100, 100, 'NCC02', 'MN01', 'LSP05', '', 0),
-('SP018', 'ád', 'ád', 'id shoppee.png', '222', '2222', '999999', 99, 20, 'NCC02', 'MN01', 'LSP02', '', 1),
-('SP019', 'Đường ăn', '', 'empty.png', '2000', '5000', '4000', 76, 10, 'NCC02', 'MN01', 'LSP01', '', 1),
-('SP01956', 'Đường ăn65456', '', 'empty.png', '2000', '5000', '4000', 58, 10, 'NCC02', 'MN01', 'LSP01', '', 1),
-('SP01A', 'COCACOLA', '8934588012228', 'cocacola.png', '8000', '10000', '999999', 0, 20, 'NCC02', 'MN01', 'LSP01', 'KO', 1),
-('SP01Ac', 'Revice chanh muối', '8934588843051', 'revicechanhmuoi.png', '8000', '10000', '999999', 82, 120, 'NCC02', 'MN01', 'LSP01', 'KO', 1),
-('SP01B', 'HENIKEN', '8934822201333', 'lon-heineken.png', '12000', '15000', '999999', 99, 120, 'NCC02', 'MN01', 'LSP01', 'KO', 1),
-('SP01Bc', 'Trà ô lông', '8934588873058', 'traolong.png', '12000', '15000', '999999', 99, 120, 'NCC02', 'MN01', 'LSP01', 'KO', 1),
-('SP020', 'test item', '71289571289478', 'zalo_last_screenshot.png', '6000', '12000', '9000', 97, 20, 'NCC02', 'DVT04', 'LSP02', 'test item', 1),
-('SP02A', 'String', '8934588232220', 'chaisting.png', '4000', '7000', '999999', 93, 70, 'NCC06', 'MN01', 'LSP02', 'KO', 1),
-('SP02Av', 'Nước lọc aquafina', '8934588063053', 'nuocloc.png', '4000', '7000', '999999', 99, 70, 'NCC06', 'MN01', 'LSP02', 'KO', 1),
-('SP03A', '7up 1,5L', '8934588023064', '7up1-5L.png', '3000', '5000', '999999', 77, 50, 'NCC03', 'MN01', 'LSP03', 'KO', 1),
-('SP03Ai', 'Thuốc lá Demi(mèo bạc)', '8934674015416', 'thuocdemi.png', '3000', '15000', '999999', 90, 20, 'NCC03', 'MN01', 'LSP03', '', 1),
-('SP03Aiaa', 'Bia tiger lon', '8934822101336', '9471798d16594cb09d617aee28d8297d.jpg', '3000', '15000', '999999', 97, 50, 'NCC03', 'MN01', 'LSP03', '', 1),
-('SP03Aiaav', 'Pepsi lon', '8934588013065', 'banner.jpg', '50000', '60000', '999999', 75, 50, 'NCC03', 'MN01', 'LSP03', '', 1),
-('SP03Aiaavff', 'Mirinda lon', '8934588132223', 'mirinda.png', '95000', '150000', '999999', 75, 50, 'NCC03', 'MN01', 'LSP03', '', 1);
+INSERT INTO `sanpham` (`ID`, `Name`, `Barcode`, `hinhAnh`, `GiaNhap`, `GiaBan`, `giaSi`, `SoLuong`, `SoLuongToiThieu`, `IDNhaCungCap`, `IDDonViTinh`, `idLoaiSanPham`, `GhiChu`, `TrangThai`, `ThoiGian`) VALUES
+('SP012', 'Nước giặt Ariel 1.6 lít', '4902430650212', '1568083204882549375.jpg', '50000', '90000', '999999', 72, 20, 'NCC02', 'MN01', 'LSP04', '', 1, '2022-09-25 13:36:58'),
+('SP013', 'Bánh Oreo 68.5g', '6901668053121', 'Bánh-quy-kem-vani-Oreo-gói-68.5g.jpg', '23000', '50000', '999999', 91, 50, 'NCC03', 'MN01', 'LSP02', 'đồ ăn vặt', 1, '2022-09-25 13:36:58'),
+('SP014', 'Lưỡi lam Platinum', '8888826024583', '70af2aec3c3268a9a8359dcd06a3b72a.png', '3000', '5000', '999999', 91, 20, 'NCC02', 'MN02', 'LSP02', '', 1, '2022-09-25 13:36:58'),
+('SP015', 'Bột canh 180G', '8934561281696', '287652673_558881695830581_2757102238107310630_n.jpg', '32000', '46000', '999999', 87, 10, 'NCC02', 'MN01', 'LSP02', '', 1, '2022-09-25 13:36:58'),
+('SP016', 'STTT vinamilk 110ml dâu', '8934673574327', 'empty.png', '8000', '12000', '100000', 100, 100, 'NCC02', 'MN01', 'LSP05', '', 0, '2022-09-25 13:36:58'),
+('SP018', 'ád', 'ád', 'id shoppee.png', '222', '2222', '999999', 99, 20, 'NCC02', 'MN01', 'LSP02', '', 1, '2022-09-25 13:36:58'),
+('SP019', 'Đường ăn', '', 'empty.png', '2000', '5000', '4000', 76, 10, 'NCC02', 'MN01', 'LSP01', '', 1, '2022-09-25 13:36:58'),
+('SP01956', 'Đường ăn65456', '', 'empty.png', '2000', '5000', '4000', 58, 10, 'NCC02', 'MN01', 'LSP01', '', 1, '2022-09-25 13:36:58'),
+('SP01A', 'COCACOLA', '8934588012228', 'cocacola.png', '8000', '10000', '999999', 0, 20, 'NCC02', 'MN01', 'LSP01', 'KO', 1, '2022-09-25 13:36:58'),
+('SP01Ac', 'Revice chanh muối', '8934588843051', 'revicechanhmuoi.png', '8000', '10000', '999999', 82, 120, 'NCC02', 'MN01', 'LSP01', 'KO', 1, '2022-09-25 13:36:58'),
+('SP01B', 'HENIKEN', '8934822201333', 'lon-heineken.png', '12000', '15000', '999999', 99, 120, 'NCC02', 'MN01', 'LSP01', 'KO', 1, '2022-09-25 13:36:58'),
+('SP01Bc', 'Trà ô lông', '8934588873058', 'traolong.png', '12000', '15000', '999999', 99, 120, 'NCC02', 'MN01', 'LSP01', 'KO', 1, '2022-09-25 13:36:58'),
+('SP020', 'test item', '71289571289478', 'zalo_last_screenshot.png', '6000', '12000', '9000', 95, 20, 'NCC02', 'DVT04', 'LSP02', 'test item', 1, '2022-09-25 13:36:58'),
+('SP021', 'helloworldv hello', '12412312312', '293128237_604584784402934_8419741851485846479_n.jpg', '10000', '15000', '12000', 100, 20, 'NCC01', 'DVT04', 'LSP02', 'hello', 1, '2022-10-04 11:02:17'),
+('SP02A', 'String', '8934588232220', 'chaisting.png', '4000', '7000', '999999', 93, 70, 'NCC06', 'MN01', 'LSP02', 'KO', 1, '2022-09-25 13:36:58'),
+('SP02Av', 'Nước lọc aquafina', '8934588063053', 'nuocloc.png', '4000', '7000', '999999', 99, 70, 'NCC06', 'MN01', 'LSP02', 'KO', 1, '2022-09-25 13:36:58'),
+('SP03A', '7up 1,5L', '8934588023064', '7up1-5L.png', '3000', '5000', '999999', 77, 50, 'NCC03', 'MN01', 'LSP03', 'KO', 1, '2022-09-25 13:36:58'),
+('SP03Ai', 'Thuốc lá Demi(mèo bạc)', '8934674015416', 'thuocdemi.png', '3000', '15000', '999999', 90, 20, 'NCC03', 'MN01', 'LSP03', '', 1, '2022-09-25 13:36:58'),
+('SP03Aiaa', 'Bia tiger lon', '8934822101336', '9471798d16594cb09d617aee28d8297d.jpg', '3000', '15000', '999999', 97, 50, 'NCC03', 'MN01', 'LSP03', '', 1, '2022-09-25 13:36:58'),
+('SP03Aiaav', 'Pepsi lon', '8934588013065', 'banner.jpg', '50000', '60000', '999999', 75, 50, 'NCC03', 'MN01', 'LSP03', '', 1, '2022-09-25 13:36:58'),
+('SP03Aiaavf', 'Mirinda lon', '8934588132223', 'mirinda.png', '95000', '150000', '999999', 75, 50, 'NCC03', 'MN01', 'LSP03', '', 1, '2022-09-25 13:36:58');
 
 -- --------------------------------------------------------
 
@@ -508,10 +382,10 @@ INSERT INTO `sanpham` (`ID`, `Name`, `Barcode`, `hinhAnh`, `GiaNhap`, `GiaBan`, 
 CREATE TABLE `thutienkhachhang` (
   `ID` int(20) NOT NULL,
   `ThoiGian` datetime DEFAULT NULL,
-  `IDNhanVien` varchar(20) DEFAULT NULL,
-  `IDKhachHang` varchar(20) DEFAULT NULL,
+  `IDNhanVien` varchar(10) DEFAULT NULL,
+  `IDKhachHang` varchar(10) DEFAULT NULL,
   `SoTien` decimal(10,0) DEFAULT NULL,
-  `GhiChu` varchar(250) DEFAULT NULL
+  `GhiChu` varchar(150) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -534,10 +408,10 @@ INSERT INTO `thutienkhachhang` (`ID`, `ThoiGian`, `IDNhanVien`, `IDKhachHang`, `
 --
 
 CREATE TABLE `trichkho` (
-  `ID` varchar(20) NOT NULL,
-  `IDNhanVien` varchar(20) DEFAULT NULL,
+  `ID` varchar(10) NOT NULL,
+  `IDNhanVien` varchar(10) DEFAULT NULL,
   `ThoiGian` datetime DEFAULT NULL,
-  `GhiChu` varchar(250) DEFAULT NULL
+  `GhiChu` varchar(150) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -668,7 +542,7 @@ ALTER TABLE `trichkho`
 -- AUTO_INCREMENT cho bảng `chitiethoadon`
 --
 ALTER TABLE `chitiethoadon`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=246;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=259;
 
 --
 -- AUTO_INCREMENT cho bảng `phieutranoncc`

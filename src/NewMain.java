@@ -1,6 +1,21 @@
 
-import CLASS.config;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.*;
+import javax.print.Doc;
+import javax.print.DocFlavor;
+import javax.print.DocPrintJob;
+import javax.print.PrintException;
+import javax.print.PrintService;
+import javax.print.PrintServiceLookup;
+import javax.print.SimpleDoc;
+import javax.print.attribute.HashPrintRequestAttributeSet;
+import javax.print.attribute.PrintRequestAttributeSet;
+import javax.print.attribute.standard.Sides;
 
 class GFG {
 
@@ -35,7 +50,7 @@ class GFG {
 
     // Driver Code.
     public static void main(String args[]) {
-       config config = new  config("admin", "123", 8);
-       HELPER.helper.setConfig(config);
+        System.out.println(HELPER.helper.getDateTime());
+
     }
 }

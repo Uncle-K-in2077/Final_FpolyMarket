@@ -146,7 +146,7 @@ public class MDSanPham {
     }
 
     public static void add(sanPham item) {
-        String sql = "insert into SanPham values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "insert into SanPham values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         HELPER.SQLhelper.executeUpdate(sql,
                 item.getIdSanPham(),
                 item.getName(),
@@ -161,7 +161,8 @@ public class MDSanPham {
                 item.getIdDonViTinh(),
                 item.getIdLoaiSanPham(),
                 item.getGhiChu(),
-                item.isTrangThai() == true ? 1 : 0
+                item.isTrangThai() == true ? 1 : 0,
+                HELPER.helper.getDateTime()
         );
     }
 
