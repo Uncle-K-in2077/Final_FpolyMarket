@@ -97,6 +97,10 @@ public class frmMAIN extends javax.swing.JFrame {
         MDCongNo.dataTableThuNoKhachHang(tableThuNoKhachHang);
     }
 
+    public void traHangNhaCungCap() {
+        openTab(new panelTraHangNhaCungCap(), "Trả hàng nhà cung cấp :");
+    }
+
     public void addKeyEsc() {
         InputMap inputMap = tabbed.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
         inputMap.put(KeyStroke.getKeyStroke("ESCAPE"), "VK_ESCAPE");
@@ -1968,6 +1972,11 @@ public class frmMAIN extends javax.swing.JFrame {
         jButton7.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton7.setPreferredSize(new java.awt.Dimension(120, 120));
         jButton7.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
         jToolBar1.add(jButton7);
 
         panelMain.setLayout(new java.awt.BorderLayout());
@@ -2162,6 +2171,11 @@ public class frmMAIN extends javax.swing.JFrame {
 
         jMenuItem19.setText("Trả hàng lại NCC");
         jMenuItem19.setMargin(new java.awt.Insets(6, 6, 6, 6));
+        jMenuItem19.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem19ActionPerformed(evt);
+            }
+        });
         jMenu5.add(jMenuItem19);
 
         jMenuItem20.setText("Nhật ký trả hàng cho NCC");
@@ -2624,6 +2638,14 @@ public class frmMAIN extends javax.swing.JFrame {
             loadTableAccount();
         }
     }//GEN-LAST:event_tableTaiKhoanMousePressed
+
+    private void jMenuItem19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem19ActionPerformed
+        traHangNhaCungCap();
+    }//GEN-LAST:event_jMenuItem19ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        traHangNhaCungCap();
+    }//GEN-LAST:event_jButton7ActionPerformed
 
     public void openTab(JPanel TypeOfPanel, String name) {
         JPanel tab = TypeOfPanel;
