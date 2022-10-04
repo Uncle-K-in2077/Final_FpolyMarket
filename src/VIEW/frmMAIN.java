@@ -20,13 +20,19 @@ import MODEL.MDSanPham;
 import MODEL.MDThuChi;
 import java.awt.Component;
 import java.awt.Font;
-import java.awt.Frame;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Hashtable;
+import java.util.Map;
 import java.util.function.IntConsumer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
 import javax.swing.InputMap;
@@ -39,6 +45,15 @@ import javax.swing.KeyStroke;
 import javax.swing.Timer;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JRDataSource;
+import net.sf.jasperreports.engine.JREmptyDataSource;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
 
 public class frmMAIN extends javax.swing.JFrame {
 
@@ -522,6 +537,7 @@ public class frmMAIN extends javax.swing.JFrame {
         btnNhapHang = new javax.swing.JButton();
         jSeparator6 = new javax.swing.JToolBar.Separator();
         jButton7 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         panelMain = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -1970,6 +1986,17 @@ public class frmMAIN extends javax.swing.JFrame {
         jButton7.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar1.add(jButton7);
 
+        jButton1.setText("jButton1");
+        jButton1.setFocusable(false);
+        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jButton1);
+
         panelMain.setLayout(new java.awt.BorderLayout());
 
         jMenu1.setText("Hệ thống");
@@ -2625,6 +2652,19 @@ public class frmMAIN extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tableTaiKhoanMousePressed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+            Hashtable map = new Hashtable();
+            JasperReport jasper = JasperCompileManager.compileReport("src/REPORT/newReport.jrxml");
+            
+            Connection con = HELPER.SQLhelper.getConnection();
+            JasperPrint printer = JasperFillManager.fillReport(jasper, map, con);
+            JasperViewer.viewReport(printer, false);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     public void openTab(JPanel TypeOfPanel, String name) {
         JPanel tab = TypeOfPanel;
         tab.setName(name);
@@ -2673,6 +2713,7 @@ public class frmMAIN extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbFilterThuNo1;
     private javax.swing.JComboBox<String> cbFilterThuNo2;
     private javax.swing.JComboBox<String> comboBoxNhomHang;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private com.toedter.calendar.JDateChooser jDateChooser1;
