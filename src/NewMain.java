@@ -1,4 +1,5 @@
 
+import MODEL.MDHoaDon;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -50,7 +51,11 @@ class GFG {
 
     // Driver Code.
     public static void main(String args[]) {
+<<<<<<< HEAD
+        System.out.println(MDHoaDon.craeteID());
+=======
         System.out.println(HELPER.helper.getDateTime());
 
+>>>>>>> 0b30a45accd445c3f9ce7ee644e411d088508b14
     }
 }
