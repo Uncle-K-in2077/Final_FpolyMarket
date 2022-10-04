@@ -3,13 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/gocHocTap/app/Final_FpolyMarket/src/VIEW/frmDangNhap.java</file>
-            <file>file:/D:/gocHocTap/app/Final_FpolyMarket/src/VIEW/popupWaiting.java</file>
-            <file>file:/D:/gocHocTap/app/Final_FpolyMarket/src/VIEW/frmEditorSanPham.java</file>
-            <file>file:/D:/gocHocTap/app/Final_FpolyMarket/src/VIEW/panelTaoHoaDonBanHang.java</file>
-            <file>file:/D:/gocHocTap/app/Final_FpolyMarket/src/VIEW/frmNhapHang.java</file>
-            <file>file:/D:/gocHocTap/app/Final_FpolyMarket/src/VIEW/frmMAIN.java</file>
-            <file>file:/D:/gocHocTap/app/Final_FpolyMarket/src/NewMain.java</file>
+            <file>file:/C:/Users/Admin/Desktop/Fpoly_Final/src/MODEL/MDThuChi.java</file>
+            <file>file:/C:/Users/Admin/Desktop/Fpoly_Final/src/VIEW/frmMAIN.java</file>
+            <file>file:/C:/Users/Admin/Desktop/Fpoly_Final/src/VIEW/frmThuNoKhachHang.java</file>
+            <file>file:/C:/Users/Admin/Desktop/Fpoly_Final/src/VIEW/frmPhieuChi.java</file>
+            <file>file:/C:/Users/Admin/Desktop/Fpoly_Final/src/VIEW/frmDangNhap.java</file>
+            <file>file:/C:/Users/Admin/Desktop/Fpoly_Final/src/VIEW/frmNhapHang.java</file>
+            <file>file:/C:/Users/Admin/Desktop/Fpoly_Final/src/MODEL/MDCongNo.java</file>
+            <file>file:/C:/Users/Admin/Desktop/Fpoly_Final/src/VIEW/panelTaoHoaDonBanHang.java</file>
+            <file>file:/C:/Users/Admin/Desktop/Fpoly_Final/src/MODEL/MDHoaDon.java</file>
+            <file>file:/C:/Users/Admin/Desktop/Fpoly_Final/src/VIEW/frmXemHoaDon.java</file>
         </group>
     </open-files>
 </project-private>

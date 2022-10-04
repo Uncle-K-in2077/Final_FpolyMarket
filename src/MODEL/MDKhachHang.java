@@ -127,7 +127,7 @@ public class MDKhachHang {
     }
 
     public static void add(khachHang kh) {
-        String sql = "insert into khachHang values(?,?,?,?,?,?,?)";
+        String sql = "insert into khachHang values(?,?,?,?,?,?,?,?)";
         HELPER.SQLhelper.executeUpdate(sql,
                 kh.getIdKhachHang(),
                 kh.getName(),
@@ -135,7 +135,8 @@ public class MDKhachHang {
                 kh.getDiaChi(),
                 kh.getGhiChu(),
                 kh.getNo(),
-                kh.isTrangThai() == true ? 1 : 0
+                kh.isTrangThai() == true ? 1 : 0,
+                HELPER.helper.getDateTime()
         );
     }
 
@@ -178,7 +179,7 @@ public class MDKhachHang {
     }
 
     public static void quickAdd(String id, String name, String sdt, String diachi) {
-        String sql = "insert into khachhang(id,name,SoDienThoai,DiaChi) values(?,?,?,?);";
-        HELPER.SQLhelper.executeUpdate(sql, id, name, sdt, diachi);
+        String sql = "insert into khachhang(id,name,SoDienThoai,DiaChi,thoigian) values(?,?,?,?,?);";
+        HELPER.SQLhelper.executeUpdate(sql, id, name, sdt, diachi,HELPER.helper.getDateTime());
     }
 }

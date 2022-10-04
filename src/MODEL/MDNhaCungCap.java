@@ -15,13 +15,13 @@ import javax.swing.table.DefaultTableModel;
  * @author Admin
  */
 public class MDNhaCungCap {
-    
+
     public static void truNoNCC(String idNCC, long tien) {
         String sql = "update NhaCungCap set congno = congno-? where id= ?";
 
         HELPER.SQLhelper.executeUpdate(sql, tien, idNCC);
     }
-    
+
     public static void arrayToTable(JTable table) {
         String sql = "select * from nhacungcap";
         ResultSet rs = HELPER.SQLhelper.executeQuery(sql);
@@ -43,7 +43,7 @@ public class MDNhaCungCap {
         }
         table.setModel(model);
     }
-    
+
     public static ArrayList<nhaCungCap> getAll() {
         ArrayList<nhaCungCap> data = new ArrayList<>();
         String sql = "select * from NhaCungCap where trangthai = 1";
@@ -64,7 +64,7 @@ public class MDNhaCungCap {
         }
         return data;
     }
-    
+
     public static nhaCungCap getNhaCungCap(String id) {
         String sql = "select * from NhaCungCap where id = ?";
         nhaCungCap ncc = new nhaCungCap();
@@ -84,12 +84,12 @@ public class MDNhaCungCap {
             }
         } catch (Exception e) {
         }
-        
+
         return ncc;
     }
-    
+
     public static void add(nhaCungCap ncc) {
-        String sql = "insert into NhaCungCap values(?,?,?,?,?,?,?)";
+        String sql = "insert into NhaCungCap values(?,?,?,?,?,?,?,?)";
         HELPER.SQLhelper.executeUpdate(sql,
                 ncc.getIdNhaCungCap(),
                 ncc.getName(),
@@ -97,15 +97,16 @@ public class MDNhaCungCap {
                 ncc.getDiaChi(),
                 ncc.getGhiChu(),
                 ncc.getCongNo(),
-                ncc.isTrangThai() == true ? 1 : 0
+                ncc.isTrangThai() == true ? 1 : 0,
+                HELPER.helper.getDateTime()
         );
     }
-    
+
     public static void remove(String id) {
         String sql = "update NhaCungCap set trangthai=0 where id=?";
         HELPER.SQLhelper.executeUpdate(sql, id);
     }
-    
+
     public static void update(nhaCungCap ncc) {
         String sql = "update NhaCungCap set name=?,sodienthoai=?,diachi=?,ghichu=?,congno=?,trangthai=? where id=?";
         HELPER.SQLhelper.executeUpdate(sql,
@@ -118,12 +119,12 @@ public class MDNhaCungCap {
                 ncc.getIdNhaCungCap()
         );
     }
-    
+
     public static void reStore(String id) {
         String sql = "update NhaCungCap set trangthai=1 where id = ? ";
         HELPER.SQLhelper.executeUpdate(sql, id);
     }
-    
+
     public static String createId() {
         String id = "";
         String sql = "select count(id) as 'count' from NhaCungCap";
@@ -141,7 +142,7 @@ public class MDNhaCungCap {
 
     //Quick add chưa chắc lắm đoạn này
     public static void quickAdd(String id, String name, String sdt, String diachi) {
-        String sql = "insert into NhaCungCap(id,name,SoDienThoai,DiaChi) values(?,?,?,?);";
-        HELPER.SQLhelper.executeUpdate(sql, id, name, sdt, diachi);
+        String sql = "insert into NhaCungCap(id,name,SoDienThoai,DiaChi,thoigian) values(?,?,?,?,?);";
+        HELPER.SQLhelper.executeUpdate(sql, id, name, sdt, diachi, HELPER.helper.getDateTime());
     }
 }

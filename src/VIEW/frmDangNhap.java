@@ -239,10 +239,8 @@ public class frmDangNhap extends javax.swing.JFrame {
                 new frmMAIN(account).setVisible(true);
             }
         }
-
-
     }//GEN-LAST:event_btnDangNhapActionPerformed
-   
+
     private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
         if (JOptionPane.showConfirmDialog(this, "Thoát phần mềm ?") == 0) {
             System.exit(0);
